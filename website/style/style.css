@@ -9,9 +9,10 @@ div.main {
     border-radius: 50%;
 }
 
-.eye { border: 1px solid black;width: 10px;height: 10px;margin-top: 20px;margin-left: 25%; }
+.eye { border: 1px solid black;width: 10px;height: 10px;margin-top: 20px;margin-left: 25%; display: inline-block; }
 .nose {    margin-left: 47%;
           margin-top: 10%; 
+      
       }
 
 .mouth {
