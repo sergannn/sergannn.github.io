@@ -1,5 +1,23 @@
 body { 
-
   border: 10px solid purple;
-
 }
+div.main {
+    width: 240px;
+    height: 171px;
+    border: 1px solid black;
+    margin-left: calc(50vw - 50px);
+    border-radius: 50%;
+}
+
+.eye { border: 1px solid black;width: 10px;height: 10px;margin-top: 20px;margin-left: 25%; }
+.nose {    margin-left: 47%;
+          margin-top: 10%; 
+      }
+
+.mouth {
+    width: 100px;
+    height: 10px;
+    border: 1px solid black;
+    margin-left: 24%;
+    margin-top: 28px;
+} 
