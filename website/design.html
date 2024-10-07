@@ -1,6 +1,15 @@
 <style>		
   
-body {background:blue;}	
+  /*
+  100%
+  -2px
+  -10%.      90% -2px
+  -20%-4px   70% -6px
+  
+  -40% 		30%-6px*/
+  
+  
+body {background:blue; font-size: 0;}	
 .main{ border:1px solid white;width:450px;height:150px;}
 .main div { display:inline-block;}
 	.first { width:10%;height:100%;background:pink;}
@@ -14,9 +23,9 @@ body {background:blue;}
     
     .bottom_brown { background:brown; width:10%;height:20%; }
     
-.last { width:12%;height:100%;}
-.last_top { display:block !important;height:calc(80% - 2px);background:white;}
-.last_bottom { display:block !important;height:calc(20% - 2px);background:green;}
+.last { width:calc(20% - 4px);height:100%;}
+.last_top { display:block !important;height:80%;background:white;}
+.last_bottom { display:block !important;height:20%;background:brown;}
 </style>
 <body>
 
