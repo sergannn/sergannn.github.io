@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+   /* любой уровень вложенности */
+   ul { padding-left:0px;list-style-type:none;}
+	ul.outer ul { display:none;}
+    ul.outer > li > ul > li:hover > ul {display:block;padding-left:70px;}
+    ul.outer > li > ul {position:absolute;} 
+     ul.outer > li > ul >li>ul {position:absolute;} 
+    ul.outer > li:hover > ul { display:block;}
+       /* только первый уровень вложенности */
+       /* непосредственные дочерние элементы */
+    ul.outer > li {color:black;display:inline-block;}
+
+</style>
+</head>
+<body>
+
+<h1>The list-style-type Property</h1>
+
+ <ul class="outer"><li>Напитки
+		<ul>
+  			<li>Горячие
+            	<ul>
+                	<li>кофе
+                    	<ul><li>зерновой
+                        			<ul><li>jacobs</li></ul>
+                            </li>
+                        	<li>другой</li>
+                        </ul>    
+                    </li>
+                    	
+                    <li>чай</li>
+                </ul>    
+            </li>
+  			<li>Холодные</li>
+  			<li>Соки</li>
+        </ul>
+      </li>  
+      <li>Eda<ul><li>рис</li></ul></li>
+      <li>Мороженное<ul><li>магнат</li></ul></li>
+</ul>
+
+
+</body>
+</html>
