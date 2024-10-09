@@ -1,0 +1,40 @@
+<style>
+
+ul.outer li { display:inline-block; border:1px solid red; }
+ul.inner li { display:block; border:1px solid red;  }
+
+ul.inner { display:none;position:absolute;}
+
+ul.outer li:hover ul.inner {display:block;}
+
+ul { text-align:center;border:1px solid green; padding-left:0px;}
+
+</style>
+
+<div>
+
+<ul class="outer">
+ <li> <a href> Главная</a>	<ul class="inner"> <li> Ремонт</li>
+        	 <li> Реставрация </li>
+             <li> Покраска </li>
+        </ul>   </li>
+ <li> <a href>Контакты</a>	<ul class="inner"> <li> Ремонт</li>
+        	 <li> Реставрация </li>
+             <li> Покраска </li>
+        </ul>   </li>
+ <li> <a href>Услуги</a>
+ 		<ul class="inner"> <li> Ремонт</li>
+        	 <li> Реставрация </li>
+             <li> Покраска </li>
+        </ul>     
+ </li>
+ <li> <a href>Товары</a> 	<ul class="inner"> <li> Ремонт</li>
+        	 <li> Реставрация </li>
+             <li> Покраска </li>
+        </ul>  </li>
+ 
+</ul>
+ 
+</div>
+ 
+ 
