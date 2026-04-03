@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pain Statistics Support</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6efea;
+      --card: #ffffff;
+      --text: #231815;
+      --muted: #6f625d;
+      --accent: #b85741;
+      --line: #e8d9d3;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #fbf6f2 0%, var(--bg) 100%);
+      color: var(--text);
+    }
+
+    .wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+    }
+
+    .hero,
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: 0 18px 40px rgba(45, 26, 21, 0.08);
+    }
+
+    .hero {
+      padding: 28px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    h1, h2 {
+      margin: 0 0 12px;
+    }
+
+    h1 {
+      font-size: 34px;
+      line-height: 1.1;
+    }
+
+    h2 {
+      font-size: 22px;
+    }
+
+    p, li {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    ul {
+      margin: 12px 0 0;
+      padding-left: 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 12px;
+      margin-bottom: 16px;
+      border-radius: 999px;
+      background: rgba(184, 87, 65, 0.1);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .meta {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 24px;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="badge">Pain Statistics</div>
+      <h1>Support</h1>
+      <p>
+        Pain Statistics is a simple pain diary app that helps users log pain attacks,
+        add optional notes, review recent history, and export records as CSV.
+      </p>
+      <p>
+        For support, questions, or feedback, please contact
+        <a href="mailto:su.vasiliev@gmail.com">su.vasiliev@gmail.com</a>.
+      </p>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>What the app does</h2>
+        <ul>
+          <li>Logs pain attacks in one tap</li>
+          <li>Lets users add notes to each record</li>
+          <li>Shows history grouped by day</li>
+          <li>Displays simple statistics and trends</li>
+          <li>Exports records as CSV</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:su.vasiliev@gmail.com">su.vasiliev@gmail.com</a></p>
+        <p>Developer: Sergey Vasiliev</p>
+        <p>Response language: Russian or English</p>
+      </article>
+    </section>
+
+    <section class="card">
+      <h2>Privacy</h2>
+      <p>
+        The current version stores pain diary records locally on the device.
+        It does not require account registration to use the core diary features.
+      </p>
+      <p>
+        Full privacy information is available here:
+        <a href="/pain-privacy.html">Privacy Policy</a>
+      </p>
+    </section>
+
+    <p class="meta">Last updated: April 3, 2026</p>
+  </main>
+</body>
+</html>
