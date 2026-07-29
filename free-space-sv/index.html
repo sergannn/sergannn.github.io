@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Free Space SV - Support and About</title>
+  <style>
+    :root { color-scheme: dark; --ink:#f7fbff; --muted:#b8c5d6; --panel:rgba(10,15,24,.78); --cyan:#48d5ff; --line:rgba(255,255,255,.16); }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--ink); background:radial-gradient(circle at 20% 0%, rgba(72,213,255,.22), transparent 340px), linear-gradient(135deg,#08111f,#1d2735); line-height:1.55; }
+    main { max-width:860px; margin:0 auto; padding:56px 22px 72px; }
+    .icon { width:78px; height:78px; border-radius:24px; display:grid; place-items:center; background:#101723; border:1px solid var(--line); box-shadow:0 18px 42px rgba(0,0,0,.24); font-size:34px; }
+    h1 { margin:24px 0 12px; font-size:clamp(38px,7vw,64px); line-height:1.04; letter-spacing:-.035em; }
+    .lead { margin:0 0 28px; color:var(--muted); font-size:20px; max-width:720px; }
+    section { background:var(--panel); border:1px solid var(--line); border-radius:22px; padding:24px; margin-top:18px; backdrop-filter:blur(18px); }
+    h2 { margin:0 0 10px; font-size:24px; }
+    p, li { font-size:17px; color:var(--muted); }
+    ul { padding-left:22px; }
+    a { color:var(--cyan); font-weight:800; }
+    .updated { margin-top:28px; font-size:14px; color:rgba(255,255,255,.6); }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="icon">SSD</div>
+    <h1>Free Space SV</h1>
+    <p class="lead">A compact macOS monitor for storage and memory numbers that should stay visible without opening System Settings.</p>
+
+    <section>
+      <h2>About</h2>
+      <p>Free Space SV keeps a small status window on your desktop with available storage, RAM, warning levels, recent changes, and optional storage-source details.</p>
+      <ul>
+        <li>Floating status window for free storage and RAM.</li>
+        <li>Configurable warning thresholds.</li>
+        <li>Optional last-change and likely-source details.</li>
+        <li>Manual storage scan from settings.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Support</h2>
+      <p>If you need help with Free Space SV, contact <a href="mailto:su.vasiliev@gmail.com">su.vasiliev@gmail.com</a>.</p>
+    </section>
+
+    <section>
+      <h2>Privacy</h2>
+      <p>The app is designed as a local macOS utility. It does not require an account.</p>
+    </section>
+
+    <p class="updated">Last updated: July 29, 2026</p>
+  </main>
+</body>
+</html>
