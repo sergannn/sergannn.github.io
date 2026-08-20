@@ -1,0 +1,3460 @@
+{
+  "generatedAt": "2026-08-20T10:26:32.018Z",
+  "results": [
+    {
+      "key": "versailles-home",
+      "url": "https://versailles.clinic/",
+      "viewport": "mobile",
+      "status": 200,
+      "title": "Премиум клиника медицинской косметологии Versailles",
+      "h1": "Клиника медицинской косметологии Versailles",
+      "metrics": {
+        "innerW": 390,
+        "scrollW": 390,
+        "scrollH": 6498,
+        "overflow": [
+          {
+            "tag": "DIV",
+            "cls": "modals",
+            "text": "Запишитесь на прием в клинику Оставьте заявку и мы перезвоним вам в течение 15 минут. Даю ",
+            "left": -390,
+            "right": 0
+          },
+          {
+            "tag": "DIV",
+            "cls": "modal",
+            "text": "Запишитесь на прием в клинику Оставьте заявку и мы перезвоним вам в течение 15 минут. Даю ",
+            "left": -375,
+            "right": -15
+          },
+          {
+            "tag": "DIV",
+            "cls": "modal__top",
+            "text": "",
+            "left": -355,
+            "right": -35
+          },
+          {
+            "tag": "BUTTON",
+            "cls": "close",
+            "text": "",
+            "left": -65,
+            "right": -35
+          },
+          {
+            "tag": "svg",
+            "cls": "[object SVGAnimatedString]",
+            "text": "",
+            "left": -65,
+            "right": -35
+          },
+          {
+            "tag": "use",
+            "cls": "[object SVGAnimatedString]",
+            "text": "",
+            "left": -63,
+            "right": -37
+          },
+          {
+            "tag": "FORM",
+            "cls": "",
+            "text": "Запишитесь на прием в клинику Оставьте заявку и мы перезвоним вам в течение 15 минут. Даю ",
+            "left": -355,
+            "right": -35
+          },
+          {
+            "tag": "H3",
+            "cls": "",
+            "text": "Запишитесь на прием в клинику",
+            "left": -355,
+            "right": -35
+          },
+          {
+            "tag": "DIV",
+            "cls": " modal__desc text",
+            "text": "Оставьте заявку и мы перезвоним вам в течение 15 минут.",
+            "left": -355,
+            "right": -35
+          },
+          {
+            "tag": "DIV",
+            "cls": "modal__inputs",
+            "text": "Даю согласие на обработку персональных данных",
+            "left": -355,
+            "right": -35
+          }
+        ],
+        "visibleControls": [
+          {
+            "tag": "A",
+            "text": "/",
+            "href": "https://versailles.clinic/",
+            "cls": "header__logo"
+          },
+          {
+            "tag": "BUTTON",
+            "text": "",
+            "href": null,
+            "cls": "d-xl-none header__search-btn"
+          },
+          {
+            "tag": "A",
+            "text": "tel: +7 911-92-713-92",
+            "href": "tel: +7911-92-713-92",
+            "cls": "header__phone d-flex"
+          },
+          {
+            "tag": "A",
+            "text": "https://blavomusic.ru/?utm_source=versaillesclinic&utm_medium=cpc&utm_",
+            "href": "https://blavomusic.ru/?utm_source=versaillesclinic&utm_medium=cpc&utm_campaign=perman_links&utm_term=general_banner",
+            "cls": "button-arrow  button-arrow__link button__white"
+          },
+          {
+            "tag": "A",
+            "text": "https://versailles.clinic/services/apparatnaya-kosmetologiya/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/",
+            "cls": "button-arrow  button-arrow__link button__white"
+          },
+          {
+            "tag": "A",
+            "text": "https://versailles.clinic/services/apparatnaya-kosmetologiya/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/",
+            "cls": "button-arrow  button-arrow__link button__white"
+          },
+          {
+            "tag": "A",
+            "text": "https://versailles.clinic/services/lazernaya-kosmetologiya/",
+            "href": "https://versailles.clinic/services/lazernaya-kosmetologiya/",
+            "cls": "button-arrow  button-arrow__link button__white"
+          },
+          {
+            "tag": "A",
+            "text": "https://versailles.clinic/services/spa-protsedury/solyanaya-peshchera/",
+            "href": "https://versailles.clinic/services/spa-protsedury/solyanaya-peshchera/",
+            "cls": "button-arrow  button-arrow__link button__white"
+          },
+          {
+            "tag": "A",
+            "text": "https://versailles.clinic/services/preventivnaya-meditsina/magnitotera",
+            "href": "https://versailles.clinic/services/preventivnaya-meditsina/magnitoterapiya/",
+            "cls": "button-arrow  button-arrow__link button__white"
+          },
+          {
+            "tag": "A",
+            "text": "https://blavomusic.ru/?utm_source=versaillesclinic&utm_medium=cpc&utm_",
+            "href": "https://blavomusic.ru/?utm_source=versaillesclinic&utm_medium=cpc&utm_campaign=perman_links&utm_term=general_banner",
+            "cls": "button-arrow  button-arrow__link button__white"
+          },
+          {
+            "tag": "A",
+            "text": "https://versailles.clinic/services/apparatnaya-kosmetologiya/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/",
+            "cls": "button-arrow  button-arrow__link button__white"
+          },
+          {
+            "tag": "A",
+            "text": "Политика Cookie",
+            "href": "https://versailles.clinic/cookies/",
+            "cls": ""
+          },
+          {
+            "tag": "BUTTON",
+            "text": "Принять",
+            "href": null,
+            "cls": "button \n"
+          },
+          {
+            "tag": "A",
+            "text": "Онлайн-запись",
+            "href": "https://versailles.clinic/#",
+            "cls": "yButton bottom right"
+          }
+        ]
+      },
+      "text": "Запишитесь на прием в клинику\nОставьте заявку и мы перезвоним вам в течение 15 минут.\nДаю согласие на обработку персональных данных\nЗаписаться\n\n\n\nОставьте отзыв\nПосле модерации мы обязательно его опубликуем\nДаю согласие на обработку персональных данных\nОтправить\n\n\n\n\n\n\nКлиника медицинской косметологии Versailles\nДобро пожаловать в клинику медицинской косметологии Versailles! Откройте для себя мир красоты и здоровья с нашими инновационными технологиями и профессиональным подходом.\nМы предлагаем комплексные решения для улучшения внешнего вида лица и тела, используя современное оборудование и инновационные методики.\n\nНаши услуги:\n\nАппаратная косметология:\nFotona лазер - омоложении кожи, пилинги, удаление новообразований\nSmas-лифтинг - безоперационная подтяжка кожи тела\nEndosphères® Therapy тела - метод компрессионной микровибрации, комплексное воздействие на кожу лица и тела\nLpg-массаж - вакуумный массаж кож\nRf-лифтинг - улучшение контуров лица и тела\nHYDRA TOUCH H2- уходовая процедура вы",
+      "screenshot": "versailles-home-mobile.png",
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_CERT_AUTHORITY_INVALID"
+        },
+        {
+          "type": "warning",
+          "text": "It is recommended that a robustness level be specified. Not specifying the robustness level could result in unexpected behavior."
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_CERT_AUTHORITY_INVALID"
+        }
+      ],
+      "failed": [
+        {
+          "url": "https://hdrc.yandex.net/",
+          "failure": "net::ERR_CERT_AUTHORITY_INVALID"
+        },
+        {
+          "url": "https://privacy-cs.mail.ru/fp/?id=9TTx7RnuSbvoyCbZDtfM3",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://privacy-cs.mail.ru/fp/?id=9TTx7RnuSbvoyCbZDtfM3",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://hdrc.yandex.net/",
+          "failure": "net::ERR_CERT_AUTHORITY_INVALID"
+        }
+      ],
+      "badResponses": []
+    },
+    {
+      "key": "versailles-prices",
+      "url": "https://versailles.clinic/prices",
+      "viewport": "mobile",
+      "status": 404,
+      "title": "Страница не найдена",
+      "h1": null,
+      "metrics": {
+        "innerW": 390,
+        "scrollW": 390,
+        "scrollH": 990,
+        "overflow": [
+          {
+            "tag": "DIV",
+            "cls": "modals",
+            "text": "Запишитесь на прием в клинику Оставьте заявку и мы перезвоним вам в течение 15 минут. Даю ",
+            "left": -390,
+            "right": 0
+          },
+          {
+            "tag": "DIV",
+            "cls": "modal",
+            "text": "Запишитесь на прием в клинику Оставьте заявку и мы перезвоним вам в течение 15 минут. Даю ",
+            "left": -375,
+            "right": -15
+          },
+          {
+            "tag": "DIV",
+            "cls": "modal__top",
+            "text": "",
+            "left": -355,
+            "right": -35
+          },
+          {
+            "tag": "BUTTON",
+            "cls": "close",
+            "text": "",
+            "left": -65,
+            "right": -35
+          },
+          {
+            "tag": "svg",
+            "cls": "[object SVGAnimatedString]",
+            "text": "",
+            "left": -65,
+            "right": -35
+          },
+          {
+            "tag": "use",
+            "cls": "[object SVGAnimatedString]",
+            "text": "",
+            "left": -63,
+            "right": -37
+          },
+          {
+            "tag": "FORM",
+            "cls": "",
+            "text": "Запишитесь на прием в клинику Оставьте заявку и мы перезвоним вам в течение 15 минут. Даю ",
+            "left": -355,
+            "right": -35
+          },
+          {
+            "tag": "H3",
+            "cls": "",
+            "text": "Запишитесь на прием в клинику",
+            "left": -355,
+            "right": -35
+          },
+          {
+            "tag": "DIV",
+            "cls": " modal__desc text",
+            "text": "Оставьте заявку и мы перезвоним вам в течение 15 минут.",
+            "left": -355,
+            "right": -35
+          },
+          {
+            "tag": "DIV",
+            "cls": "modal__inputs",
+            "text": "Даю согласие на обработку персональных данных",
+            "left": -355,
+            "right": -35
+          }
+        ],
+        "visibleControls": [
+          {
+            "tag": "A",
+            "text": "/",
+            "href": "https://versailles.clinic/",
+            "cls": "header__logo"
+          },
+          {
+            "tag": "BUTTON",
+            "text": "",
+            "href": null,
+            "cls": "d-xl-none header__search-btn"
+          },
+          {
+            "tag": "A",
+            "text": "tel: +7 911-92-713-92",
+            "href": "tel: +7911-92-713-92",
+            "cls": "header__phone d-flex"
+          },
+          {
+            "tag": "A",
+            "text": "https://vk.com/rk_versailles",
+            "href": "https://vk.com/rk_versailles",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "https://wa.me/79119271392",
+            "href": "https://wa.me/79119271392",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "https://t.me/versaillesrb",
+            "href": "https://t.me/versaillesrb",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "https://www.youtube.com/@VersaillesClinic",
+            "href": "https://www.youtube.com/@VersaillesClinic",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "Правовая информация",
+            "href": "https://versailles.clinic/legal/",
+            "cls": "footer__normal-text subMenuText"
+          },
+          {
+            "tag": "A",
+            "text": "Политика конфиденциальности",
+            "href": "https://versailles.clinic/privacy/",
+            "cls": "footer__normal-text subMenuText"
+          },
+          {
+            "tag": "BUTTON",
+            "text": "Записаться",
+            "href": null,
+            "cls": "button \nopen-modal"
+          },
+          {
+            "tag": "A",
+            "text": "+7 (911) 92-713-92",
+            "href": "tel:+7911-92-713-92",
+            "cls": "footer__normal-text subMenuText"
+          },
+          {
+            "tag": "A",
+            "text": "9271392@gmail.com",
+            "href": "mailto: 9271392@gmail.com",
+            "cls": "footer__normal-text subMenuText"
+          },
+          {
+            "tag": "A",
+            "text": "Политика Cookie",
+            "href": "https://versailles.clinic/cookies/",
+            "cls": ""
+          },
+          {
+            "tag": "BUTTON",
+            "text": "Принять",
+            "href": null,
+            "cls": "button \n"
+          },
+          {
+            "tag": "A",
+            "text": "Онлайн-запись",
+            "href": "https://versailles.clinic/prices#",
+            "cls": "yButton bottom right"
+          }
+        ]
+      },
+      "text": "Запишитесь на прием в клинику\nОставьте заявку и мы перезвоним вам в течение 15 минут.\nДаю согласие на обработку персональных данных\nЗаписаться\n\n\n\nОставьте отзыв\nПосле модерации мы обязательно его опубликуем\nДаю согласие на обработку персональных данных\nОтправить\n\n\n\n\n\n\n404\nТакой страницы не существует\nПравовая информация\nПолитика конфиденциальности\nМедицинская лицензия ЛО-78-01-008972\nПредставленная на сайте информация не является публичной офертой, определяемой положениями Статьи 437 Гражданского кодекса РФ.\nИМЕЮТСЯ ПРОТИВОПОКАЗАНИЯ. НЕОБХОДИМА ОЧНАЯ КОНСУЛЬТАЦИЯ СПЕЦИАЛИСТА. 16+\nЗаписаться\n+7 (911) 92-713-92\n9271392@gmail.com\nСанкт-Петербург, ул. Кирочная, д. 64\nПн-Пт: 09:00 - 20:00 Сб: 9:00 - 18:00\n\nУправление файлами cookie\n\nДанный веб-сайт использует cookie-файлы и сервис «Яндекс Метрика» в целях предоставления вам лучшего пользовательского опыта на нашем сайте. Продолжая использовать данный сайт, вы соглашаетесь с использованием нами cookie-файлов. Файлы cookie можно отключить в н",
+      "screenshot": "versailles-prices-mobile.png",
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_CERT_AUTHORITY_INVALID"
+        },
+        {
+          "type": "warning",
+          "text": "It is recommended that a robustness level be specified. Not specifying the robustness level could result in unexpected behavior."
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_CERT_AUTHORITY_INVALID"
+        }
+      ],
+      "failed": [
+        {
+          "url": "https://hdrc.yandex.net/",
+          "failure": "net::ERR_CERT_AUTHORITY_INVALID"
+        },
+        {
+          "url": "https://privacy-cs.mail.ru/fp/?id=uWNhrbKAWq4itHpXFV0F6",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://privacy-cs.mail.ru/fp/?id=uWNhrbKAWq4itHpXFV0F6",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://hdrc.yandex.net/",
+          "failure": "net::ERR_CERT_AUTHORITY_INVALID"
+        }
+      ],
+      "badResponses": [
+        {
+          "status": 404,
+          "url": "https://versailles.clinic/prices"
+        }
+      ]
+    },
+    {
+      "key": "versailles-contacts",
+      "url": "https://versailles.clinic/contacts",
+      "viewport": "mobile",
+      "status": 200,
+      "title": "Контакты клиники Versailles в Санкт-Петербурге",
+      "h1": "Контакты",
+      "metrics": {
+        "innerW": 390,
+        "scrollW": 390,
+        "scrollH": 2896,
+        "overflow": [
+          {
+            "tag": "DIV",
+            "cls": "modals",
+            "text": "Запишитесь на прием в клинику Оставьте заявку и мы перезвоним вам в течение 15 минут. Даю ",
+            "left": -390,
+            "right": 0
+          },
+          {
+            "tag": "DIV",
+            "cls": "modal",
+            "text": "Запишитесь на прием в клинику Оставьте заявку и мы перезвоним вам в течение 15 минут. Даю ",
+            "left": -375,
+            "right": -15
+          },
+          {
+            "tag": "DIV",
+            "cls": "modal__top",
+            "text": "",
+            "left": -355,
+            "right": -35
+          },
+          {
+            "tag": "BUTTON",
+            "cls": "close",
+            "text": "",
+            "left": -65,
+            "right": -35
+          },
+          {
+            "tag": "svg",
+            "cls": "[object SVGAnimatedString]",
+            "text": "",
+            "left": -65,
+            "right": -35
+          },
+          {
+            "tag": "use",
+            "cls": "[object SVGAnimatedString]",
+            "text": "",
+            "left": -63,
+            "right": -37
+          },
+          {
+            "tag": "FORM",
+            "cls": "",
+            "text": "Запишитесь на прием в клинику Оставьте заявку и мы перезвоним вам в течение 15 минут. Даю ",
+            "left": -355,
+            "right": -35
+          },
+          {
+            "tag": "H3",
+            "cls": "",
+            "text": "Запишитесь на прием в клинику",
+            "left": -355,
+            "right": -35
+          },
+          {
+            "tag": "DIV",
+            "cls": " modal__desc text",
+            "text": "Оставьте заявку и мы перезвоним вам в течение 15 минут.",
+            "left": -355,
+            "right": -35
+          },
+          {
+            "tag": "DIV",
+            "cls": "modal__inputs",
+            "text": "Даю согласие на обработку персональных данных",
+            "left": -355,
+            "right": -35
+          }
+        ],
+        "visibleControls": [
+          {
+            "tag": "A",
+            "text": "/",
+            "href": "https://versailles.clinic/",
+            "cls": "header__logo"
+          },
+          {
+            "tag": "BUTTON",
+            "text": "",
+            "href": null,
+            "cls": "d-xl-none header__search-btn"
+          },
+          {
+            "tag": "A",
+            "text": "tel: +7 911-92-713-92",
+            "href": "tel: +7911-92-713-92",
+            "cls": "header__phone d-flex"
+          },
+          {
+            "tag": "A",
+            "text": "Главная",
+            "href": "https://versailles.clinic/",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "9271392@gmail.com",
+            "href": "mailto: 9271392@gmail.com",
+            "cls": "text"
+          },
+          {
+            "tag": "A",
+            "text": "+7 (911) 92-713-92",
+            "href": "tel:+7911-92-713-92",
+            "cls": "text"
+          },
+          {
+            "tag": "A",
+            "text": "Политика Cookie",
+            "href": "https://versailles.clinic/cookies/",
+            "cls": ""
+          },
+          {
+            "tag": "BUTTON",
+            "text": "Принять",
+            "href": null,
+            "cls": "button \n"
+          },
+          {
+            "tag": "A",
+            "text": "Онлайн-запись",
+            "href": "https://versailles.clinic/contacts/#",
+            "cls": "yButton bottom right"
+          }
+        ]
+      },
+      "text": "Запишитесь на прием в клинику\nОставьте заявку и мы перезвоним вам в течение 15 минут.\nДаю согласие на обработку персональных данных\nЗаписаться\n\n\n\nОставьте отзыв\nПосле модерации мы обязательно его опубликуем\nДаю согласие на обработку персональных данных\nОтправить\n\n\n\n\n\n\nГлавная\n — \nКонтакты\nКонтакты\nСанкт-Петербург, ул. Кирочная, д. 64\nВремя работы\nЕжедневно с 9:00 до 21:00\nЭлектронная почта\n9271392@gmail.com\nТелефон\n+7 (911) 92-713-92\nРеквизиты компании:\n\nООО «РОЙАЛМЕД»\nАдрес: 191015, г. Санкт-Петербург, ул. Кирочная д.64 лит А пом. 20Н\nИНН 7825508976\nКПП 784201001\nр/с 40702810155710002575\nСЕВЕРО-ЗАПАДНЫЙ БАНК ПАО СБЕРБАНК\nБИК 044030653\nк/с 30101810500000000653\nОГРН 1037843116035\nтел. + 7 (812) 564-65-66\n\nЛицензии\n\t\n\t\n\n\nЗапишитесь на прием в клинику\n\nОставьте заявку и мы перезвоним вам в течение 15 минут.\n\nЗаписаться\nДаю согласие на обработку персональных данных\nПравовая информация\nПолитика конфиденциальности\nМедицинская лицензия ЛО-78-01-008972\nПредставленная на сайте информация не явл",
+      "screenshot": "versailles-contacts-mobile.png",
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_CERT_AUTHORITY_INVALID"
+        },
+        {
+          "type": "warning",
+          "text": "It is recommended that a robustness level be specified. Not specifying the robustness level could result in unexpected behavior."
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_CERT_AUTHORITY_INVALID"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_CERT_AUTHORITY_INVALID"
+        }
+      ],
+      "failed": [
+        {
+          "url": "https://privacy-cs.mail.ru/fp/?id=jlhGf3zpmqTWMKpbdGjwq",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://hdrc.yandex.net/",
+          "failure": "net::ERR_CERT_AUTHORITY_INVALID"
+        },
+        {
+          "url": "https://privacy-cs.mail.ru/fp/?id=jlhGf3zpmqTWMKpbdGjwq",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://hdrc.yandex.net/",
+          "failure": "net::ERR_CERT_AUTHORITY_INVALID"
+        }
+      ],
+      "badResponses": []
+    },
+    {
+      "key": "blavomusic-home",
+      "url": "https://blavomusic.ru/",
+      "viewport": "mobile",
+      "status": 200,
+      "title": "Музыка для медитации и релаксации онлайн | Blavo Music",
+      "h1": "Музыка для медитации, релаксации и внутренней гармонии",
+      "metrics": {
+        "innerW": 390,
+        "scrollW": 390,
+        "scrollH": 8530,
+        "overflow": [
+          {
+            "tag": "NAV",
+            "cls": "header_nav",
+            "text": "",
+            "left": -390,
+            "right": 465
+          },
+          {
+            "tag": "UL",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "LI",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "A",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "LI",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "A",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "LI",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "BUTTON",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "LI",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "A",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          }
+        ],
+        "visibleControls": [
+          {
+            "tag": "A",
+            "text": "Blavo Meditation & Music Therapy",
+            "href": "https://blavomusic.ru/",
+            "cls": "header_logo"
+          },
+          {
+            "tag": "A",
+            "text": "/",
+            "href": "https://blavomusic.ru/",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "/catalog",
+            "href": "https://blavomusic.ru/catalog",
+            "cls": ""
+          },
+          {
+            "tag": "BUTTON",
+            "text": "",
+            "href": null,
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "/news",
+            "href": "https://blavomusic.ru/news",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "/about-us",
+            "href": "https://blavomusic.ru/about-us",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "/contacts",
+            "href": "https://blavomusic.ru/contacts",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "/catalog/search",
+            "href": "https://blavomusic.ru/catalog/search",
+            "cls": ""
+          },
+          {
+            "tag": "BUTTON",
+            "text": "Войти",
+            "href": null,
+            "cls": "log_in_header"
+          },
+          {
+            "tag": "A",
+            "text": "Перейти к прослушиванию",
+            "href": "https://blavomusic.ru/catalog/praktiki-professora-blavo/kak-izbavitsia-ot-boli-v-spine-bez-lisnix-lekarstv-cto-delat-esli-tabletki-uze-ne-pomogaiutkak-izbavitsia-ot-boli-v-spine-bez-lisnix-lekarstv-cto-delat-esli-tabletki-uze-ne-pomogaiut",
+            "cls": "banner_btn site_btn"
+          },
+          {
+            "tag": "BUTTON",
+            "text": "Открыть энергию утра",
+            "href": null,
+            "cls": "haiku_day_btn site_btn"
+          },
+          {
+            "tag": "BUTTON",
+            "text": "Смотреть видео",
+            "href": null,
+            "cls": "banner_video"
+          },
+          {
+            "tag": "BUTTON",
+            "text": "",
+            "href": null,
+            "cls": "radio_info__back_name"
+          }
+        ]
+      },
+      "text": "Blavo Meditation\n& Music Therapy\nВойти\nМузыка для медитации, релаксации и внутренней гармонии\nПерейти к прослушиванию\nчетверг\nЭнергия утра\n\nНе бойтесь на этой неделе тратить значительные суммы, вкладывая их в дела, в обустройство дома, в деловые связи. Деньги вам отобьются. На этой неделе для вас особенно актуален закон: чем больше потратишь, тем больше придет. Слушайте сказкотерапию \"Дерево Кисике\", которую озвучивает народный артист России Сергей Мигицко.\n\nОткрыть энергию утра\nСмотреть видео\nРекомендуем\nПредыдущая композиция\nСледующая композиция\nДобавить в избранное\nМедитация для всех\nМедитация для снижения тревожности\n5\n29 мин 45 сек\nДобавить в избранное\nПритчи, которые лечат\nПовелитель Драконов. Озвучивает Рушель Блаво\n5\n20 мин 28 сек\nДобавить в избранное\nПритчи, которые лечат\nВолшебная флейта. Озвучивает заслуженный артист РФ Сергей Чонишвили\n5\n22 мин 33 сек\nДобавить в избранное\nСказкотерапия от звезд театра и кино\nЗеленая шапка.Озвучивает народный артист России Иван Краско\n5\n22 м",
+      "screenshot": "blavomusic-home-mobile.png",
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        }
+      ],
+      "failed": [
+        {
+          "url": "https://blavomusic.ru/catalog?_rsc=1ws3r",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/news?_rsc=1ws3r",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/about-us?_rsc=1ws3r",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/contacts?_rsc=1ws3r",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/catalog/search?_rsc=1ws3r",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "badResponses": [
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/profile/information"
+        },
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/finance"
+        },
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/profile/information"
+        },
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/profile/information"
+        },
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/finance"
+        }
+      ]
+    },
+    {
+      "key": "blavomusic-catalog",
+      "url": "https://blavomusic.ru/catalog",
+      "viewport": "mobile",
+      "status": 200,
+      "title": "Каталог музыки для медитации и релаксации | Blavo Music",
+      "h1": "Все произведения для медитации и релаксации",
+      "metrics": {
+        "innerW": 390,
+        "scrollW": 390,
+        "scrollH": 6621,
+        "overflow": [
+          {
+            "tag": "NAV",
+            "cls": "header_nav",
+            "text": "",
+            "left": -390,
+            "right": 465
+          },
+          {
+            "tag": "UL",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "LI",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "A",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "LI",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "A",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "LI",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "BUTTON",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "LI",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "A",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          }
+        ],
+        "visibleControls": [
+          {
+            "tag": "A",
+            "text": "Blavo Meditation & Music Therapy",
+            "href": "https://blavomusic.ru/",
+            "cls": "header_logo"
+          },
+          {
+            "tag": "A",
+            "text": "/",
+            "href": "https://blavomusic.ru/",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "/catalog",
+            "href": "https://blavomusic.ru/catalog",
+            "cls": ""
+          },
+          {
+            "tag": "BUTTON",
+            "text": "",
+            "href": null,
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "/news",
+            "href": "https://blavomusic.ru/news",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "/about-us",
+            "href": "https://blavomusic.ru/about-us",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "/contacts",
+            "href": "https://blavomusic.ru/contacts",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "/catalog/search",
+            "href": "https://blavomusic.ru/catalog/search",
+            "cls": ""
+          },
+          {
+            "tag": "BUTTON",
+            "text": "Войти",
+            "href": null,
+            "cls": "log_in_header"
+          },
+          {
+            "tag": "A",
+            "text": "Главная",
+            "href": "https://blavomusic.ru/",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "Музыкотерапия Рушеля Блаво",
+            "href": "https://blavomusic.ru/catalog/muzykoterapiia-ruselia-blavo",
+            "cls": "tab_list_item category"
+          },
+          {
+            "tag": "A",
+            "text": "Сказкотерапия от звезд театра и кино",
+            "href": "https://blavomusic.ru/catalog/skazkoterapiia-ot-zvezd-teatra-i-kino",
+            "cls": "tab_list_item category"
+          },
+          {
+            "tag": "A",
+            "text": "Медитация для всех",
+            "href": "https://blavomusic.ru/catalog/meditaciia-dlia-vsex",
+            "cls": "tab_list_item category"
+          },
+          {
+            "tag": "A",
+            "text": "Медитация с аффирмациями",
+            "href": "https://blavomusic.ru/catalog/meditaciia-s-affirmaciiami",
+            "cls": "tab_list_item category"
+          },
+          {
+            "tag": "A",
+            "text": "Практики профессора Блаво",
+            "href": "https://blavomusic.ru/catalog/praktiki-professora-blavo",
+            "cls": "tab_list_item category"
+          },
+          {
+            "tag": "A",
+            "text": "Аудиокниги-библиотерапия",
+            "href": "https://blavomusic.ru/catalog/audioknigi-biblioterapiia",
+            "cls": "tab_list_item category"
+          },
+          {
+            "tag": "A",
+            "text": "Звуки природы, для оздоровления",
+            "href": "https://blavomusic.ru/catalog/zvuki-prirody-dlia-ozdorovleniia",
+            "cls": "tab_list_item category"
+          },
+          {
+            "tag": "A",
+            "text": "Притчи, которые лечат",
+            "href": "https://blavomusic.ru/catalog/pritci-kotorye-lecat",
+            "cls": "tab_list_item category"
+          },
+          {
+            "tag": "A",
+            "text": "Видео",
+            "href": "https://blavomusic.ru/catalog/video",
+            "cls": "tab_list_item category"
+          },
+          {
+            "tag": "A",
+            "text": "Перейти к библиотеке",
+            "href": "https://blavomusic.ru/catalog/muzykoterapiia-ruselia-blavo",
+            "cls": "banner_btn site_btn"
+          }
+        ]
+      },
+      "text": "Blavo Meditation\n& Music Therapy\nВойти\nГлавная\nКаталог\nВсе произведения для медитации и релаксации\nМузыкотерапия Рушеля Блаво\nСказкотерапия от звезд театра и кино\nМедитация для всех\nМедитация с аффирмациями\nПрактики профессора Блаво\nАудиокниги-библиотерапия\nЗвуки природы, для оздоровления\nПритчи, которые лечат\nВидео\n36 произведений , 9 часов\nМузыкотерапия Рушеля Блаво\n\nАвторская музыка профессора Рушеля Блаво для целевого воздействия на органы и системы, утвержденное министерством здравоохранения Российской Федерации.\n\nПерейти к библиотеке\nМузыкотерапия Рушеля Блаво\nМузыка для увеличения концентрации внимания\nАвторская музыка профессора Рушеля Блаво для целевого воздействия на органы и системы, утвержденное министерством здравоохранения Российской Федерации.\n5\n30 мин 29 сек\nРекомендуем\nЭто композиции можно прослушать бесплатно без регистрации. Больше произведений в нашем приложении ссылки\nПредыдущая композиция\nСледующая композиция\nДобавить в избранное\nМедитация для всех\nМедитация для с",
+      "screenshot": "blavomusic-catalog-mobile.png",
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_CERT_AUTHORITY_INVALID"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        }
+      ],
+      "failed": [
+        {
+          "url": "https://hdrc.yandex.net/",
+          "failure": "net::ERR_CERT_AUTHORITY_INVALID"
+        },
+        {
+          "url": "https://blavomusic.ru/catalog/muzykoterapiia-ruselia-blavo?_rsc=tvkvj",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/catalog/skazkoterapiia-ot-zvezd-teatra-i-kino?_rsc=tvkvj",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/catalog/meditaciia-dlia-vsex/meditaciia-dlia-snizeniia-trevoznosti?_rsc=tvkvj",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "badResponses": [
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/profile/information"
+        },
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/profile/information"
+        },
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/finance"
+        },
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/profile/information"
+        },
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/finance"
+        }
+      ]
+    },
+    {
+      "key": "blavomusic-contacts",
+      "url": "https://blavomusic.ru/contacts",
+      "viewport": "mobile",
+      "status": 200,
+      "title": "Контакты Blavo Music | Центр Рушеля Блаво",
+      "h1": "Контакты",
+      "metrics": {
+        "innerW": 390,
+        "scrollW": 390,
+        "scrollH": 2185,
+        "overflow": [
+          {
+            "tag": "NAV",
+            "cls": "header_nav",
+            "text": "",
+            "left": -390,
+            "right": 465
+          },
+          {
+            "tag": "UL",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "LI",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "A",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "LI",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "A",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "LI",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "BUTTON",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "LI",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "A",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          }
+        ],
+        "visibleControls": [
+          {
+            "tag": "A",
+            "text": "Blavo Meditation & Music Therapy",
+            "href": "https://blavomusic.ru/",
+            "cls": "header_logo"
+          },
+          {
+            "tag": "A",
+            "text": "/",
+            "href": "https://blavomusic.ru/",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "/catalog",
+            "href": "https://blavomusic.ru/catalog",
+            "cls": ""
+          },
+          {
+            "tag": "BUTTON",
+            "text": "",
+            "href": null,
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "/news",
+            "href": "https://blavomusic.ru/news",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "/about-us",
+            "href": "https://blavomusic.ru/about-us",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "/contacts",
+            "href": "https://blavomusic.ru/contacts",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "/catalog/search",
+            "href": "https://blavomusic.ru/catalog/search",
+            "cls": ""
+          },
+          {
+            "tag": "BUTTON",
+            "text": "Войти",
+            "href": null,
+            "cls": "log_in_header"
+          },
+          {
+            "tag": "A",
+            "text": "Главная",
+            "href": "https://blavomusic.ru/",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "+7 (911) 92 713 92",
+            "href": "tel:+7 (911) 92 713 92",
+            "cls": "contacts_item__link"
+          },
+          {
+            "tag": "A",
+            "text": "Blavomusic@yandex.ru",
+            "href": "mailto:Blavomusic@yandex.ru",
+            "cls": "contacts_item__link"
+          },
+          {
+            "tag": "BUTTON",
+            "text": "",
+            "href": null,
+            "cls": "radio_info__back_name"
+          }
+        ]
+      },
+      "text": "Blavo Meditation\n& Music Therapy\nВойти\nГлавная\nКонтакты\nКонтакты\nКонтакты\n\nСвяжитесь с нами, если у вас есть вопросы. Мы будем рады на них ответить!\n\nТелефон\n+7 (911) 92 713 92\nПочта\nBlavomusic@yandex.ru\nАдрес\n191015, Санкт-Петербург, ул. Кирочная, д. 64, Центр Рушеля Блаво\nЧасы работы\n09:00 до 21:00\nКонтакты Blavo Music\n\n \n\nСвяжитесь с командой Blavo Music по любым вопросам, связанным с музыкой для медитации, релаксации и сотрудничеством. Мы всегда открыты для общения с нашими слушателями, партнерами и авторами. На этой странице вы найдете актуальные контактные данные для получения консультаций, обратной связи и поддержки пользователей.\n\n \n \n‌\n\n‌\n\n‌\n\n00:00\n00:00\nОткрыть информацию о композиции\nДобавить в избранное\nСкачать композицию\nЗагрузка ...\n--:--\n--:--\nBlavo Meditation\n& Music Therapy\nГлавная\nКаталог\nБлог\nНовости\nКниги\nВидео галерея\nКонтакты\nО нас\nЗаказать обратный звонок\n+7 (911) 92 713 92\n© Центр Рушеля Блаво 1989 - 2026\nПолитика конфиденциальности\nСправка\nSitemap\nПубличная офе",
+      "screenshot": "blavomusic-contacts-mobile.png",
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_CERT_AUTHORITY_INVALID"
+        }
+      ],
+      "failed": [
+        {
+          "url": "https://yandex.ru/map-widget/v1/?um=constructor%3A96043c9ab268f53e0a720a2ca91011f7289f8990b085ca34dd6881a6b5e6c1d5&amp;source=constructor&amp;ll=55.710568,37.65582&amp;z=4326",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://yandex.ru/map-widget/v1/?um=constructor%3A96043c9ab268f53e0a720a2ca91011f7289f8990b085ca34dd6881a6b5e6c1d5&amp;source=constructor&amp;ll=55.710568,37.65582&amp;z=4326",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/contacts",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/contacts",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://hdrc.yandex.net/",
+          "failure": "net::ERR_CERT_AUTHORITY_INVALID"
+        },
+        {
+          "url": "https://core-renderer-tiles.maps.yandex.ru/tiles?l=map&v=26.08.18-0~b:260817132330~ia:26.08.12-0~ib:26.08.20-2&x=38299&y=19112&z=16&scale=1&lang=ru_RU&client_id=yandex-web-maps&experimental_use_metapoi=1&experimental_metapoi_combined_tiles=1&experimental_ranking_mode_name=default-web-ranking&auction=1&experimental_enable_direct_info_logging=1&use_permalinks_for_direct_requests=1&direct_density=auction_z14_byak_p0&experimental_mm_local_rubricpoi_min_zoom=13&experimental_mm_local_photopoi_min_zoom=13&experimental_mm_photopoi_min_zoom=13&experimental_mm_rubricpoi_min_zoom=13&ads=enabled",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://core-renderer-tiles.maps.yandex.ru/tiles?l=map&v=26.08.18-0~b:260817132330~ia:26.08.12-0~ib:26.08.20-2&x=38299&y=19115&z=16&scale=1&lang=ru_RU&client_id=yandex-web-maps&experimental_use_metapoi=1&experimental_metapoi_combined_tiles=1&experimental_ranking_mode_name=default-web-ranking&auction=1&experimental_enable_direct_info_logging=1&use_permalinks_for_direct_requests=1&direct_density=auction_z14_byak_p0&experimental_mm_local_rubricpoi_min_zoom=13&experimental_mm_local_photopoi_min_zoom=13&experimental_mm_photopoi_min_zoom=13&experimental_mm_rubricpoi_min_zoom=13&ads=enabled",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "badResponses": [
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/profile/information"
+        },
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/profile/information"
+        },
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/finance"
+        }
+      ]
+    },
+    {
+      "key": "blavomusic-sitemap",
+      "url": "https://blavomusic.ru/sitemap",
+      "viewport": "mobile",
+      "status": 200,
+      "title": "Музыка для медитации, релаксации и внутренней гармонии",
+      "h1": "Музыка для медитации, релаксации и внутренней гармонии",
+      "metrics": {
+        "innerW": 390,
+        "scrollW": 390,
+        "scrollH": 1198,
+        "overflow": [
+          {
+            "tag": "NAV",
+            "cls": "header_nav",
+            "text": "",
+            "left": -390,
+            "right": 465
+          },
+          {
+            "tag": "UL",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "LI",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "A",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "LI",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "A",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "LI",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "BUTTON",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "LI",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          },
+          {
+            "tag": "A",
+            "cls": "",
+            "text": "",
+            "left": -370,
+            "right": -19
+          }
+        ],
+        "visibleControls": [
+          {
+            "tag": "A",
+            "text": "Blavo Meditation & Music Therapy",
+            "href": "https://blavomusic.ru/",
+            "cls": "header_logo"
+          },
+          {
+            "tag": "A",
+            "text": "/",
+            "href": "https://blavomusic.ru/",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "/catalog",
+            "href": "https://blavomusic.ru/catalog",
+            "cls": ""
+          },
+          {
+            "tag": "BUTTON",
+            "text": "",
+            "href": null,
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "/news",
+            "href": "https://blavomusic.ru/news",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "/about-us",
+            "href": "https://blavomusic.ru/about-us",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "/contacts",
+            "href": "https://blavomusic.ru/contacts",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "/catalog/search",
+            "href": "https://blavomusic.ru/catalog/search",
+            "cls": ""
+          },
+          {
+            "tag": "BUTTON",
+            "text": "Войти",
+            "href": null,
+            "cls": "log_in_header"
+          },
+          {
+            "tag": "A",
+            "text": "Главная",
+            "href": "https://blavomusic.ru/",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "Политика конфиденциальности мобильного приложения Blavomusic",
+            "href": "https://blavomusic.ru/policy",
+            "cls": ""
+          },
+          {
+            "tag": "BUTTON",
+            "text": "",
+            "href": null,
+            "cls": "radio_info__back_name"
+          },
+          {
+            "tag": "A",
+            "text": "Blavo Meditation & Music Therapy",
+            "href": "https://blavomusic.ru/sitemap",
+            "cls": "footer_logo"
+          },
+          {
+            "tag": "A",
+            "text": "https://apps.apple.com/ru/app/blavomusic/id6744443926",
+            "href": "https://apps.apple.com/ru/app/blavomusic/id6744443926",
+            "cls": "application_item"
+          },
+          {
+            "tag": "A",
+            "text": "https://play.google.com/store/apps/details?id=ru.blavomusic&hl=ru",
+            "href": "https://play.google.com/store/apps/details?id=ru.blavomusic&hl=ru",
+            "cls": "application_item"
+          },
+          {
+            "tag": "A",
+            "text": "https://appgallery.huawei.com/app/C118072157",
+            "href": "https://appgallery.huawei.com/app/C118072157",
+            "cls": "application_item"
+          },
+          {
+            "tag": "A",
+            "text": "https://www.rustore.ru/",
+            "href": "https://www.rustore.ru/",
+            "cls": "application_item"
+          },
+          {
+            "tag": "A",
+            "text": "Главная",
+            "href": "https://blavomusic.ru/",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "Каталог",
+            "href": "https://blavomusic.ru/catalog",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "Блог",
+            "href": "https://blavomusic.ru/news/articles",
+            "cls": ""
+          }
+        ]
+      },
+      "text": "Blavo Meditation\n& Music Therapy\nВойти\nГлавная\nКарта сайта\nМузыка для медитации, релаксации и внутренней гармонии\nДругие материалы\nПолитика конфиденциальности мобильного приложения Blavomusic\n‌\n\n‌\n\n‌\n\n00:00\n00:00\nОткрыть информацию о композиции\nДобавить в избранное\nСкачать композицию\nЗагрузка ...\n--:--\n--:--\nBlavo Meditation\n& Music Therapy\nГлавная\nКаталог\nБлог\nНовости\nКниги\nВидео галерея\nКонтакты\nО нас\nЗаказать обратный звонок\n+7 (911) 92 713 92\n© Центр Рушеля Блаво 1989 - 2026\nПолитика конфиденциальности\nСправка\nSitemap\nПубличная оферта\nВсе предложения и цены, указанные на сайте, носят информационный характер и не являются публичной офертой (ст. 437 ГК РФ).\nПравовая информация",
+      "screenshot": "blavomusic-sitemap-mobile.png",
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_CERT_AUTHORITY_INVALID"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        }
+      ],
+      "failed": [
+        {
+          "url": "https://blavomusic.ru/?_rsc=cl9f9",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/catalog?_rsc=cl9f9",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/news?_rsc=cl9f9",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/about-us?_rsc=cl9f9",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/catalog/search?_rsc=cl9f9",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://hdrc.yandex.net/",
+          "failure": "net::ERR_CERT_AUTHORITY_INVALID"
+        },
+        {
+          "url": "https://blavomusic.ru/sitemap",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/books?_rsc=cl9f9",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/video-gallery?_rsc=cl9f9",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/policy?_rsc=cl9f9",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "badResponses": [
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/profile/information"
+        }
+      ]
+    },
+    {
+      "key": "versailles-home",
+      "url": "https://versailles.clinic/",
+      "viewport": "desktop",
+      "status": 200,
+      "title": "Премиум клиника медицинской косметологии Versailles",
+      "h1": "Клиника медицинской косметологии Versailles",
+      "metrics": {
+        "innerW": 1440,
+        "scrollW": 1440,
+        "scrollH": 6055,
+        "overflow": [
+          {
+            "tag": "DIV",
+            "cls": "modals",
+            "text": "Запишитесь на прием в клинику Оставьте заявку и мы перезвоним вам в течение 15 минут. Даю ",
+            "left": -1440,
+            "right": 0
+          },
+          {
+            "tag": "DIV",
+            "cls": "modal",
+            "text": "Запишитесь на прием в клинику Оставьте заявку и мы перезвоним вам в течение 15 минут. Даю ",
+            "left": -980,
+            "right": -460
+          },
+          {
+            "tag": "DIV",
+            "cls": "modal__top",
+            "text": "",
+            "left": -950,
+            "right": -490
+          },
+          {
+            "tag": "BUTTON",
+            "cls": "close",
+            "text": "",
+            "left": -520,
+            "right": -490
+          },
+          {
+            "tag": "svg",
+            "cls": "[object SVGAnimatedString]",
+            "text": "",
+            "left": -520,
+            "right": -490
+          },
+          {
+            "tag": "use",
+            "cls": "[object SVGAnimatedString]",
+            "text": "",
+            "left": -518,
+            "right": -492
+          },
+          {
+            "tag": "FORM",
+            "cls": "",
+            "text": "Запишитесь на прием в клинику Оставьте заявку и мы перезвоним вам в течение 15 минут. Даю ",
+            "left": -950,
+            "right": -490
+          },
+          {
+            "tag": "H3",
+            "cls": "",
+            "text": "Запишитесь на прием в клинику",
+            "left": -950,
+            "right": -490
+          },
+          {
+            "tag": "DIV",
+            "cls": " modal__desc text",
+            "text": "Оставьте заявку и мы перезвоним вам в течение 15 минут.",
+            "left": -950,
+            "right": -490
+          },
+          {
+            "tag": "DIV",
+            "cls": "modal__inputs",
+            "text": "Даю согласие на обработку персональных данных",
+            "left": -950,
+            "right": -490
+          }
+        ],
+        "visibleControls": [
+          {
+            "tag": "A",
+            "text": "/",
+            "href": "https://versailles.clinic/",
+            "cls": "header__logo"
+          },
+          {
+            "tag": "A",
+            "text": "tel: +7 911-92-713-92",
+            "href": "tel: +7911-92-713-92",
+            "cls": "header__phone d-flex"
+          },
+          {
+            "tag": "A",
+            "text": "8 (812)564-65-66",
+            "href": "tel:+78125646566",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "+7 (911) 92-713-92",
+            "href": "tel: +7911-92-713-92",
+            "cls": ""
+          },
+          {
+            "tag": "BUTTON",
+            "text": "Записаться",
+            "href": null,
+            "cls": "button \nopen-modal"
+          },
+          {
+            "tag": "A",
+            "text": "О клинике",
+            "href": "https://versailles.clinic/about/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/",
+            "cls": "menu-item__text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/byuti-sfera-terapiya-po-litsu/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/byuti-sfera-terapiya-po-litsu/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/ultrazvukovoy-smas-lifting/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/ultrazvukovoy-smas-lifting/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/kriolipoliz-vtorogo-podborodka/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/kriolipoliz-vtorogo-podborodka/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/endosfera-po-litsu/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/endosfera-po-litsu/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/lpg-massazh-po-litsu/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/lpg-massazh-po-litsu/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/rf-lifting-po-litsu/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/rf-lifting-po-litsu/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/mikrotoki/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/mikrotoki/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/biostimulyatsiya/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/biostimulyatsiya/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/byuti-sfera-terapiya-po-telu/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/byuti-sfera-terapiya-po-telu/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/smas-lifting-po-telu/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/smas-lifting-po-telu/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/kriolipoliz/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/kriolipoliz/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/endosfera-po-telu/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/endosfera-po-telu/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/lpg-massazh-po-telu/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/lpg-massazh-po-telu/",
+            "cls": " menu-item text"
+          }
+        ]
+      },
+      "text": "Запишитесь на прием в клинику\nОставьте заявку и мы перезвоним вам в течение 15 минут.\nДаю согласие на обработку персональных данных\nЗаписаться\n\n\n\nОставьте отзыв\nПосле модерации мы обязательно его опубликуем\nДаю согласие на обработку персональных данных\nОтправить\n\n\n\n\n\n\n8 (812)564-65-66\n+7 (911) 92-713-92\nЗаписаться\nО клинике\nУслуги\nВрачи\nЦены\nАкции\nОтзывы\nКонтакты\nКлиника медицинской косметологии Versailles\nДобро пожаловать в клинику медицинской косметологии Versailles! Откройте для себя мир красоты и здоровья с нашими инновационными технологиями и профессиональным подходом.\nМы предлагаем комплексные решения для улучшения внешнего вида лица и тела, используя современное оборудование и инновационные методики.\n\nНаши услуги:\n\nАппаратная косметология:\nFotona лазер - омоложении кожи, пилинги, удаление новообразований\nSmas-лифтинг - безоперационная подтяжка кожи тела\nEndosphères® Therapy тела - метод компрессионной микровибрации, комплексное воздействие на кожу лица и тела\nLpg-массаж - вакуу",
+      "screenshot": "versailles-home-desktop.png",
+      "console": [
+        {
+          "type": "warning",
+          "text": "It is recommended that a robustness level be specified. Not specifying the robustness level could result in unexpected behavior."
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_CERT_AUTHORITY_INVALID"
+        }
+      ],
+      "failed": [
+        {
+          "url": "https://privacy-cs.mail.ru/fp/?id=Y7hjISkb8nv7qMYmmfXhr",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://privacy-cs.mail.ru/fp/?id=Y7hjISkb8nv7qMYmmfXhr",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://hdrc.yandex.net/",
+          "failure": "net::ERR_CERT_AUTHORITY_INVALID"
+        }
+      ],
+      "badResponses": []
+    },
+    {
+      "key": "versailles-prices",
+      "url": "https://versailles.clinic/prices",
+      "viewport": "desktop",
+      "status": 404,
+      "title": "Страница не найдена",
+      "h1": null,
+      "metrics": {
+        "innerW": 1440,
+        "scrollW": 1440,
+        "scrollH": 1099,
+        "overflow": [
+          {
+            "tag": "DIV",
+            "cls": "modals",
+            "text": "Запишитесь на прием в клинику Оставьте заявку и мы перезвоним вам в течение 15 минут. Даю ",
+            "left": -1440,
+            "right": 0
+          },
+          {
+            "tag": "DIV",
+            "cls": "modal",
+            "text": "Запишитесь на прием в клинику Оставьте заявку и мы перезвоним вам в течение 15 минут. Даю ",
+            "left": -980,
+            "right": -460
+          },
+          {
+            "tag": "DIV",
+            "cls": "modal__top",
+            "text": "",
+            "left": -950,
+            "right": -490
+          },
+          {
+            "tag": "BUTTON",
+            "cls": "close",
+            "text": "",
+            "left": -520,
+            "right": -490
+          },
+          {
+            "tag": "svg",
+            "cls": "[object SVGAnimatedString]",
+            "text": "",
+            "left": -520,
+            "right": -490
+          },
+          {
+            "tag": "use",
+            "cls": "[object SVGAnimatedString]",
+            "text": "",
+            "left": -518,
+            "right": -492
+          },
+          {
+            "tag": "FORM",
+            "cls": "",
+            "text": "Запишитесь на прием в клинику Оставьте заявку и мы перезвоним вам в течение 15 минут. Даю ",
+            "left": -950,
+            "right": -490
+          },
+          {
+            "tag": "H3",
+            "cls": "",
+            "text": "Запишитесь на прием в клинику",
+            "left": -950,
+            "right": -490
+          },
+          {
+            "tag": "DIV",
+            "cls": " modal__desc text",
+            "text": "Оставьте заявку и мы перезвоним вам в течение 15 минут.",
+            "left": -950,
+            "right": -490
+          },
+          {
+            "tag": "DIV",
+            "cls": "modal__inputs",
+            "text": "Даю согласие на обработку персональных данных",
+            "left": -950,
+            "right": -490
+          }
+        ],
+        "visibleControls": [
+          {
+            "tag": "A",
+            "text": "/",
+            "href": "https://versailles.clinic/",
+            "cls": "header__logo"
+          },
+          {
+            "tag": "A",
+            "text": "tel: +7 911-92-713-92",
+            "href": "tel: +7911-92-713-92",
+            "cls": "header__phone d-flex"
+          },
+          {
+            "tag": "A",
+            "text": "8 (812)564-65-66",
+            "href": "tel:+78125646566",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "+7 (911) 92-713-92",
+            "href": "tel: +7911-92-713-92",
+            "cls": ""
+          },
+          {
+            "tag": "BUTTON",
+            "text": "Записаться",
+            "href": null,
+            "cls": "button \nopen-modal"
+          },
+          {
+            "tag": "A",
+            "text": "О клинике",
+            "href": "https://versailles.clinic/about/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/",
+            "cls": "menu-item__text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/byuti-sfera-terapiya-po-litsu/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/byuti-sfera-terapiya-po-litsu/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/ultrazvukovoy-smas-lifting/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/ultrazvukovoy-smas-lifting/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/kriolipoliz-vtorogo-podborodka/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/kriolipoliz-vtorogo-podborodka/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/endosfera-po-litsu/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/endosfera-po-litsu/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/lpg-massazh-po-litsu/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/lpg-massazh-po-litsu/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/rf-lifting-po-litsu/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/rf-lifting-po-litsu/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/mikrotoki/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/mikrotoki/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/biostimulyatsiya/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/biostimulyatsiya/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/byuti-sfera-terapiya-po-telu/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/byuti-sfera-terapiya-po-telu/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/smas-lifting-po-telu/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/smas-lifting-po-telu/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/kriolipoliz/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/kriolipoliz/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/endosfera-po-telu/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/endosfera-po-telu/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/lpg-massazh-po-telu/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/lpg-massazh-po-telu/",
+            "cls": " menu-item text"
+          }
+        ]
+      },
+      "text": "Запишитесь на прием в клинику\nОставьте заявку и мы перезвоним вам в течение 15 минут.\nДаю согласие на обработку персональных данных\nЗаписаться\n\n\n\nОставьте отзыв\nПосле модерации мы обязательно его опубликуем\nДаю согласие на обработку персональных данных\nОтправить\n\n\n\n\n\n\n8 (812)564-65-66\n+7 (911) 92-713-92\nЗаписаться\nО клинике\nУслуги\nВрачи\nЦены\nАкции\nОтзывы\nКонтакты\n404\nТакой страницы не существует\nПравовая информация\nПолитика конфиденциальности\nМедицинская лицензия ЛО-78-01-008972\nПредставленная на сайте информация не является публичной офертой, определяемой положениями Статьи 437 Гражданского кодекса РФ.\nИМЕЮТСЯ ПРОТИВОПОКАЗАНИЯ. НЕОБХОДИМА ОЧНАЯ КОНСУЛЬТАЦИЯ СПЕЦИАЛИСТА. 16+\nЗаписаться\n+7 (911) 92-713-92\n9271392@gmail.com\nСанкт-Петербург, ул. Кирочная, д. 64\nПн-Пт: 09:00 - 20:00 Сб: 9:00 - 18:00\n\nУправление файлами cookie\n\nДанный веб-сайт использует cookie-файлы и сервис «Яндекс Метрика» в целях предоставления вам лучшего пользовательского опыта на нашем сайте. Продолжая использовать д",
+      "screenshot": "versailles-prices-desktop.png",
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_CERT_AUTHORITY_INVALID"
+        },
+        {
+          "type": "warning",
+          "text": "It is recommended that a robustness level be specified. Not specifying the robustness level could result in unexpected behavior."
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_CERT_AUTHORITY_INVALID"
+        }
+      ],
+      "failed": [
+        {
+          "url": "https://privacy-cs.mail.ru/fp/?id=ZRMMXSq2IIOwYtIM5efti",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://privacy-cs.mail.ru/fp/?id=ZRMMXSq2IIOwYtIM5efti",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://hdrc.yandex.net/",
+          "failure": "net::ERR_CERT_AUTHORITY_INVALID"
+        },
+        {
+          "url": "https://hdrc.yandex.net/",
+          "failure": "net::ERR_CERT_AUTHORITY_INVALID"
+        }
+      ],
+      "badResponses": [
+        {
+          "status": 404,
+          "url": "https://versailles.clinic/prices"
+        }
+      ]
+    },
+    {
+      "key": "versailles-contacts",
+      "url": "https://versailles.clinic/contacts",
+      "viewport": "desktop",
+      "status": 200,
+      "title": "Контакты клиники Versailles в Санкт-Петербурге",
+      "h1": "Контакты",
+      "metrics": {
+        "innerW": 1440,
+        "scrollW": 1440,
+        "scrollH": 2812,
+        "overflow": [
+          {
+            "tag": "DIV",
+            "cls": "modals",
+            "text": "Запишитесь на прием в клинику Оставьте заявку и мы перезвоним вам в течение 15 минут. Даю ",
+            "left": -1440,
+            "right": 0
+          },
+          {
+            "tag": "DIV",
+            "cls": "modal",
+            "text": "Запишитесь на прием в клинику Оставьте заявку и мы перезвоним вам в течение 15 минут. Даю ",
+            "left": -980,
+            "right": -460
+          },
+          {
+            "tag": "DIV",
+            "cls": "modal__top",
+            "text": "",
+            "left": -950,
+            "right": -490
+          },
+          {
+            "tag": "BUTTON",
+            "cls": "close",
+            "text": "",
+            "left": -520,
+            "right": -490
+          },
+          {
+            "tag": "svg",
+            "cls": "[object SVGAnimatedString]",
+            "text": "",
+            "left": -520,
+            "right": -490
+          },
+          {
+            "tag": "use",
+            "cls": "[object SVGAnimatedString]",
+            "text": "",
+            "left": -518,
+            "right": -492
+          },
+          {
+            "tag": "FORM",
+            "cls": "",
+            "text": "Запишитесь на прием в клинику Оставьте заявку и мы перезвоним вам в течение 15 минут. Даю ",
+            "left": -950,
+            "right": -490
+          },
+          {
+            "tag": "H3",
+            "cls": "",
+            "text": "Запишитесь на прием в клинику",
+            "left": -950,
+            "right": -490
+          },
+          {
+            "tag": "DIV",
+            "cls": " modal__desc text",
+            "text": "Оставьте заявку и мы перезвоним вам в течение 15 минут.",
+            "left": -950,
+            "right": -490
+          },
+          {
+            "tag": "DIV",
+            "cls": "modal__inputs",
+            "text": "Даю согласие на обработку персональных данных",
+            "left": -950,
+            "right": -490
+          }
+        ],
+        "visibleControls": [
+          {
+            "tag": "A",
+            "text": "/",
+            "href": "https://versailles.clinic/",
+            "cls": "header__logo"
+          },
+          {
+            "tag": "A",
+            "text": "tel: +7 911-92-713-92",
+            "href": "tel: +7911-92-713-92",
+            "cls": "header__phone d-flex"
+          },
+          {
+            "tag": "A",
+            "text": "8 (812)564-65-66",
+            "href": "tel:+78125646566",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "+7 (911) 92-713-92",
+            "href": "tel: +7911-92-713-92",
+            "cls": ""
+          },
+          {
+            "tag": "BUTTON",
+            "text": "Записаться",
+            "href": null,
+            "cls": "button \nopen-modal"
+          },
+          {
+            "tag": "A",
+            "text": "О клинике",
+            "href": "https://versailles.clinic/about/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/",
+            "cls": "menu-item__text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/byuti-sfera-terapiya-po-litsu/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/byuti-sfera-terapiya-po-litsu/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/ultrazvukovoy-smas-lifting/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/ultrazvukovoy-smas-lifting/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/kriolipoliz-vtorogo-podborodka/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/kriolipoliz-vtorogo-podborodka/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/endosfera-po-litsu/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/endosfera-po-litsu/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/lpg-massazh-po-litsu/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/lpg-massazh-po-litsu/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/rf-lifting-po-litsu/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/rf-lifting-po-litsu/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/mikrotoki/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/mikrotoki/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/biostimulyatsiya/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/biostimulyatsiya/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/byuti-sfera-terapiya-po-telu/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/byuti-sfera-terapiya-po-telu/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/smas-lifting-po-telu/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/smas-lifting-po-telu/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/kriolipoliz/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/kriolipoliz/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/endosfera-po-telu/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/endosfera-po-telu/",
+            "cls": " menu-item text"
+          },
+          {
+            "tag": "A",
+            "text": "/services/apparatnaya-kosmetologiya/lpg-massazh-po-telu/",
+            "href": "https://versailles.clinic/services/apparatnaya-kosmetologiya/lpg-massazh-po-telu/",
+            "cls": " menu-item text"
+          }
+        ]
+      },
+      "text": "Запишитесь на прием в клинику\nОставьте заявку и мы перезвоним вам в течение 15 минут.\nДаю согласие на обработку персональных данных\nЗаписаться\n\n\n\nОставьте отзыв\nПосле модерации мы обязательно его опубликуем\nДаю согласие на обработку персональных данных\nОтправить\n\n\n\n\n\n\n8 (812)564-65-66\n+7 (911) 92-713-92\nЗаписаться\nО клинике\nУслуги\nВрачи\nЦены\nАкции\nОтзывы\nКонтакты\nГлавная\n — \nКонтакты\nКонтакты\nСанкт-Петербург, ул. Кирочная, д. 64\nВремя работы\nЕжедневно с 9:00 до 21:00\nЭлектронная почта\n9271392@gmail.com\nТелефон\n+7 (911) 92-713-92\nРеквизиты компании:\n\nООО «РОЙАЛМЕД»\nАдрес: 191015, г. Санкт-Петербург, ул. Кирочная д.64 лит А пом. 20Н\nИНН 7825508976\nКПП 784201001\nр/с 40702810155710002575\nСЕВЕРО-ЗАПАДНЫЙ БАНК ПАО СБЕРБАНК\nБИК 044030653\nк/с 30101810500000000653\nОГРН 1037843116035\nтел. + 7 (812) 564-65-66\n\nЛицензии\n\t\n\t\n\n\nЗапишитесь на прием в клинику\n\nОставьте заявку и мы перезвоним вам в течение 15 минут.\n\nЗаписаться\nДаю согласие на обработку персональных данных\nПравовая информация\nПолитика ",
+      "screenshot": "versailles-contacts-desktop.png",
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_CERT_AUTHORITY_INVALID"
+        },
+        {
+          "type": "warning",
+          "text": "It is recommended that a robustness level be specified. Not specifying the robustness level could result in unexpected behavior."
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_CERT_AUTHORITY_INVALID"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_CERT_AUTHORITY_INVALID"
+        }
+      ],
+      "failed": [
+        {
+          "url": "https://hdrc.yandex.net/",
+          "failure": "net::ERR_CERT_AUTHORITY_INVALID"
+        },
+        {
+          "url": "https://privacy-cs.mail.ru/fp/?id=jdbsMEo6pWzhkLAPU0uwQ",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://privacy-cs.mail.ru/fp/?id=jdbsMEo6pWzhkLAPU0uwQ",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://hdrc.yandex.net/",
+          "failure": "net::ERR_CERT_AUTHORITY_INVALID"
+        }
+      ],
+      "badResponses": []
+    },
+    {
+      "key": "blavomusic-home",
+      "url": "https://blavomusic.ru/",
+      "viewport": "desktop",
+      "status": 200,
+      "title": "Музыка для медитации и релаксации онлайн | Blavo Music",
+      "h1": "Музыка для медитации, релаксации и внутренней гармонии",
+      "metrics": {
+        "innerW": 1440,
+        "scrollW": 1440,
+        "scrollH": 7641,
+        "overflow": [
+          {
+            "tag": "DIV",
+            "cls": "swiper-slide recommendation_slide",
+            "text": "Добавить в избранное Сказкотерапия от звезд театра и кино Край земли. Озвучивает народный ",
+            "left": 1421,
+            "right": 1746
+          },
+          {
+            "tag": "DIV",
+            "cls": "products_item",
+            "text": "Добавить в избранное Сказкотерапия от звезд театра и кино Край земли. Озвучивает народный ",
+            "left": 1421,
+            "right": 1746
+          },
+          {
+            "tag": "DIV",
+            "cls": "recommendation_slide__img",
+            "text": "Добавить в избранное Сказкотерапия от звезд театра и кино",
+            "left": 1421,
+            "right": 1746
+          },
+          {
+            "tag": "DIV",
+            "cls": "slide__img_head",
+            "text": "Добавить в избранное Сказкотерапия от звезд театра и кино",
+            "left": 1433,
+            "right": 1746
+          },
+          {
+            "tag": "BUTTON",
+            "cls": "slide__favorite",
+            "text": "Добавить в избранное",
+            "left": 1433,
+            "right": 1461
+          },
+          {
+            "tag": "svg",
+            "cls": "[object SVGAnimatedString]",
+            "text": "",
+            "left": 1439,
+            "right": 1455
+          },
+          {
+            "tag": "path",
+            "cls": "[object SVGAnimatedString]",
+            "text": "",
+            "left": 1440,
+            "right": 1454
+          },
+          {
+            "tag": "SPAN",
+            "cls": "visually-hidden",
+            "text": "Добавить в избранное",
+            "left": 1447,
+            "right": 1448
+          },
+          {
+            "tag": "SPAN",
+            "cls": "slide__cat",
+            "text": "Сказкотерапия от звезд театра и кино",
+            "left": 1471,
+            "right": 1746
+          },
+          {
+            "tag": "IMG",
+            "cls": "",
+            "text": "Край земли. Озвучивает народный артист России Олег Басилашвили",
+            "left": 1421,
+            "right": 1746
+          }
+        ],
+        "visibleControls": [
+          {
+            "tag": "A",
+            "text": "Blavo Meditation & Music Therapy",
+            "href": "https://blavomusic.ru/",
+            "cls": "header_logo"
+          },
+          {
+            "tag": "A",
+            "text": "Главная",
+            "href": "https://blavomusic.ru/",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "Каталог",
+            "href": "https://blavomusic.ru/catalog",
+            "cls": ""
+          },
+          {
+            "tag": "BUTTON",
+            "text": "Заказ композиции",
+            "href": null,
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "Блог",
+            "href": "https://blavomusic.ru/news",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "О нас",
+            "href": "https://blavomusic.ru/about-us",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "Контакты",
+            "href": "https://blavomusic.ru/contacts",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "/catalog/search",
+            "href": "https://blavomusic.ru/catalog/search",
+            "cls": ""
+          },
+          {
+            "tag": "BUTTON",
+            "text": "Войти",
+            "href": null,
+            "cls": "log_in_header"
+          },
+          {
+            "tag": "A",
+            "text": "Перейти к прослушиванию",
+            "href": "https://blavomusic.ru/catalog/praktiki-professora-blavo/kak-izbavitsia-ot-boli-v-spine-bez-lisnix-lekarstv-cto-delat-esli-tabletki-uze-ne-pomogaiutkak-izbavitsia-ot-boli-v-spine-bez-lisnix-lekarstv-cto-delat-esli-tabletki-uze-ne-pomogaiut",
+            "cls": "banner_btn site_btn"
+          },
+          {
+            "tag": "BUTTON",
+            "text": "Открыть энергию утра",
+            "href": null,
+            "cls": "haiku_day_btn site_btn"
+          },
+          {
+            "tag": "BUTTON",
+            "text": "Смотреть видео",
+            "href": null,
+            "cls": "banner_video"
+          },
+          {
+            "tag": "BUTTON",
+            "text": "",
+            "href": null,
+            "cls": "radio_info__back_name"
+          }
+        ]
+      },
+      "text": "Blavo Meditation\n& Music Therapy\nГлавная\nКаталог\nЗаказ композиции\nБлог\nО нас\nКонтакты\nВойти\nМузыка для медитации, релаксации и внутренней гармонии\nПерейти к прослушиванию\nчетверг\nЭнергия\nутра\n\nНе бойтесь на этой неделе тратить значительные суммы, вкладывая их в дела, в обустройство дома, в деловые связи. Деньги вам отобьются. На этой неделе для вас особенно актуален закон: чем больше потратишь, тем больше придет. Слушайте сказкотерапию \"Дерево Кисике\", которую озвучивает народный артист России Сергей Мигицко.\n\nОткрыть энергию утра\nСмотреть видео\nРекомендуем\nПредыдущая композиция\nСледующая композиция\nДобавить в избранное\nМедитация для всех\nМедитация для снижения тревожности\n5\n29 мин 45 сек\nДобавить в избранное\nПритчи, которые лечат\nПовелитель Драконов. Озвучивает Рушель Блаво\n5\n20 мин 28 сек\nДобавить в избранное\nПритчи, которые лечат\nВолшебная флейта. Озвучивает заслуженный артист РФ Сергей Чонишвили\n5\n22 мин 33 сек\nДобавить в избранное\nСказкотерапия от звезд театра и кино\nЗеленая шапка",
+      "screenshot": "blavomusic-home-desktop.png",
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_CERT_AUTHORITY_INVALID"
+        }
+      ],
+      "failed": [
+        {
+          "url": "https://blavomusic.ru/video-gallery?_rsc=1ws3r",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://hdrc.yandex.net/",
+          "failure": "net::ERR_CERT_AUTHORITY_INVALID"
+        }
+      ],
+      "badResponses": [
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/profile/information"
+        },
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/finance"
+        },
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/profile/information"
+        },
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/finance"
+        },
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/profile/information"
+        }
+      ]
+    },
+    {
+      "key": "blavomusic-catalog",
+      "url": "https://blavomusic.ru/catalog",
+      "viewport": "desktop",
+      "status": 200,
+      "title": "Каталог музыки для медитации и релаксации | Blavo Music",
+      "h1": "Все произведения для медитации и релаксации",
+      "metrics": {
+        "innerW": 1440,
+        "scrollW": 1440,
+        "scrollH": 4213,
+        "overflow": [
+          {
+            "tag": "DIV",
+            "cls": "tab_list",
+            "text": "Музыкотерапия Рушеля Блаво Сказкотерапия от звезд театра и кино Медитация для всех Медитац",
+            "left": 39,
+            "right": 2513
+          },
+          {
+            "tag": "A",
+            "cls": "tab_list_item category",
+            "text": "Практики профессора Блаво",
+            "left": 1241,
+            "right": 1532
+          },
+          {
+            "tag": "A",
+            "cls": "tab_list_item category",
+            "text": "Аудиокниги-библиотерапия",
+            "left": 1537,
+            "right": 1814
+          },
+          {
+            "tag": "A",
+            "cls": "tab_list_item category",
+            "text": "Звуки природы, для оздоровления",
+            "left": 1819,
+            "right": 2153
+          },
+          {
+            "tag": "A",
+            "cls": "tab_list_item category",
+            "text": "Притчи, которые лечат",
+            "left": 2158,
+            "right": 2401
+          },
+          {
+            "tag": "A",
+            "cls": "tab_list_item category",
+            "text": "Видео",
+            "left": 2406,
+            "right": 2513
+          },
+          {
+            "tag": "DIV",
+            "cls": "swiper-slide recommendation_slide",
+            "text": "Добавить в избранное Сказкотерапия от звезд театра и кино Край земли. Озвучивает народный ",
+            "left": 1421,
+            "right": 1746
+          },
+          {
+            "tag": "DIV",
+            "cls": "products_item",
+            "text": "Добавить в избранное Сказкотерапия от звезд театра и кино Край земли. Озвучивает народный ",
+            "left": 1421,
+            "right": 1746
+          },
+          {
+            "tag": "DIV",
+            "cls": "recommendation_slide__img",
+            "text": "Добавить в избранное Сказкотерапия от звезд театра и кино",
+            "left": 1421,
+            "right": 1746
+          },
+          {
+            "tag": "DIV",
+            "cls": "slide__img_head",
+            "text": "Добавить в избранное Сказкотерапия от звезд театра и кино",
+            "left": 1433,
+            "right": 1746
+          }
+        ],
+        "visibleControls": [
+          {
+            "tag": "A",
+            "text": "Blavo Meditation & Music Therapy",
+            "href": "https://blavomusic.ru/",
+            "cls": "header_logo"
+          },
+          {
+            "tag": "A",
+            "text": "Главная",
+            "href": "https://blavomusic.ru/",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "Каталог",
+            "href": "https://blavomusic.ru/catalog",
+            "cls": ""
+          },
+          {
+            "tag": "BUTTON",
+            "text": "Заказ композиции",
+            "href": null,
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "Блог",
+            "href": "https://blavomusic.ru/news",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "О нас",
+            "href": "https://blavomusic.ru/about-us",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "Контакты",
+            "href": "https://blavomusic.ru/contacts",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "/catalog/search",
+            "href": "https://blavomusic.ru/catalog/search",
+            "cls": ""
+          },
+          {
+            "tag": "BUTTON",
+            "text": "Войти",
+            "href": null,
+            "cls": "log_in_header"
+          },
+          {
+            "tag": "A",
+            "text": "Главная",
+            "href": "https://blavomusic.ru/",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "Музыкотерапия Рушеля Блаво",
+            "href": "https://blavomusic.ru/catalog/muzykoterapiia-ruselia-blavo",
+            "cls": "tab_list_item category"
+          },
+          {
+            "tag": "A",
+            "text": "Сказкотерапия от звезд театра и кино",
+            "href": "https://blavomusic.ru/catalog/skazkoterapiia-ot-zvezd-teatra-i-kino",
+            "cls": "tab_list_item category"
+          },
+          {
+            "tag": "A",
+            "text": "Медитация для всех",
+            "href": "https://blavomusic.ru/catalog/meditaciia-dlia-vsex",
+            "cls": "tab_list_item category"
+          },
+          {
+            "tag": "A",
+            "text": "Медитация с аффирмациями",
+            "href": "https://blavomusic.ru/catalog/meditaciia-s-affirmaciiami",
+            "cls": "tab_list_item category"
+          },
+          {
+            "tag": "A",
+            "text": "Практики профессора Блаво",
+            "href": "https://blavomusic.ru/catalog/praktiki-professora-blavo",
+            "cls": "tab_list_item category"
+          },
+          {
+            "tag": "A",
+            "text": "Аудиокниги-библиотерапия",
+            "href": "https://blavomusic.ru/catalog/audioknigi-biblioterapiia",
+            "cls": "tab_list_item category"
+          },
+          {
+            "tag": "A",
+            "text": "Звуки природы, для оздоровления",
+            "href": "https://blavomusic.ru/catalog/zvuki-prirody-dlia-ozdorovleniia",
+            "cls": "tab_list_item category"
+          },
+          {
+            "tag": "A",
+            "text": "Притчи, которые лечат",
+            "href": "https://blavomusic.ru/catalog/pritci-kotorye-lecat",
+            "cls": "tab_list_item category"
+          },
+          {
+            "tag": "A",
+            "text": "Видео",
+            "href": "https://blavomusic.ru/catalog/video",
+            "cls": "tab_list_item category"
+          },
+          {
+            "tag": "A",
+            "text": "Перейти к библиотеке",
+            "href": "https://blavomusic.ru/catalog/muzykoterapiia-ruselia-blavo",
+            "cls": "banner_btn site_btn"
+          }
+        ]
+      },
+      "text": "Blavo Meditation\n& Music Therapy\nГлавная\nКаталог\nЗаказ композиции\nБлог\nО нас\nКонтакты\nВойти\nГлавная\nКаталог\nВсе произведения для медитации и релаксации\nМузыкотерапия Рушеля Блаво\nСказкотерапия от звезд театра и кино\nМедитация для всех\nМедитация с аффирмациями\nПрактики профессора Блаво\nАудиокниги-библиотерапия\nЗвуки природы, для оздоровления\nПритчи, которые лечат\nВидео\n36 произведений , 9 часов\nМузыкотерапия Рушеля Блаво\n\nАвторская музыка профессора Рушеля Блаво для целевого воздействия на органы и системы, утвержденное министерством здравоохранения Российской Федерации.\n\nПерейти к библиотеке\nМузыкотерапия Рушеля Блаво\nМузыка для увеличения концентрации внимания\nАвторская музыка профессора Рушеля Блаво для целевого воздействия на органы и системы, утвержденное министерством здравоохранения Российской Федерации.\n5\n30 мин 29 сек\nРекомендуем\nЭто композиции можно прослушать бесплатно без регистрации. Больше произведений в нашем приложении ссылки\nПредыдущая композиция\nСледующая композиция\nДо",
+      "screenshot": "blavomusic-catalog-desktop.png",
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_CERT_AUTHORITY_INVALID"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        }
+      ],
+      "failed": [
+        {
+          "url": "https://blavomusic.ru/catalog",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/catalog",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://hdrc.yandex.net/",
+          "failure": "net::ERR_CERT_AUTHORITY_INVALID"
+        },
+        {
+          "url": "https://blavomusic.ru/catalog",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/catalog/muzykoterapiia-ruselia-blavo?_rsc=tvkvj",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/catalog/skazkoterapiia-ot-zvezd-teatra-i-kino?_rsc=tvkvj",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/catalog/meditaciia-dlia-vsex?_rsc=tvkvj",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/catalog/meditaciia-s-affirmaciiami?_rsc=tvkvj",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/catalog/praktiki-professora-blavo?_rsc=tvkvj",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/catalog",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/catalog/meditaciia-dlia-vsex/meditaciia-dlia-snizeniia-trevoznosti?_rsc=tvkvj",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/catalog/pritci-kotorye-lecat/povelitel-drakonov-ozvucivaet-rusel-blavo?_rsc=tvkvj",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/catalog/pritci-kotorye-lecat/volsebnaia-fleita-ozvucivaet-zasluzennyi-artist-rf-sergei-conisvili?_rsc=tvkvj",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/catalog/skazkoterapiia-ot-zvezd-teatra-i-kino/zelenaia-sapkaozvucivaet-narodnyi-artist-rossii-ivan-krasko?_rsc=tvkvj",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "badResponses": [
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/profile/information"
+        },
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/profile/information"
+        },
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/finance"
+        },
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/profile/information"
+        },
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/finance"
+        }
+      ]
+    },
+    {
+      "key": "blavomusic-contacts",
+      "url": "https://blavomusic.ru/contacts",
+      "viewport": "desktop",
+      "status": 200,
+      "title": "Контакты Blavo Music | Центр Рушеля Блаво",
+      "h1": "Контакты",
+      "metrics": {
+        "innerW": 1440,
+        "scrollW": 1440,
+        "scrollH": 1776,
+        "overflow": [
+          {
+            "tag": "ASIDE",
+            "cls": "radio_star_info",
+            "text": "",
+            "left": 2520,
+            "right": 2880
+          },
+          {
+            "tag": "DIV",
+            "cls": "info_wrapper",
+            "text": "",
+            "left": 2520,
+            "right": 2880
+          },
+          {
+            "tag": "BUTTON",
+            "cls": "radio_info__back_name",
+            "text": "",
+            "left": 2540,
+            "right": 2555
+          },
+          {
+            "tag": "DIV",
+            "cls": "radio_info__back",
+            "text": "",
+            "left": 2540,
+            "right": 2555
+          },
+          {
+            "tag": "svg",
+            "cls": "[object SVGAnimatedString]",
+            "text": "",
+            "left": 2540,
+            "right": 2552
+          },
+          {
+            "tag": "path",
+            "cls": "[object SVGAnimatedString]",
+            "text": "",
+            "left": 2542,
+            "right": 2550
+          },
+          {
+            "tag": "DIV",
+            "cls": "radio_info__text",
+            "text": "",
+            "left": 2540,
+            "right": 2860
+          },
+          {
+            "tag": "DIV",
+            "cls": "filter_box radio_star_info",
+            "text": "",
+            "left": 2520,
+            "right": 2880
+          },
+          {
+            "tag": "DIV",
+            "cls": "info_wrapper",
+            "text": "",
+            "left": 2520,
+            "right": 2880
+          },
+          {
+            "tag": "DIV",
+            "cls": "radio_info__back_name",
+            "text": "",
+            "left": 2540,
+            "right": 2860
+          }
+        ],
+        "visibleControls": [
+          {
+            "tag": "A",
+            "text": "Blavo Meditation & Music Therapy",
+            "href": "https://blavomusic.ru/",
+            "cls": "header_logo"
+          },
+          {
+            "tag": "A",
+            "text": "Главная",
+            "href": "https://blavomusic.ru/",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "Каталог",
+            "href": "https://blavomusic.ru/catalog",
+            "cls": ""
+          },
+          {
+            "tag": "BUTTON",
+            "text": "Заказ композиции",
+            "href": null,
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "Блог",
+            "href": "https://blavomusic.ru/news",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "О нас",
+            "href": "https://blavomusic.ru/about-us",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "Контакты",
+            "href": "https://blavomusic.ru/contacts",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "/catalog/search",
+            "href": "https://blavomusic.ru/catalog/search",
+            "cls": ""
+          },
+          {
+            "tag": "BUTTON",
+            "text": "Войти",
+            "href": null,
+            "cls": "log_in_header"
+          },
+          {
+            "tag": "A",
+            "text": "Главная",
+            "href": "https://blavomusic.ru/",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "+7 (911) 92 713 92",
+            "href": "tel:+7 (911) 92 713 92",
+            "cls": "contacts_item__link"
+          },
+          {
+            "tag": "A",
+            "text": "Blavomusic@yandex.ru",
+            "href": "mailto:Blavomusic@yandex.ru",
+            "cls": "contacts_item__link"
+          },
+          {
+            "tag": "BUTTON",
+            "text": "",
+            "href": null,
+            "cls": "radio_info__back_name"
+          }
+        ]
+      },
+      "text": "Blavo Meditation\n& Music Therapy\nГлавная\nКаталог\nЗаказ композиции\nБлог\nО нас\nКонтакты\nВойти\nГлавная\nКонтакты\nКонтакты\nКонтакты\n\nСвяжитесь с нами, если у вас есть вопросы. Мы будем рады на них ответить!\n\nТелефон\n+7 (911) 92 713 92\nПочта\nBlavomusic@yandex.ru\nАдрес\n191015, Санкт-Петербург, ул. Кирочная, д. 64, Центр Рушеля Блаво\nЧасы работы\n09:00 до 21:00\nКонтакты Blavo Music\n\n \n\nСвяжитесь с командой Blavo Music по любым вопросам, связанным с музыкой для медитации, релаксации и сотрудничеством. Мы всегда открыты для общения с нашими слушателями, партнерами и авторами. На этой странице вы найдете актуальные контактные данные для получения консультаций, обратной связи и поддержки пользователей.\n\n \n \n‌\n\n‌\n\n‌\n\n00:00\n00:00\nОткрыть информацию о композиции\nДобавить в избранное\nСкачать композицию\nЗагрузка ...\n--:--\n--:--\nBlavo Meditation\n& Music Therapy\nГлавная\nКаталог\nБлог\nНовости\nКниги\nВидео галерея\nКонтакты\nО нас\nЗаказать обратный звонок\n+7 (911) 92 713 92\n© Центр Рушеля Блаво 1989 - 2026\nПоли",
+      "screenshot": "blavomusic-contacts-desktop.png",
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_CERT_AUTHORITY_INVALID"
+        }
+      ],
+      "failed": [
+        {
+          "url": "https://yandex.ru/map-widget/v1/?um=constructor%3A96043c9ab268f53e0a720a2ca91011f7289f8990b085ca34dd6881a6b5e6c1d5&amp;source=constructor&amp;ll=55.710568,37.65582&amp;z=4326",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://yandex.ru/map-widget/v1/?um=constructor%3A96043c9ab268f53e0a720a2ca91011f7289f8990b085ca34dd6881a6b5e6c1d5&amp;source=constructor&amp;ll=55.710568,37.65582&amp;z=4326",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/contacts",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/contacts",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://hdrc.yandex.net/",
+          "failure": "net::ERR_CERT_AUTHORITY_INVALID"
+        },
+        {
+          "url": "https://core-renderer-tiles.maps.yandex.ru/tiles?l=map&v=26.08.18-0~b:260817132330~ia:26.08.12-0~ib:26.08.20-2&x=38299&y=19112&z=16&scale=1&lang=ru_RU&client_id=yandex-web-maps&experimental_use_metapoi=1&experimental_metapoi_combined_tiles=1&experimental_ranking_mode_name=default-web-ranking&auction=1&experimental_enable_direct_info_logging=1&use_permalinks_for_direct_requests=1&direct_density=auction_z14_byak_p0&experimental_mm_local_rubricpoi_min_zoom=13&experimental_mm_local_photopoi_min_zoom=13&experimental_mm_photopoi_min_zoom=13&experimental_mm_rubricpoi_min_zoom=13&experimental_data_poi=postprocess_overview_zooms&ads=enabled",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://core-renderer-tiles.maps.yandex.ru/tiles?l=map&v=26.08.18-0~b:260817132330~ia:26.08.12-0~ib:26.08.20-2&x=38299&y=19115&z=16&scale=1&lang=ru_RU&client_id=yandex-web-maps&experimental_use_metapoi=1&experimental_metapoi_combined_tiles=1&experimental_ranking_mode_name=default-web-ranking&auction=1&experimental_enable_direct_info_logging=1&use_permalinks_for_direct_requests=1&direct_density=auction_z14_byak_p0&experimental_mm_local_rubricpoi_min_zoom=13&experimental_mm_local_photopoi_min_zoom=13&experimental_mm_photopoi_min_zoom=13&experimental_mm_rubricpoi_min_zoom=13&experimental_data_poi=postprocess_overview_zooms&ads=enabled",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://core-renderer-tiles.maps.yandex.ru/vmap3/tiles?lang=ru_RU&x=19151&y=9557&z=15&zmin=15&zmax=21&v=26.08.18-0~b:260817132330~ia:26.08.12-0~ib:26.08.20-2&ads=enabled&client_id=yandex-web-maps&experimental_use_metapoi=1&experimental_metapoi_combined_tiles=1&experimental_ranking_mode_name=default-web-ranking&auction=1&experimental_enable_direct_info_logging=1&use_permalinks_for_direct_requests=1&direct_density=auction_z14_byak_p0&experimental_mm_local_rubricpoi_min_zoom=13&experimental_mm_local_photopoi_min_zoom=13&experimental_mm_photopoi_min_zoom=13&experimental_mm_rubricpoi_min_zoom=13&experimental_data_poi=postprocess_overview_zooms",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "badResponses": [
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/profile/information"
+        },
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/profile/information"
+        },
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/finance"
+        }
+      ]
+    },
+    {
+      "key": "blavomusic-sitemap",
+      "url": "https://blavomusic.ru/sitemap",
+      "viewport": "desktop",
+      "status": 200,
+      "title": "Музыка для медитации, релаксации и внутренней гармонии",
+      "h1": "Музыка для медитации, релаксации и внутренней гармонии",
+      "metrics": {
+        "innerW": 1440,
+        "scrollW": 1440,
+        "scrollH": 1000,
+        "overflow": [
+          {
+            "tag": "ASIDE",
+            "cls": "radio_star_info",
+            "text": "",
+            "left": 2520,
+            "right": 2880
+          },
+          {
+            "tag": "DIV",
+            "cls": "info_wrapper",
+            "text": "",
+            "left": 2520,
+            "right": 2880
+          },
+          {
+            "tag": "BUTTON",
+            "cls": "radio_info__back_name",
+            "text": "",
+            "left": 2540,
+            "right": 2555
+          },
+          {
+            "tag": "DIV",
+            "cls": "radio_info__back",
+            "text": "",
+            "left": 2540,
+            "right": 2555
+          },
+          {
+            "tag": "svg",
+            "cls": "[object SVGAnimatedString]",
+            "text": "",
+            "left": 2540,
+            "right": 2552
+          },
+          {
+            "tag": "path",
+            "cls": "[object SVGAnimatedString]",
+            "text": "",
+            "left": 2542,
+            "right": 2550
+          },
+          {
+            "tag": "DIV",
+            "cls": "radio_info__text",
+            "text": "",
+            "left": 2540,
+            "right": 2860
+          },
+          {
+            "tag": "DIV",
+            "cls": "filter_box radio_star_info",
+            "text": "",
+            "left": 2520,
+            "right": 2880
+          },
+          {
+            "tag": "DIV",
+            "cls": "info_wrapper",
+            "text": "",
+            "left": 2520,
+            "right": 2880
+          },
+          {
+            "tag": "DIV",
+            "cls": "radio_info__back_name",
+            "text": "",
+            "left": 2540,
+            "right": 2860
+          }
+        ],
+        "visibleControls": [
+          {
+            "tag": "A",
+            "text": "Blavo Meditation & Music Therapy",
+            "href": "https://blavomusic.ru/",
+            "cls": "header_logo"
+          },
+          {
+            "tag": "A",
+            "text": "Главная",
+            "href": "https://blavomusic.ru/",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "Каталог",
+            "href": "https://blavomusic.ru/catalog",
+            "cls": ""
+          },
+          {
+            "tag": "BUTTON",
+            "text": "Заказ композиции",
+            "href": null,
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "Блог",
+            "href": "https://blavomusic.ru/news",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "О нас",
+            "href": "https://blavomusic.ru/about-us",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "Контакты",
+            "href": "https://blavomusic.ru/contacts",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "/catalog/search",
+            "href": "https://blavomusic.ru/catalog/search",
+            "cls": ""
+          },
+          {
+            "tag": "BUTTON",
+            "text": "Войти",
+            "href": null,
+            "cls": "log_in_header"
+          },
+          {
+            "tag": "A",
+            "text": "Главная",
+            "href": "https://blavomusic.ru/",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "Политика конфиденциальности мобильного приложения Blavomusic",
+            "href": "https://blavomusic.ru/policy",
+            "cls": ""
+          },
+          {
+            "tag": "BUTTON",
+            "text": "",
+            "href": null,
+            "cls": "radio_info__back_name"
+          },
+          {
+            "tag": "A",
+            "text": "Blavo Meditation & Music Therapy",
+            "href": "https://blavomusic.ru/sitemap",
+            "cls": "footer_logo"
+          },
+          {
+            "tag": "A",
+            "text": "https://apps.apple.com/ru/app/blavomusic/id6744443926",
+            "href": "https://apps.apple.com/ru/app/blavomusic/id6744443926",
+            "cls": "application_item"
+          },
+          {
+            "tag": "A",
+            "text": "https://play.google.com/store/apps/details?id=ru.blavomusic&hl=ru",
+            "href": "https://play.google.com/store/apps/details?id=ru.blavomusic&hl=ru",
+            "cls": "application_item"
+          },
+          {
+            "tag": "A",
+            "text": "https://appgallery.huawei.com/app/C118072157",
+            "href": "https://appgallery.huawei.com/app/C118072157",
+            "cls": "application_item"
+          },
+          {
+            "tag": "A",
+            "text": "https://www.rustore.ru/",
+            "href": "https://www.rustore.ru/",
+            "cls": "application_item"
+          },
+          {
+            "tag": "A",
+            "text": "Главная",
+            "href": "https://blavomusic.ru/",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "Каталог",
+            "href": "https://blavomusic.ru/catalog",
+            "cls": ""
+          },
+          {
+            "tag": "A",
+            "text": "Блог",
+            "href": "https://blavomusic.ru/news/articles",
+            "cls": ""
+          }
+        ]
+      },
+      "text": "Blavo Meditation\n& Music Therapy\nГлавная\nКаталог\nЗаказ композиции\nБлог\nО нас\nКонтакты\nВойти\nГлавная\nКарта сайта\nМузыка для медитации, релаксации и внутренней гармонии\nДругие материалы\nПолитика конфиденциальности мобильного приложения Blavomusic\n‌\n\n‌\n\n‌\n\n00:00\n00:00\nОткрыть информацию о композиции\nДобавить в избранное\nСкачать композицию\nЗагрузка ...\n--:--\n--:--\nBlavo Meditation\n& Music Therapy\nГлавная\nКаталог\nБлог\nНовости\nКниги\nВидео галерея\nКонтакты\nО нас\nЗаказать обратный звонок\n+7 (911) 92 713 92\n© Центр Рушеля Блаво 1989 - 2026\nПолитика конфиденциальности\nСправка\nSitemap\nПубличная оферта\nВсе предложения и цены, указанные на сайте, носят информационный характер\nи не являются публичной офертой (ст. 437 ГК РФ).\nПравовая информация",
+      "screenshot": "blavomusic-sitemap-desktop.png",
+      "console": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_CERT_AUTHORITY_INVALID"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 ()"
+        }
+      ],
+      "failed": [
+        {
+          "url": "https://blavomusic.ru/catalog/search?_rsc=cl9f9",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/news/articles?_rsc=cl9f9",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/books?_rsc=cl9f9",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/video-gallery?_rsc=cl9f9",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/policy?_rsc=cl9f9",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://blavomusic.ru/sitemap",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "url": "https://hdrc.yandex.net/",
+          "failure": "net::ERR_CERT_AUTHORITY_INVALID"
+        },
+        {
+          "url": "https://blavomusic.ru/sitemap",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "badResponses": [
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/profile/information"
+        },
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/profile/information"
+        },
+        {
+          "status": 401,
+          "url": "https://blavomusic.ru/api/v1/finance"
+        }
+      ]
+    }
+  ],
+  "appLinks": [
+    {
+      "url": "https://apps.apple.com/ru/app/blavomusic/id6744443926",
+      "status": 200,
+      "finalUrl": "https://apps.apple.com/ru/app/blavomusic/id6744443926"
+    },
+    {
+      "url": "https://play.google.com/store/apps/details?id=ru.blavomusic&hl=ru",
+      "status": 200,
+      "finalUrl": "https://play.google.com/store/apps/details?id=ru.blavomusic&hl=ru"
+    },
+    {
+      "url": "https://appgallery.huawei.com/app/C118072157",
+      "status": 200,
+      "finalUrl": "https://appgallery.huawei.com/app/C118072157"
+    },
+    {
+      "url": "https://www.rustore.ru/",
+      "status": 200,
+      "finalUrl": "https://www.rustore.ru/"
+    }
+  ],
+  "blavoInternalLinks": [
+    "/",
+    "/about-us",
+    "/books",
+    "/catalog",
+    "/catalog/audioknigi-biblioterapiia/energiia-na-grani-21-zakon-ziznennoi-energii-glava-1-zakon-energii-svobody-voli",
+    "/catalog/audioknigi-biblioterapiia/energiia-na-grani-21-zakon-ziznennoi-energii-glava-6-zakon-energii-biznesa",
+    "/catalog/audioknigi-biblioterapiia/ia-vernu-vam-zrenie",
+    "/catalog/audioknigi-biblioterapiia/ia-vylecu-vas-pozvonocnik",
+    "/catalog/audioknigi-biblioterapiia/kniga-kotoraia-lecit",
+    "/catalog/meditaciia-dlia-vsex/meditaciia-dlia-glubokogo-rasslableniia",
+    "/catalog/meditaciia-dlia-vsex/meditaciia-dlia-snizeniia-trevoznosti",
+    "/catalog/muzykoterapiia-ruselia-blavo",
+    "/catalog/muzykoterapiia-ruselia-blavo/muzykoterapiia-dlia-ustraneniia-trevoznyx-myslei",
+    "/catalog/praktiki-professora-blavo/kak-izbavitsia-ot-boli-v-spine-bez-lisnix-lekarstv-cto-delat-esli-tabletki-uze-ne-pomogaiutkak-izbavitsia-ot-boli-v-spine-bez-lisnix-lekarstv-cto-delat-esli-tabletki-uze-ne-pomogaiut",
+    "/catalog/pritci-kotorye-lecat/povelitel-drakonov-ozvucivaet-rusel-blavo",
+    "/catalog/pritci-kotorye-lecat/volsebnaia-fleita-ozvucivaet-zasluzennyi-artist-rf-sergei-conisvili",
+    "/catalog/search",
+    "/catalog/skazkoterapiia-ot-zvezd-teatra-i-kino/krai-zemli-ozvucivaet-narodnyi-artist-rossii-oleg-basilasvili",
+    "/catalog/skazkoterapiia-ot-zvezd-teatra-i-kino/zelenaia-sapkaozvucivaet-narodnyi-artist-rossii-ivan-krasko",
+    "/catalog/zvuki-prirody-dlia-ozdorovleniia/lesnaia-garmoniia-dlia-uveliceniia-resursa",
+    "/contacts",
+    "/news",
+    "/news/articles",
+    "/policy",
+    "/public/Blavo_Legal_Notice.pdf",
+    "/public/faq.pdf",
+    "/public/public_offer_blavo.pdf",
+    "/sitemap",
+    "/video-gallery"
+  ]
+}
