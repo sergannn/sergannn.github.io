@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Проверка замечаний по dkbilet.ru и dkvdk.ru</title>
+  <style>
+    :root {
+      --ink: #1e2228;
+      --muted: #667085;
+      --line: #d9dee7;
+      --soft: #f6f7f9;
+      --ok: #177245;
+      --warn: #a15c00;
+      --bad: #b42318;
+      --info: #2457a7;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background: #ffffff;
+    }
+
+    main {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 42px 0 64px;
+    }
+
+    header {
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--ink);
+      margin-bottom: 28px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 30px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 34px 0 14px;
+      font-size: 20px;
+      line-height: 1.3;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    a {
+      color: #9a153d;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .lead {
+      max-width: 880px;
+      color: #3b414b;
+      font-size: 17px;
+    }
+
+    .meta {
+      color: var(--muted);
+      margin-top: 12px;
+      font-size: 13px;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 24px 0 30px;
+    }
+
+    .summary div {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: var(--soft);
+    }
+
+    .summary strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .summary span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin: 14px 0;
+      break-inside: avoid;
+    }
+
+    .item-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .item h3 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.3;
+      letter-spacing: 0;
+    }
+
+    .status {
+      flex: 0 0 auto;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .confirmed {
+      color: var(--ok);
+      background: #eaf6ef;
+    }
+
+    .partial {
+      color: var(--warn);
+      background: #fff4df;
+    }
+
+    .not-confirmed {
+      color: var(--bad);
+      background: #fff0ee;
+    }
+
+    .clarify {
+      color: var(--info);
+      background: #eef4ff;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .note {
+      border-left: 3px solid var(--line);
+      padding-left: 12px;
+    }
+
+    .note b {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .quote {
+      color: #3b414b;
+      background: var(--soft);
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin: 12px 0;
+    }
+
+    figure {
+      margin: 14px 0 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    figcaption {
+      padding: 8px 10px;
+      color: var(--muted);
+      font-size: 12px;
+      border-top: 1px solid var(--line);
+      background: var(--soft);
+    }
+
+    .compact-list {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .compact-list li {
+      margin: 5px 0;
+    }
+
+    footer {
+      margin-top: 36px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 760px) {
+      main {
+        width: min(100% - 24px, 1120px);
+        padding-top: 24px;
+      }
+
+      .summary,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .item-head {
+        display: block;
+      }
+
+      .status {
+        display: inline-block;
+        margin-top: 10px;
+      }
+    }
+
+    @media print {
+      body {
+        font-size: 12px;
+      }
+
+      main {
+        width: 100%;
+        padding: 0;
+      }
+
+      .item {
+        page-break-inside: avoid;
+      }
+
+      a {
+        color: inherit;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Проверка замечаний по dkbilet.ru и dkvdk.ru</h1>
+      <p class="lead">Проверка сделана по предоставленным скриншотам и ручным наблюдениям. Ниже отдельно отмечено, какие пункты подтверждены, какие не воспроизводятся, а где нужна конкретизация.</p>
+      <p class="meta">Дата фиксации: 23 августа 2026. Проверяемые сайты: <a href="https://dkbilet.ru/">dkbilet.ru</a>, <a href="https://dkvdk.ru/">dkvdk.ru</a>.</p>
+    </header>
+
+    <section class="summary" aria-label="Сводка">
+      <div><strong>7</strong><span>подтверждено</span></div>
+      <div><strong>2</strong><span>частично подтверждено</span></div>
+      <div><strong>5</strong><span>не подтверждено</span></div>
+      <div><strong>1</strong><span>нужно уточнить</span></div>
+    </section>
+
+    <section>
+      <h2>Пункты проверки</h2>
+
+      <article class="item">
+        <div class="item-head">
+          <h3>1. Старые карточки спектаклей за январь-март 2026</h3>
+          <span class="status not-confirmed">не подтверждено</span>
+        </div>
+        <p class="quote"><b>Исходная формулировка:</b> «Проверили 5 карточек спектаклей, которые уже прошли (январь-март 2026)».</p>
+        <div class="grid">
+          <div class="note">
+            <b>Как проверяли</b>
+            <p>Через календарь и изменение дат в адресной строке старые мероприятия найти не удалось. Пример проверочного URL: <a href="https://dkbilet.ru/?tribe-bar-date=2026-09-01&amp;tribe-bar-end-date=2025-09-30&amp;month=september">dkbilet.ru с датами 2026 и 2025</a>.</p>
+          </div>
+          <div class="note">
+            <b>Вывод</b>
+            <p>Пункт лучше не оставлять как подтвержденный без ссылок на конкретные 5 карточек. Сейчас не видно, какие именно прошедшие мероприятия проверялись и как на них попасть.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="item">
+        <div class="item-head">
+          <h3>2. Перенесенные спектакли и отображение по датам</h3>
+          <span class="status partial">частично подтверждено</span>
+        </div>
+        <p class="quote"><b>Исходная мысль:</b> перенесенные спектакли могут путать зрителя.</p>
+        <div class="grid">
+          <div class="note">
+            <b>Проверка</b>
+            <p>Отображение на исходную и новую дату есть. Это видно на афише августа: карточка с пометкой «Спектакль перенесен» присутствует в списке.</p>
+          </div>
+          <div class="note">
+            <b>Вывод</b>
+            <p>Скрывать событие с первоначальной даты было бы нелогично: если пользователь купил билет на октябрь, а событие перенесли на ноябрь, он все равно будет искать его в октябре. Корректнее показывать карточку и на старой, и на новой дате, но явно подписывать перенос и новую дату.</p>
+          </div>
+        </div>
+        <figure>
+          <img src="alex-evidence/01-calendar-august-2026.png" alt="Афиша dkbilet.ru за август 2026 с карточкой перенесенного спектакля">
+          <figcaption>Скриншот 01: карточка перенесенного спектакля отображается в афише.</figcaption>
+        </figure>
+      </article>
+
+      <article class="item">
+        <div class="item-head">
+          <h3>3. Текст «Театральная афиша Санкт-Петербурга на 2025 год» рядом с событиями 2026</h3>
+          <span class="status confirmed">подтверждено</span>
+        </div>
+        <p>На странице афиши отображаются спектакли за август 2026, но в текстовом блоке ниже указано «на 2025 год». Пункт сформулирован верно.</p>
+        <figure>
+          <img src="alex-evidence/02-text-2025-on-2026-page.png" alt="На странице dkbilet.ru в тексте указан 2025 год при афише 2026">
+          <figcaption>Скриншот 02: текстовый блок содержит 2025 год при странице с мероприятиями 2026.</figcaption>
+        </figure>
+      </article>
+
+      <article class="item">
+        <div class="item-head">
+          <h3>4. Одинокие числа между карточками спектаклей</h3>
+          <span class="status not-confirmed">не подтверждено</span>
+        </div>
+        <p>При проверке такие числа не воспроизвелись. Возможная гипотеза: это может быть возрастное ограничение, если не подгрузились картинка и ссылка, например при плохом интернете или из-за тяжелого изображения. Без конкретного скриншота или URL пункт лучше оставить как непроверенный.</p>
+      </article>
+
+      <article class="item">
+        <div class="item-head">
+          <h3>5. RevSlider как тяжелый плагин WordPress</h3>
+          <span class="status partial">частично подтверждено</span>
+        </div>
+        <div class="grid">
+          <div class="note">
+            <b>Проверка</b>
+            <p>Плагин действительно подключен: видны файлы <code>rs6.min.js</code>, <code>rbtools.min.js</code>, <code>rs6.css</code>. В проверке из анонимного режима загрузка быстрая: примерно 108 КБ за 221 мс и 61.9 КБ за 291 мс для основных JS-файлов.</p>
+          </div>
+          <div class="note">
+            <b>Вывод</b>
+            <p>Факт использования подтвержден, но утверждение о заметной текущей тяжести не подтверждается этим замером. Если сейчас плагин используется только для логотипа, это можно упростить, но запас на будущее использование тоже допустим.</p>
+          </div>
+        </div>
+        <figure>
+          <img src="alex-evidence/03-revslider-network.png" alt="Network DevTools с файлами RevSlider и временем загрузки">
+          <figcaption>Скриншот 03: подключенные файлы RevSlider загружаются быстро в текущем замере.</figcaption>
+        </figure>
+      </article>
+
+      <article class="item">
+        <div class="item-head">
+          <h3>6. Ошибка в фактическом адресе: «униципальный округ»</h3>
+          <span class="status not-confirmed">не подтверждено</span>
+        </div>
+        <p>На странице реквизитов слово «муниципальный» написано полностью и в юридическом, и в фактическом адресе. Пункт не подтвержден текущим состоянием страницы.</p>
+        <figure>
+          <img src="alex-evidence/04-requisites-address.png" alt="Страница реквизитов с полным словом муниципальный">
+          <figcaption>Скриншот 04: «муниципальный округ» написано полностью.</figcaption>
+        </figure>
+      </article>
+
+      <article class="item">
+        <div class="item-head">
+          <h3>7. Кнопка «Купить билет» ведет не на страницу спектакля, а на общий список афиши</h3>
+          <span class="status confirmed">подтверждено</span>
+        </div>
+        <p>Да, замечание подтверждается. Более того, на главной есть отдельная кнопка «Купить билет», по которой не сразу понятно, к какому событию она относится.</p>
+        <p><b>Рекомендация:</b> кнопка в карточке должна вести на конкретную страницу или конкретный билетный сценарий выбранного спектакля. Общая кнопка на главной должна иметь понятную привязку или текст, например «Перейти к афише».</p>
+      </article>
+
+      <article class="item">
+        <div class="item-head">
+          <h3>8. Пустые SEO-поля на главной и других страницах</h3>
+          <span class="status confirmed">подтверждено</span>
+        </div>
+        <p>Title присутствует, но <code>meta name="Description"</code> и <code>meta name="Keywords"</code> пустые. Формулировку лучше уточнить: «Title есть, description отсутствует».</p>
+        <figure>
+          <img src="alex-evidence/06-empty-description.png" alt="DevTools показывает title и пустой meta Description">
+          <figcaption>Скриншот 06: title заполнен, description пустой.</figcaption>
+        </figure>
+      </article>
+
+      <article class="item">
+        <div class="item-head">
+          <h3>9. Дата «01 января 1970» на карточках афиши</h3>
+          <span class="status not-confirmed">не подтверждено</span>
+        </div>
+        <p>Дата 01 января 1970 при текущей проверке не обнаружена. В карточках видны реальные даты, например 29 августа 2026, 19:00.</p>
+        <figure>
+          <img src="alex-evidence/07-poster-date-page.png" alt="Карточка афиши с датой 29 августа 2026 19:00">
+          <figcaption>Скриншот 07: на карточке отображается 29 августа 2026, а не 01 января 1970.</figcaption>
+        </figure>
+      </article>
+
+      <article class="item">
+        <div class="item-head">
+          <h3>10. Кнопка «Вернуться» на dkvdk.ru</h3>
+          <span class="status not-confirmed">не подтверждено</span>
+        </div>
+        <p>Кнопка работает и ведет обратно на страницу афиши месяца или даты, например <a href="https://dkvdk.ru/poster/2026/08/29/">/poster/2026/08/29/</a> или <a href="https://dkvdk.ru/poster/2026/08/">/poster/2026/08/</a>. Формулировка «никуда не ведет» не подтверждается.</p>
+        <figure>
+          <img src="alex-evidence/05-dkvdk-event-return.png" alt="Страница спектакля dkvdk.ru с кнопкой вернуться">
+          <figcaption>Скриншот 05: кнопка «Вернуться» присутствует и работает.</figcaption>
+        </figure>
+      </article>
+
+      <article class="item">
+        <div class="item-head">
+          <h3>11. Баннер, который никуда не ведет</h3>
+          <span class="status clarify">нужно уточнить</span>
+        </div>
+        <p>Нужно указать, какой именно баннер имеется в виду: сайт, страница, место на странице и ожидаемое действие. Без этого пункт нельзя подтвердить или опровергнуть.</p>
+      </article>
+
+      <article class="item">
+        <div class="item-head">
+          <h3>12. У картинок нет alt</h3>
+          <span class="status confirmed">подтверждено</span>
+        </div>
+        <p>Да, у изображений встречается пустой атрибут <code>alt</code>. Это влияет на доступность и качество разметки.</p>
+        <figure>
+          <img src="alex-evidence/08-empty-alt.png" alt="DevTools показывает изображение с пустым alt">
+          <figcaption>Скриншот 08: у изображения пустой атрибут alt.</figcaption>
+        </figure>
+      </article>
+
+      <article class="item">
+        <div class="item-head">
+          <h3>13. На сайте есть Facebook Pixel</h3>
+          <span class="status confirmed">подтверждено</span>
+        </div>
+        <p>Да, Facebook Pixel присутствует в коде страницы: виден блок <code>Facebook Pixel Code</code> и вызовы <code>fbq('init', ...)</code>, <code>fbq('track', 'PageView')</code>.</p>
+        <figure>
+          <img src="alex-evidence/09-facebook-pixel.png" alt="DevTools показывает код Facebook Pixel">
+          <figcaption>Скриншот 09: код Facebook Pixel подключен.</figcaption>
+        </figure>
+      </article>
+
+      <article class="item">
+        <div class="item-head">
+          <h3>14. Номера в шапке нельзя нажать для звонка с телефона</h3>
+          <span class="status confirmed">подтверждено</span>
+        </div>
+        <p>Да, номер телефона в шапке не кликабелен как телефонная ссылка. Нужно оформить номер через <code>&lt;a href="tel:+79119253322"&gt;</code>.</p>
+      </article>
+
+      <article class="item">
+        <div class="item-head">
+          <h3>15. Ссылка VK использует http</h3>
+          <span class="status confirmed">подтверждено</span>
+        </div>
+        <p>Да, ссылка указана как <code>&lt;a href="http://vk.com/club88228483" target="_blank"&gt;</code>. Лучше заменить на <code>https://vk.com/club88228483</code>.</p>
+      </article>
+    </section>
+
+    <section>
+      <h2>Рекомендуемая краткая правка формулировок</h2>
+      <ul class="compact-list">
+        <li>Не писать, что проверены 5 прошедших карточек, пока нет конкретных URL или скриншотов этих карточек.</li>
+        <li>По перенесенным спектаклям писать не «скрывать со старой даты», а «показывать на обеих датах с явной пометкой переноса и новой датой».</li>
+        <li>Про RevSlider писать мягче: «плагин подключен; текущая загрузка быстрая, но если используется только для логотипа, можно рассмотреть упрощение».</li>
+        <li>Оставить подтвержденными: 2025 в тексте при афише 2026, кнопки покупки, пустой description, пустые alt, Facebook Pixel, некликабельный телефон, VK по http.</li>
+        <li>Убрать или пометить как непроверенные: 01 января 1970, «униципальный округ», «Вернуться никуда не ведет», одинокие числа без конкретного примера.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Документ подготовлен как рабочая проверка замечаний. Скриншоты находятся в папке <code>alex-evidence/</code> рядом с этим HTML.
+    </footer>
+  </main>
+</body>
+</html>
