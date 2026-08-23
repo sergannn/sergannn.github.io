@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Короткая проверка замечаний</title>
+  <style>
+    body {
+      margin: 0;
+      color: #20242a;
+      font: 15px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background: #fff;
+    }
+
+    main {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 34px 0 54px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin: 0 0 22px;
+      color: #5c6470;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #d9dee7;
+    }
+
+    th,
+    td {
+      padding: 11px 12px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid #d9dee7;
+    }
+
+    th {
+      font-size: 13px;
+      color: #525b67;
+      background: #f5f6f8;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .status {
+      display: inline-block;
+      min-width: 78px;
+      border-radius: 999px;
+      padding: 3px 9px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .yes {
+      color: #177245;
+      background: #eaf6ef;
+    }
+
+    .no {
+      color: #b42318;
+      background: #fff0ee;
+    }
+
+    .part {
+      color: #9a5a00;
+      background: #fff4df;
+    }
+
+    .ask {
+      color: #2457a7;
+      background: #eef4ff;
+    }
+
+    a {
+      color: #9a153d;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    code {
+      padding: 1px 4px;
+      border-radius: 4px;
+      background: #f1f3f6;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+    }
+
+    @media (max-width: 760px) {
+      table,
+      thead,
+      tbody,
+      tr,
+      th,
+      td {
+        display: block;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tr {
+        border-bottom: 1px solid #d9dee7;
+        padding: 10px 0;
+      }
+
+      td {
+        border: 0;
+        padding: 5px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Короткая проверка замечаний</h1>
+    <p class="lead">Формат: рядом с каждым пунктом указано, подтверждается ли замечание, и короткий комментарий.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 34%">Пункт</th>
+          <th style="width: 110px">Статус</th>
+          <th>Комментарий</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Проверили 5 старых карточек спектаклей за январь-март 2026</td>
+          <td><span class="status no">Нет</span></td>
+          <td>Не понятно, как именно проверили: старые мероприятия не видны и через изменение дат в адресной строке на них не получилось зайти. Пример: <a href="https://dkbilet.ru/?tribe-bar-date=2026-09-01&amp;tribe-bar-end-date=2025-09-30&amp;month=september">URL с 2025 в end-date</a>.</td>
+        </tr>
+        <tr>
+          <td>Перенесенные спектакли путают зрителя</td>
+          <td><span class="status part">Частично</span></td>
+          <td>Отображение есть и на старую, и на новую дату. Это логично: если пользователь купил билет на октябрь, он будет искать событие в октябре, даже если его перенесли на ноябрь. Лучше явно показывать перенос и новую дату.</td>
+        </tr>
+        <tr>
+          <td>Текст про афишу Санкт-Петербурга на 2025 год рядом со спектаклями 2026</td>
+          <td><span class="status yes">Да</span></td>
+          <td>Все верно, так и есть: на странице события уже на август 2026, а в тексте указан 2025 год.</td>
+        </tr>
+        <tr>
+          <td>Между карточками иногда проскакивают одинокие числа</td>
+          <td><span class="status no">Нет</span></td>
+          <td>Не вижу такого. Возможно, это возрастное ограничение в ситуации, когда картинка или ссылка не подгрузились, например из-за плохого интернета или тяжелого изображения.</td>
+        </tr>
+        <tr>
+          <td>Подключенный плагин один из самых тяжелых в экосистеме WordPress</td>
+          <td><span class="status part">Частично</span></td>
+          <td>Плагин используется, но по скриншоту грузится быстро и не занимает много памяти. Проверялось в анонимном режиме, чтобы исключить влияние кеша. Если он сейчас только для логотипа, можно упростить, но в будущем он может использоваться и для других задач.</td>
+        </tr>
+        <tr>
+          <td>В фактическом адресе пропущена буква: «униципальный округ»</td>
+          <td><span class="status no">Нет</span></td>
+          <td>Слово «муниципальный» написано полностью.</td>
+        </tr>
+        <tr>
+          <td>Кнопка «Купить билет» ведет не на страницу спектакля, а на общий список афиши</td>
+          <td><span class="status yes">Да</span></td>
+          <td>Да, это правда. Более того, на главной есть кнопка «Купить билет», по которой не ясно, к чему она относится.</td>
+        </tr>
+        <tr>
+          <td>SEO-поля сейчас пустые</td>
+          <td><span class="status part">Частично</span></td>
+          <td><code>title</code> есть, а <code>description</code> действительно отсутствует или пустой.</td>
+        </tr>
+        <tr>
+          <td>Убрать дату «01 января 1970» с каждой карточки афиши</td>
+          <td><span class="status no">Нет</span></td>
+          <td>Не понимаю, где обнаружена такая дата. Сейчас вижу нормальную дату: 29 августа 2026, 19:00.</td>
+        </tr>
+        <tr>
+          <td>Кнопка «Вернуться» никуда не ведет</td>
+          <td><span class="status no">Нет</span></td>
+          <td>Кнопка работает: ведет на <a href="https://dkvdk.ru/poster/2026/08/29/">/poster/2026/08/29/</a> или <a href="https://dkvdk.ru/poster/2026/08/">/poster/2026/08/</a>.</td>
+        </tr>
+        <tr>
+          <td>Баннер, который никуда не ведет</td>
+          <td><span class="status ask">Уточнить</span></td>
+          <td>Какой именно баннер имеется в виду?</td>
+        </tr>
+        <tr>
+          <td>У картинок нет <code>alt</code></td>
+          <td><span class="status yes">Да</span></td>
+          <td>Да, у картинок встречается пустой <code>alt</code>.</td>
+        </tr>
+        <tr>
+          <td>Facebook Pixel есть на сайте</td>
+          <td><span class="status yes">Да</span></td>
+          <td>Да, Facebook Pixel действительно есть.</td>
+        </tr>
+        <tr>
+          <td>Номера в шапке нельзя нажать для звонка с телефона</td>
+          <td><span class="status yes">Да</span></td>
+          <td>Да, номер не кликабелен.</td>
+        </tr>
+        <tr>
+          <td>Ссылка VK указана через <code>http</code></td>
+          <td><span class="status yes">Да</span></td>
+          <td>Да, сейчас указано <code>&lt;a href="http://vk.com/club88228483" target="_blank"&gt;</code>, лучше заменить на <code>https</code>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>
