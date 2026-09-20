@@ -364,6 +364,54 @@ https://web.max.ru/-79157065918537</code></pre>
   -vn -c:a aac -b:a 128k -movflags +faststart \
   "/Users/servas/Downloads/_Подмосковные вечера - BENKO DIXIELAND BAND.m4a" \
   -y</code></pre>
+        <p>Разберем команду по кускам:</p>
+        <table>
+          <tr>
+            <th>Фрагмент</th>
+            <th>Что означает</th>
+          </tr>
+          <tr>
+            <td><code>ffmpeg</code></td>
+            <td>Запускает программу ffmpeg. Это универсальная утилита для конвертации аудио и видео.</td>
+          </tr>
+          <tr>
+            <td><code>-hide_banner</code></td>
+            <td>Убирает длинную служебную “шапку” ffmpeg из вывода. На результат не влияет, просто делает консоль чище.</td>
+          </tr>
+          <tr>
+            <td><code>-i "...mp4"</code></td>
+            <td><code>-i</code> означает input, то есть входной файл. Здесь мы говорим ffmpeg: возьми исходный MP4 с музыкой.</td>
+          </tr>
+          <tr>
+            <td><code>-vn</code></td>
+            <td>Video none: не брать видеодорожку. Нам нужно только аудио, поэтому картинку из MP4 выбрасываем.</td>
+          </tr>
+          <tr>
+            <td><code>-c:a aac</code></td>
+            <td>Codec audio: закодировать аудио кодеком AAC. AAC хорошо подходит для файла <code>.m4a</code> и обычно нормально воспринимается веб-приложениями.</td>
+          </tr>
+          <tr>
+            <td><code>-b:a 128k</code></td>
+            <td>Bitrate audio: качество/поток аудио 128 килобит в секунду. Для голосового/музыкального сообщения это разумный компромисс между размером и качеством.</td>
+          </tr>
+          <tr>
+            <td><code>-movflags +faststart</code></td>
+            <td>Переносит служебные метаданные MP4/M4A в начало файла. Тогда файл быстрее начинает проигрываться при потоковой загрузке, потому что плееру не надо ждать конец файла.</td>
+          </tr>
+          <tr>
+            <td><code>"...m4a"</code></td>
+            <td>Выходной файл. Расширение <code>.m4a</code> означает аудио-контейнер MPEG-4 без видео.</td>
+          </tr>
+          <tr>
+            <td><code>-y</code></td>
+            <td>Разрешает перезаписать выходной файл без вопроса “Overwrite?”. Удобно для повторных запусков.</td>
+          </tr>
+          <tr>
+            <td><code>\</code></td>
+            <td>Обратный слэш в конце строки в macOS/Linux означает: команда продолжается на следующей строке. Это только оформление, чтобы длинная команда читалась легче.</td>
+          </tr>
+        </table>
+        <p>Итог простыми словами: “Возьми MP4, выброси видео, аудио перекодируй в AAC 128k, сохрани как M4A и подготовь файл к быстрому старту воспроизведения”.</p>
         <p>Но если прикрепить этот M4A через обычную кнопку загрузки файла, MAX показывает его как файл-вложение. Это не подходит, потому что пользователю приходится открывать или скачивать файл.</p>
 
         <h3>Фейковый микрофон Chrome</h3>
@@ -384,6 +432,125 @@ https://web.max.ru/-79157065918537</code></pre>
         <p>Еще один неудачный путь — выполнить небольшой JavaScript прямо в открытой странице браузера. В теории это удобно: вставляешь код в адресную строку или Console, и он выполняется внутри MAX Web.</p>
         <p>На практике случилась типичная ошибка: фокус был не в адресной строке, а в поле ввода сообщения MAX. Поэтому текст <code>javascript:...</code> не выполнился как код, а отправился как обычное сообщение в канал.</p>
         <p>Вывод: для повторяемой автоматизации нельзя полагаться на ручной фокус браузера. Надежнее использовать отдельный временный профиль и выполнять код через Playwright внутри страницы.</p>
+
+        <p>Смысл того одноразового скрипта был такой: прямо из открытой страницы MAX найти JS-бандл, импортировать его как модуль, найти текущий чат и вызвать внутреннюю функцию отправки аудио. Полная реальная версия включала бы огромную строку <code>audioBase64</code> с содержимым аудиофайла, поэтому ниже показана та же структура без самого большого бинарного куска:</p>
+        <pre><code>javascript:(async () =&gt; {
+  // 1. Найти JS-бандл MAX, где лежат внутренние функции приложения.
+  const bundleUrl = [...document.scripts]
+    .map((script) =&gt; script.src)
+    .find((src) =&gt; /CHBUOM21\.js/.test(src))
+    || performance.getEntriesByType("resource")
+      .map((entry) =&gt; entry.name)
+      .find((src) =&gt; /CHBUOM21\.js/.test(src));
+
+  if (!bundleUrl) {
+    throw new Error("MAX bundle was not found");
+  }
+
+  // 2. Импортировать этот бандл как ES module.
+  const mod = await import(bundleUrl);
+
+  // 3. Взять id чата из URL:
+  // https://web.max.ru/-79157065918537 =&gt; -79157065918537
+  const targetId = location.pathname.slice(1);
+
+  // 4. Найти объект чата во внутреннем кэше MAX.
+  const chat = Array.from(mod.Co.chats.cache.values()).find((item) =&gt; {
+    if (!item || item instanceof Error) return false;
+    const id = item.id?.toString?.() ?? String(item.id ?? "");
+    return id === targetId;
+  });
+
+  if (!chat) {
+    throw new Error("chat not found");
+  }
+
+  // 5. Здесь должна была быть длинная base64-строка аудио.
+  // В HTML ее публиковать бессмысленно: она огромная.
+  const audioBase64 = "AAAA...ЗДЕСЬ_БЫЛО_СОДЕРЖИМОЕ_AUDIO...";
+
+  // 6. Превратить base64 обратно в байты.
+  const bytes = Uint8Array.from(
+    atob(audioBase64),
+    (char) =&gt; char.charCodeAt(0)
+  );
+
+  // 7. Создать браузерный File, как будто пользователь выбрал файл.
+  const file = new File(
+    [bytes],
+    "_Подмосковные вечера - BENKO DIXIELAND BAND.m4a",
+    { type: "audio/mp4" }
+  );
+
+  // 8. Сделать простую волну для визуального отображения аудиосообщения.
+  const wave = new Uint8Array(
+    Array.from({ length: 80 }, (_, i) =&gt; {
+      return 28 + Math.round(20 * Math.abs(Math.sin(i / 5)));
+    })
+  );
+
+  // 9. Вызвать внутреннюю функцию MAX для отправки аудио.
+  await mod.ja({
+    chat,
+    file,
+    duration: 193369,
+    wave
+  });
+})()</code></pre>
+
+        <p>Разбор этого скрипта по шагам:</p>
+        <table>
+          <tr>
+            <th>Строка</th>
+            <th>Зачем нужна</th>
+          </tr>
+          <tr>
+            <td><code>javascript:(async () =&gt; { ... })()</code></td>
+            <td>Bookmarklet-форма: если вставить это именно в адресную строку, браузер выполнит код на текущей странице. <code>async</code> нужен, чтобы использовать <code>await</code>.</td>
+          </tr>
+          <tr>
+            <td><code>document.scripts</code></td>
+            <td>Список всех <code>&lt;script&gt;</code>, которые подключены к странице. Так можно найти URL бандла MAX.</td>
+          </tr>
+          <tr>
+            <td><code>performance.getEntriesByType("resource")</code></td>
+            <td>Запасной способ найти загруженные ресурсы страницы, если нужного URL нет в <code>document.scripts</code>.</td>
+          </tr>
+          <tr>
+            <td><code>/CHBUOM21\.js/.test(...)</code></td>
+            <td>Проверка имени файла. В тот момент нужная логика MAX была именно в бандле <code>CHBUOM21.js</code>.</td>
+          </tr>
+          <tr>
+            <td><code>await import(bundleUrl)</code></td>
+            <td>Загружает JS-бандл как модуль и возвращает объект экспортов. После этого можно обратиться к <code>mod.Co</code>, <code>mod.ja</code> и другим экспортированным частям.</td>
+          </tr>
+          <tr>
+            <td><code>location.pathname.slice(1)</code></td>
+            <td>Берет id текущего канала из адреса страницы. Убираем первый символ <code>/</code>.</td>
+          </tr>
+          <tr>
+            <td><code>mod.Co.chats.cache.values()</code></td>
+            <td>Внутренний кэш чатов MAX Web. В нем искался объект текущего канала.</td>
+          </tr>
+          <tr>
+            <td><code>atob(audioBase64)</code></td>
+            <td>Декодирует base64 обратно в бинарные данные. Base64 — это способ представить файл текстовой строкой.</td>
+          </tr>
+          <tr>
+            <td><code>new File(...)</code></td>
+            <td>Создает объект файла прямо в браузере. Для MAX он выглядит как выбранный пользователем аудиофайл.</td>
+          </tr>
+          <tr>
+            <td><code>duration: 193369</code></td>
+            <td>Длительность аудио в миллисекундах. 193369 мс — это примерно 3 минуты 13 секунд.</td>
+          </tr>
+          <tr>
+            <td><code>mod.ja(...)</code></td>
+            <td>Внутренняя экспортированная функция MAX, которая запускает отправку аудио-вложения.</td>
+          </tr>
+        </table>
+
+        <p>Почему это отправилось текстом: bookmarklet выполняется только если текст попал в адресную строку браузера. Если в этот момент активным было поле ввода сообщения MAX, браузер ничего не выполняет. Он просто вставляет символы в поле сообщения. Поэтому в канал ушел текст, начинающийся с <code>javascript:(async()=&gt;</code>.</p>
       </section>
 
       <section>
@@ -746,6 +913,7 @@ npm install playwright-core classic-level</code></pre>
   -i "/Users/servas/Downloads/_Подмосковные вечера - BENKO DIXIELAND BAND.mp4" \
   -vn -c:a aac -b:a 128k -movflags +faststart \
   "/Users/servas/Downloads/_Подмосковные вечера - BENKO DIXIELAND BAND.m4a"</code></pre>
+        <p>Здесь <code>-i</code> указывает входной MP4, <code>-vn</code> отключает видео, <code>-c:a aac</code> выбирает аудиокодек AAC, <code>-b:a 128k</code> задает битрейт, а <code>-movflags +faststart</code> делает файл удобнее для быстрого старта проигрывания в вебе.</p>
         <p>Проверяем длительность:</p>
         <pre><code>ffprobe -v error \
   -show_entries format=duration \
