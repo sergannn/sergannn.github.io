@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MAX Web: как отправить музыку как аудиосообщение без удержания кнопки</title>
+  <style>
+    :root {
+      --bg: #f7f8fb;
+      --paper: #ffffff;
+      --ink: #18202f;
+      --muted: #647086;
+      --line: #d9deea;
+      --accent: #0b6bcb;
+      --accent-2: #0f8f73;
+      --warn: #9c5a00;
+      --code-bg: #101828;
+      --code-ink: #eef4ff;
+      --soft-blue: #edf6ff;
+      --soft-green: #eefaf5;
+      --soft-amber: #fff7e8;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 17px/1.62 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    header {
+      background: #172033;
+      color: #fff;
+      padding: 48px 24px 42px;
+    }
+
+    .wrap {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 44px 0 14px;
+      font-size: 30px;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 28px 0 10px;
+      font-size: 22px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0 0 16px;
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    main {
+      padding: 28px 24px 64px;
+    }
+
+    .lead {
+      max-width: 850px;
+      color: #dce8ff;
+      font-size: 20px;
+    }
+
+    .meta {
+      margin-top: 22px;
+      color: #b9c6da;
+      font-size: 15px;
+    }
+
+    .panel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      margin: 20px 0;
+    }
+
+    .toc {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      padding: 0;
+      list-style: none;
+      margin: 8px 0 0;
+    }
+
+    .toc a {
+      display: block;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      text-decoration: none;
+      background: #fff;
+    }
+
+    .note {
+      border-left: 4px solid var(--accent);
+      background: var(--soft-blue);
+      padding: 14px 16px;
+      margin: 18px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .ok {
+      border-left-color: var(--accent-2);
+      background: var(--soft-green);
+    }
+
+    .warn {
+      border-left-color: var(--warn);
+      background: var(--soft-amber);
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.94em;
+      background: #eef1f7;
+      padding: 0.12em 0.35em;
+      border-radius: 4px;
+    }
+
+    pre {
+      margin: 14px 0 20px;
+      padding: 16px;
+      overflow-x: auto;
+      color: var(--code-ink);
+      background: var(--code-bg);
+      border-radius: 8px;
+      line-height: 1.45;
+      font-size: 14px;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    ol,
+    ul {
+      padding-left: 24px;
+      margin: 0 0 18px;
+    }
+
+    li {
+      margin: 8px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    th,
+    td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f0f3f9;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Как я отправил музыку в MAX как аудиосообщение</h1>
+      <p class="lead">Подробный учебный разбор: от неудачных попыток через интерфейс до чтения обфусцированного кода MAX Web, поиска авторизации в локальной базе Chrome и отправки аудио через внутренний механизм MAX.</p>
+      <p class="meta">Практический пример: канал MAX “Джаз есть везде”, файл MP4 с музыкой, цель — получить inline-аудио на 03:13, а не обычный файл.</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="panel">
+        <h2 id="toc">Оглавление</h2>
+        <ul class="toc">
+          <li><a href="#task">1. Задача</a></li>
+          <li><a href="#failed">2. Что не сработало</a></li>
+          <li><a href="#bundles">3. Как я нашел код MAX</a></li>
+          <li><a href="#obfuscation">4. Что значит “код обфусцирован”</a></li>
+          <li><a href="#storage">5. Что искалось в Local Storage и IndexedDB</a></li>
+          <li><a href="#flow">6. Внутренний путь отправки</a></li>
+          <li><a href="#bug">7. Почему первый успех был ложным</a></li>
+          <li><a href="#final">8. Рабочий способ</a></li>
+          <li><a href="#student">9. Инструкция для новичка</a></li>
+          <li><a href="#safety">10. Безопасность</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 id="task">1. Что надо было сделать</h2>
+        <p>Была задача отправить музыку из MP4 в публичный канал MAX не как файл, а как аудиосообщение, которое сразу проигрывается в ленте. То есть нужен не блок “Скачать файл”, а аудио-плашка с длительностью, например <code>03:13</code>.</p>
+        <p>Исходный файл лежал локально:</p>
+        <pre><code>/Users/servas/Downloads/_Подмосковные вечера - BENKO DIXIELAND BAND.mp4</code></pre>
+        <p>Публичный канал:</p>
+        <pre><code>https://max.ru/channel_piano_clarinet
+https://web.max.ru/-79157065918537</code></pre>
+        <div class="note warn">
+          <p><strong>Важно.</strong> Эта инструкция объясняет исследовательский путь и локальную автоматизацию под своим аккаунтом. Не надо использовать чужие токены, чужие профили Chrome или отправлять сообщения без разрешения владельца аккаунта.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 id="failed">2. Что сначала не сработало</h2>
+        <h3>Загрузка M4A как файла</h3>
+        <p>Первый очевидный путь — вытащить аудио из MP4 и загрузить его в MAX как файл. Я сделал M4A:</p>
+        <pre><code>ffmpeg -hide_banner \
+  -i "/Users/servas/Downloads/_Подмосковные вечера - BENKO DIXIELAND BAND.mp4" \
+  -vn -c:a aac -b:a 128k -movflags +faststart \
+  "/Users/servas/Downloads/_Подмосковные вечера - BENKO DIXIELAND BAND.m4a" \
+  -y</code></pre>
+        <p>Но если прикрепить этот M4A через обычную кнопку загрузки файла, MAX показывает его как файл-вложение. Это не подходит, потому что пользователю приходится открывать или скачивать файл.</p>
+
+        <h3>Фейковый микрофон Chrome</h3>
+        <p>Потом был вариант запустить Chrome с fake microphone и подставить аудио вместо микрофона:</p>
+        <pre><code>open -na "Google Chrome" --args \
+  --use-fake-device-for-media-stream \
+  --use-fake-ui-for-media-stream \
+  --use-file-for-fake-audio-capture="/Users/servas/Downloads/_Подмосковные вечера - BENKO DIXIELAND BAND.fake-mic.wav" \
+  "https://web.max.ru/-79157065918537"</code></pre>
+        <p>Перед этим WAV был сделан так:</p>
+        <pre><code>ffmpeg -hide_banner -y \
+  -i "/Users/servas/Downloads/_Подмосковные вечера - BENKO DIXIELAND BAND.mp4" \
+  -vn -ac 1 -ar 48000 -sample_fmt s16 \
+  "/Users/servas/Downloads/_Подмосковные вечера - BENKO DIXIELAND BAND.fake-mic.wav"</code></pre>
+        <p>Технически это могло бы работать, но способ плохой: нужно нажимать или удерживать кнопку записи. Это именно тот “ручной костыль”, которого хотелось избежать.</p>
+      </section>
+
+      <section>
+        <h2 id="bundles">3. Как я нашел нужные места в коде MAX Web</h2>
+        <p>MAX Web — это обычное веб-приложение. Браузер загружает JavaScript-бандлы, внутри которых есть весь клиентский код: отправка сообщений, загрузка вложений, работа с WebSocket.</p>
+        <p>Я выгрузил JS-бандлы страницы в папку:</p>
+        <pre><code>/tmp/max-web-bundles</code></pre>
+        <p>Среди них были файлы вроде:</p>
+        <pre><code>CHBUOM21.js
+6ky1fLXF.js
+BTFVkylu.js
+app.C2ONFNRQ.js</code></pre>
+        <p>Дальше я искал по тексту важные слова. Сначала такие:</p>
+        <pre><code>rg "Record voice message|MediaRecorder|getUserMedia|AUDIO|audioId|sendChatMessage|cmd\\(64" /tmp/max-web-bundles</code></pre>
+        <p>Главные находки:</p>
+        <table>
+          <tr>
+            <th>Что искал</th>
+            <th>Что это дало</th>
+          </tr>
+          <tr>
+            <td><code>Record voice message</code></td>
+            <td>Нашлись строки интерфейса: кнопка записи, “Stop recording”, “Delete recording”. Это подтвердило, что voice UI живет в веб-клиенте.</td>
+          </tr>
+          <tr>
+            <td><code>MediaRecorder</code>, <code>getUserMedia</code></td>
+            <td>Нашел код записи с микрофона и кодеки: <code>audio/ogg; codecs=opus</code>, AAC/MP4 fallback.</td>
+          </tr>
+          <tr>
+            <td><code>AUDIO</code>, <code>audioId</code>, <code>duration</code>, <code>wave</code></td>
+            <td>Нашел формат аудио-вложения MAX.</td>
+          </tr>
+          <tr>
+            <td><code>sendChatMessage</code>, <code>cmd(64)</code></td>
+            <td>Нашел команду реальной отправки сообщения через внутренний WebSocket.</td>
+          </tr>
+        </table>
+
+        <p>Самое важное место оказалось в <code>CHBUOM21.js</code>. Там была функция сериализации вложений:</p>
+        <pre><code>case e instanceof WW:
+case e instanceof lG:
+  return {
+    _type: "AUDIO",
+    audioId: e.id,
+    duration: e.duration,
+    wave: e.wave,
+    token: e.token ?? void 0
+  }</code></pre>
+        <p>Отсюда стало понятно: чтобы MAX считал сообщение аудио, ему нужен attach типа <code>AUDIO</code>, а не обычный файл.</p>
+      </section>
+
+      <section>
+        <h2 id="obfuscation">4. Что значит “код обфусцирован”</h2>
+        <p>Обфускация — это когда код специально или автоматически превращается в трудно читаемый вид. Не обязательно для защиты от хакеров; часто это просто результат сборки production-приложения.</p>
+        <p>Например, вместо красивых имен:</p>
+        <pre><code>sendChatMessage(chat, message)
+AudioAttachment
+UploadQueue</code></pre>
+        <p>в бандле встречается:</p>
+        <pre><code>dJ
+WW
+VW
+CG
+L0r
+I0r</code></pre>
+        <p>То есть имена почти ничего не говорят. Поэтому я искал не “красивое название функции”, а поведение:</p>
+        <ul>
+          <li>где встречается строка <code>AUDIO</code>;</li>
+          <li>где вызывается WebSocket-команда <code>cmd(64)</code>;</li>
+          <li>где запрашивается upload URL через <code>cmd(82)</code>;</li>
+          <li>где есть поля <code>audioId</code>, <code>duration</code>, <code>wave</code>, <code>token</code>.</li>
+        </ul>
+        <p>Это обычный прием чтения минифицированного кода: идти не от имен, а от строк, констант и формы данных.</p>
+      </section>
+
+      <section>
+        <h2 id="storage">5. Что я искал в локальной базе Chrome</h2>
+        <p>Чтобы не нажимать кнопки в открытом браузере, нужен был способ открыть временную MAX Web-сессию уже авторизованной. Для этого я посмотрел, где Chrome хранит данные MAX.</p>
+        <p>Chrome хранит Local Storage сайтов в LevelDB:</p>
+        <pre><code>~/Library/Application Support/Google/Chrome/Default/Local Storage/leveldb</code></pre>
+        <p>Я проверил, в каком профиле лежат следы MAX:</p>
+        <pre><code>python3 - &lt;&lt;'PY'
+from pathlib import Path
+root = Path.home() / "Library/Application Support/Google/Chrome"
+for prof in [p for p in root.iterdir() if p.is_dir() and (p.name == "Default" or p.name.startswith("Profile"))]:
+    hits = []
+    for sub in ["Local Storage/leveldb", "IndexedDB", "Session Storage"]:
+        p = prof / sub
+        if not p.exists():
+            continue
+        for f in p.rglob("*"):
+            if f.is_file() and f.stat().st_size &lt; 100_000_000:
+                data = f.read_bytes()
+                if b"web.max.ru" in data.lower() or b"oneme" in data.lower():
+                    hits.append(str(f.relative_to(prof)))
+    if hits:
+        print("PROFILE", prof.name)
+        for h in hits[:20]:
+            print(" ", h)
+PY</code></pre>
+        <p>Так стало ясно, что нужная авторизация MAX находится в профиле <code>Default</code>.</p>
+
+        <h3>Ключи MAX в Local Storage</h3>
+        <p>Потом я прочитал LevelDB через Node-пакет <code>classic-level</code> и перечислил только безопасные сведения: имена ключей и длины значений, без публикации токенов.</p>
+        <pre><code>npm install classic-level</code></pre>
+        <p>Среди ключей был главный:</p>
+        <pre><code>_https://web.max.ru\0\1__oneme_auth</code></pre>
+        <p>Внутри него лежит JSON с авторизацией MAX Web. Значение начинается примерно так, но реальные токены печатать нельзя:</p>
+        <pre><code>{
+  "token": "ЗДЕСЬ_СЕКРЕТНЫЙ_LOGIN_TOKEN",
+  ...
+}</code></pre>
+        <div class="note warn">
+          <p><strong>Нельзя публиковать реальный <code>__oneme_auth</code>.</strong> Это доступ к аккаунту. В учебном коде его надо читать локально и не выводить в лог.</p>
+        </div>
+
+        <h3>IndexedDB MAX</h3>
+        <p>Кроме Local Storage, у MAX есть IndexedDB:</p>
+        <pre><code>~/Library/Application Support/Google/Chrome/Default/IndexedDB/https_web.max.ru_0.indexeddb.leveldb</code></pre>
+        <p>Там лежит локальный кэш чатов и сообщений. По строкам внутри нашлась база вида:</p>
+        <pre><code>max-db-14-125622089</code></pre>
+        <p>Это помогло подтвердить, что веб-клиент MAX кэширует чаты локально, но для отправки сообщения важнее оказался <code>__oneme_auth</code>.</p>
+      </section>
+
+      <section>
+        <h2 id="flow">6. Как устроена отправка аудио внутри MAX</h2>
+        <p>В коде MAX нашлась цепочка:</p>
+        <ol>
+          <li>Создается аудио-attach класса <code>WW</code>.</li>
+          <li>Он кладется в коллекцию вложений <code>VW</code>.</li>
+          <li>Создается сообщение <code>CG</code>.</li>
+          <li>MAX запрашивает upload URL через WebSocket-команду <code>cmd(82)</code>.</li>
+          <li>Файл грузится на выданный URL.</li>
+          <li>Сообщение отправляется через <code>cmd(64)</code>.</li>
+        </ol>
+        <p>Важные фрагменты, которые это показали:</p>
+        <pre><code>// запрос upload URL для audio/video
+send(82, {
+  count: 1,
+  type: 2,
+  uploaderType: ...
+})
+
+// отправка сообщения
+socket.cmd(64, {
+  chatId,
+  postId,
+  message: {
+    text,
+    cid,
+    elements,
+    link,
+    attaches: vG(message.attaches)
+  },
+  notify: true
+})</code></pre>
+        <p>Формат аудио-вложения после сериализации:</p>
+        <pre><code>{
+  _type: "AUDIO",
+  audioId: "...",
+  duration: 193369,
+  wave: Uint8Array(...),
+  token: "..."
+}</code></pre>
+        <p><code>duration</code> — длительность в миллисекундах. <code>wave</code> — массив амплитуд для визуальной волны в аудио-плашке.</p>
+      </section>
+
+      <section>
+        <h2 id="bug">7. Почему первый “успех” оказался ложным</h2>
+        <p>Сначала я отправлял <code>.ogg</code> Opus. В UI появилась аудио-плашка <code>03:13</code>, и это выглядело как успех. Но после чистой перезагрузки канала сообщения не было.</p>
+        <p>Причина нашлась в консоли MAX Web:</p>
+        <pre><code>[0] cmd errored [0x40 errors.process.attachment.video.not.ready]
+Key: errors.process.attachment.video.not.ready</code></pre>
+        <p>Что это значит простыми словами: клиент MAX нарисовал локальную плашку, но сервер отказался публиковать сообщение, потому что вложение еще не было готово.</p>
+        <p>В коде MAX видно, почему возник race condition:</p>
+        <pre><code>// упрощенно:
+sendChatMessage(chat, message)   // сообщение уже пытаются отправить
+startAudioUpload(attach)         // upload начинается после этого</code></pre>
+        <p>В обычном UI это компенсируется очередью и состояниями загрузки. При прямом вызове функции из скрипта сообщение могло уйти слишком рано.</p>
+      </section>
+
+      <section>
+        <h2 id="final">8. Что в итоге сработало</h2>
+        <p>Сработал вариант через <code>.m4a</code>, а не через <code>.ogg</code>. Для <code>.m4a</code> MAX включает ветку обработки, где сервер успевает подготовить аудио. После этого чистая перезагрузка канала показала реальное аудио-сообщение:</p>
+        <pre><code>03:13
+01:52 PM</code></pre>
+        <p>То есть итоговая логика была такая:</p>
+        <ol>
+          <li>Из MP4 сделать M4A.</li>
+          <li>Взять авторизацию MAX Web из локального Chrome Local Storage.</li>
+          <li>Открыть временный Chrome-профиль.</li>
+          <li>Записать туда ключи <code>__oneme_...</code> в Local Storage.</li>
+          <li>Открыть <code>https://web.max.ru/-79157065918537</code>.</li>
+          <li>Импортировать основной JS-бандл MAX <code>CHBUOM21.js</code>.</li>
+          <li>Найти объект чата в <code>mod.Co.chats.cache</code> по <code>chat.id === "-79157065918537"</code>.</li>
+          <li>Вызвать экспортированную функцию аудио-отправки <code>mod.ja(...)</code>.</li>
+          <li>Проверить результат в новой чистой сессии.</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2 id="student">9. Полная инструкция для студента-новичка</h2>
+        <h3>Шаг 1. Подготовить рабочую папку</h3>
+        <pre><code>mkdir -p ~/max_voice_poster
+cd ~/max_voice_poster
+npm init -y
+npm install playwright-core classic-level</code></pre>
+
+        <h3>Шаг 2. Сделать аудио из MP4</h3>
+        <p>Делаем M4A:</p>
+        <pre><code>ffmpeg -hide_banner -y \
+  -i "/Users/servas/Downloads/_Подмосковные вечера - BENKO DIXIELAND BAND.mp4" \
+  -vn -c:a aac -b:a 128k -movflags +faststart \
+  "/Users/servas/Downloads/_Подмосковные вечера - BENKO DIXIELAND BAND.m4a"</code></pre>
+        <p>Проверяем длительность:</p>
+        <pre><code>ffprobe -v error \
+  -show_entries format=duration \
+  -of default=nw=1:nk=1 \
+  "/Users/servas/Downloads/_Подмосковные вечера - BENKO DIXIELAND BAND.m4a"</code></pre>
+
+        <h3>Шаг 3. Найти авторизацию MAX в Chrome</h3>
+        <p>Нужно прочитать Local Storage Chrome, но не печатать токены. Минимальная идея:</p>
+        <pre><code>const { ClassicLevel } = require("classic-level");
+
+async function readMaxLocalStorage() {
+  const dbPath = `${process.env.HOME}/Library/Application Support/Google/Chrome/Default/Local Storage/leveldb`;
+  const db = new ClassicLevel(dbPath, {
+    keyEncoding: "utf8",
+    valueEncoding: "utf8"
+  });
+
+  const out = {};
+
+  for await (const [key, rawValue] of db.iterator()) {
+    if (!key.startsWith("_https://web.max.ru\\0\\1__oneme")) continue;
+    const localKey = key.split("\\0\\1")[1];
+    out[localKey] = rawValue.startsWith("\\1")
+      ? rawValue.slice(1)
+      : rawValue;
+  }
+
+  await db.close();
+
+  if (!out.__oneme_auth) {
+    throw new Error("MAX auth was not found");
+  }
+
+  return out;
+}</code></pre>
+
+        <h3>Шаг 4. Открыть временный MAX Web с этой авторизацией</h3>
+        <pre><code>const { chromium } = require("playwright-core");
+
+const context = await chromium.launchPersistentContext(tempProfile, {
+  executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+  headless: false
+});
+
+const page = context.pages()[0] || await context.newPage();
+
+await page.addInitScript((items) =&gt; {
+  for (const [key, value] of Object.entries(items)) {
+    localStorage.setItem(key, value);
+  }
+}, maxStorage);
+
+await page.goto("https://web.max.ru/-79157065918537", {
+  waitUntil: "domcontentloaded"
+});</code></pre>
+
+        <h3>Шаг 5. Найти JS-бандл MAX и импортировать его</h3>
+        <pre><code>const bundleUrl = performance
+  .getEntriesByType("resource")
+  .map((entry) =&gt; entry.name)
+  .find((name) =&gt; /CHBUOM21\\.js/.test(name));
+
+const mod = await import(bundleUrl);</code></pre>
+
+        <h3>Шаг 6. Найти объект канала</h3>
+        <p>URL канала в web.max.ru был:</p>
+        <pre><code>https://web.max.ru/-79157065918537</code></pre>
+        <p>Значит id чата:</p>
+        <pre><code>-79157065918537</code></pre>
+        <p>Ищем его в кэше:</p>
+        <pre><code>const targetId = location.pathname.slice(1);
+
+const chat = Array.from(mod.Co.chats.cache.values()).find((item) =&gt; {
+  if (!item || item instanceof Error) return false;
+  const id = item.id?.toString?.() ?? String(item.id ?? "");
+  return id === targetId;
+});
+
+if (!chat) {
+  throw new Error("chat not found");
+}</code></pre>
+
+        <h3>Шаг 7. Создать File и вызвать аудио-отправку</h3>
+        <pre><code>const bytes = Uint8Array.from(atob(audioBase64), (char) =&gt; char.charCodeAt(0));
+
+const file = new File([bytes], "_Подмосковные вечера - BENKO DIXIELAND BAND.m4a", {
+  type: "audio/mp4"
+});
+
+const wave = new Uint8Array(
+  Array.from({ length: 80 }, (_, i) =&gt; 28 + Math.round(20 * Math.abs(Math.sin(i / 5))))
+);
+
+await mod.ja({
+  chat,
+  file,
+  duration: 193369,
+  wave
+});</code></pre>
+
+        <h3>Шаг 8. Проверить не локальную плашку, а реальную публикацию</h3>
+        <p>Самая важная проверка: закрыть временный Chrome, открыть канал заново в новой сессии и убедиться, что аудио осталось в ленте. Если после чистой загрузки виден блок <code>03:13</code>, значит сообщение реально опубликовано.</p>
+      </section>
+
+      <section>
+        <h2 id="safety">10. Безопасность и аккуратность</h2>
+        <ul>
+          <li>Никогда не выкладывать содержимое <code>__oneme_auth</code>.</li>
+          <li>Не коммитить токены в GitHub.</li>
+          <li>Не логировать полный Local Storage.</li>
+          <li>Не отправлять посты в чужие каналы.</li>
+          <li>После экспериментов проверять канал чистой загрузкой, а не верить локальной плашке в текущем DOM.</li>
+          <li>Если видишь ошибку <code>errors.process.attachment.video.not.ready</code>, значит сервер еще не готов принять attach в сообщение.</li>
+        </ul>
+        <div class="note ok">
+          <p><strong>Ключевой урок.</strong> В веб-приложениях часто есть разница между “UI показал локальный pending” и “сервер реально опубликовал сообщение”. Всегда проверяй результат через новую загрузку страницы или вторую сессию.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
