@@ -1051,6 +1051,843 @@ const target = [...messages].reverse().find((message) =&gt; {
 });</code></pre>
         <p><strong>Что выяснил:</strong> сам факт такого скрипта показывает, как я диагностировал ошибку с фокусом. Но в финальной инструкции я отдельно отметил: пользователь сказал, что удалит запись сам, поэтому удаление не было частью рабочего способа отправки аудио.</p>
 
+
+        <h3>Полные тексты проверочных скриптов</h3>
+        <p>Ниже именно полное содержимое рабочих файлов из папки <code>/Users/servas/max_voice_poster</code>. Секретные значения токенов здесь не вставлены: скрипты читают их локально из Chrome во время запуска.</p>
+
+        <details>
+          <summary><code>inspect_max_storage.js</code></summary>
+          <pre><code>const { ClassicLevel } = require('classic-level');
+
+const dbPath = `${process.env.HOME}/Library/Application Support/Google/Chrome/Default/Local Storage/leveldb`;
+
+(async () =&gt; {
+  const db = new ClassicLevel(dbPath, { keyEncoding: 'utf8', valueEncoding: 'utf8' });
+  for await (const [key, value] of db.iterator()) {
+    if (!key.includes('web.max.ru') &amp;&amp; !key.includes('max.ru') &amp;&amp; !key.includes('oneme')) continue;
+    const safeKey = key.replace(/[A-Za-z0-9_+/-]{32,}/g, (m) =&gt; `${m.slice(0, 8)}...${m.length}`);
+    let parsed = null;
+    try {
+      parsed = JSON.parse(value);
+    } catch {}
+    console.log(JSON.stringify({
+      key: safeKey,
+      valueLength: value?.length ?? 0,
+      valueStart: String(value).slice(0, 80).replace(/[A-Za-z0-9_+/-]{32,}/g, (m) =&gt; `${m.slice(0, 8)}...${m.length}`),
+      jsonKeys: parsed &amp;&amp; typeof parsed === 'object' ? Object.keys(parsed).slice(0, 20) : null,
+    }));
+  }
+  await db.close();
+})().catch((error) =&gt; {
+  console.error(error);
+  process.exit(1);
+});
+</code></pre>
+        </details>
+
+        <details>
+          <summary><code>debug_temp_max_session.js</code></summary>
+          <pre><code>const { chromium } = require('playwright-core');
+const { ClassicLevel } = require('classic-level');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
+
+async function readMaxLocalStorage() {
+  const dbPath = `${process.env.HOME}/Library/Application Support/Google/Chrome/Default/Local Storage/leveldb`;
+  const db = new ClassicLevel(dbPath, { keyEncoding: 'utf8', valueEncoding: 'utf8' });
+  const out = {};
+  for await (const [key, rawValue] of db.iterator()) {
+    if (!key.startsWith('_https://web.max.ru\u0000\u0001__oneme')) continue;
+    out[key.split('\u0000\u0001')[1]] = rawValue.startsWith('\u0001') ? rawValue.slice(1) : rawValue;
+  }
+  await db.close();
+  return out;
+}
+
+(async () =&gt; {
+  const storage = await readMaxLocalStorage();
+  const tmpProfile = fs.mkdtempSync(path.join(os.tmpdir(), 'max-debug-'));
+  const context = await chromium.launchPersistentContext(tmpProfile, {
+    executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    headless: false,
+  });
+  const page = context.pages()[0] || await context.newPage();
+  await page.addInitScript((items) =&gt; {
+    for (const [key, value] of Object.entries(items)) localStorage.setItem(key, value);
+  }, storage);
+  await page.goto('https://web.max.ru/-79157065918537', { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(12000);
+  const info = await page.evaluate(() =&gt; ({
+    title: document.title,
+    url: location.href,
+    authLen: localStorage.getItem('__oneme_auth')?.length ?? 0,
+    keys: Object.keys(localStorage).filter((key) =&gt; key.includes('oneme')),
+    body: document.body.innerText.slice(0, 1000),
+    resources: performance.getEntriesByType('resource').map((entry) =&gt; entry.name).filter((name) =&gt; name.includes('_app')).slice(0, 20),
+  }));
+  console.log(JSON.stringify(info, null, 2));
+  await context.close();
+})().catch((error) =&gt; {
+  console.error(error);
+  process.exit(1);
+});
+</code></pre>
+        </details>
+
+        <details>
+          <summary><code>probe_max_audio_api.js</code></summary>
+          <pre><code>const { chromium } = require('playwright-core');
+
+const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const USER_DATA_DIR = `${process.env.HOME}/Library/Application Support/Google/Chrome`;
+const TARGET_URL = 'https://web.max.ru/-79157065918537';
+
+(async () =&gt; {
+const context = await chromium.launchPersistentContext(USER_DATA_DIR, {
+    executablePath: CHROME,
+    headless: false,
+    args: [
+      '--profile-directory=Default',
+      '--use-fake-device-for-media-stream',
+      '--use-fake-ui-for-media-stream',
+      `--use-file-for-fake-audio-capture=${process.env.HOME}/Downloads/_Подмосковные вечера - BENKO DIXIELAND BAND.fake-mic.wav`,
+    ],
+  });
+
+  const page = context.pages()[0] || await context.newPage();
+  console.log('opening MAX...');
+  await page.goto(TARGET_URL, { waitUntil: 'domcontentloaded', timeout: 20000 });
+  await page.waitForTimeout(8000);
+
+  const result = await page.evaluate(async () =&gt; {
+    const bundleUrl = [...document.scripts]
+      .map((script) =&gt; script.src)
+      .find((src) =&gt; /CHBUOM21\.js/.test(src));
+    const mod = await import(bundleUrl);
+    const chat = mod.Co?.chats?.get?.(location.pathname.slice(1));
+
+    return {
+      bundleUrl,
+      hasAudioSend: typeof mod.ja,
+      hasStore: Boolean(mod.Co),
+      chatType: chat?.constructor?.name ?? null,
+      chatTitle: chat?.title ?? chat?.name ?? null,
+      chatId: chat?.id?.toString?.() ?? String(chat?.id ?? ''),
+      viewerCanWrite: chat?.viewerCanWrite ?? null,
+      audioSendName: mod.ja?.name ?? null,
+    };
+  });
+
+  console.log(JSON.stringify(result, null, 2));
+  await context.close();
+})().catch((error) =&gt; {
+  console.error(error);
+  process.exit(1);
+});
+</code></pre>
+        </details>
+
+        <details>
+          <summary><code>debug_max_store.js</code></summary>
+          <pre><code>const { chromium } = require('playwright-core');
+const { ClassicLevel } = require('classic-level');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
+
+async function readStorage() {
+  const db = new ClassicLevel(`${process.env.HOME}/Library/Application Support/Google/Chrome/Default/Local Storage/leveldb`, { keyEncoding: 'utf8', valueEncoding: 'utf8' });
+  const out = {};
+  for await (const [key, rawValue] of db.iterator()) {
+    if (key.startsWith('_https://web.max.ru\u0000\u0001__oneme')) out[key.split('\u0000\u0001')[1]] = rawValue.startsWith('\u0001') ? rawValue.slice(1) : rawValue;
+  }
+  await db.close();
+  return out;
+}
+
+(async () =&gt; {
+  const storage = await readStorage();
+  const context = await chromium.launchPersistentContext(fs.mkdtempSync(path.join(os.tmpdir(), 'max-store-')), {
+    executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    headless: false,
+  });
+  const page = context.pages()[0] || await context.newPage();
+  await page.addInitScript((items) =&gt; {
+    for (const [key, value] of Object.entries(items)) localStorage.setItem(key, value);
+  }, storage);
+  await page.goto('https://web.max.ru/-79157065918537', { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(15000);
+  const info = await page.evaluate(async () =&gt; {
+    const url = performance.getEntriesByType('resource').map((e) =&gt; e.name).find((n) =&gt; /CHBUOM21\.js/.test(n));
+    const mod = await import(url);
+    const chats = mod.Co?.chats;
+    const proto = [];
+    for (let o = chats; o; o = Object.getPrototypeOf(o)) proto.push(Object.getOwnPropertyNames(o));
+    const own = Object.getOwnPropertyNames(chats || {});
+    const symbols = Object.getOwnPropertySymbols(chats || {}).map(String);
+    const sample = {};
+    for (const key of own) {
+      const val = chats[key];
+      sample[key] = {
+        type: typeof val,
+        ctor: val?.constructor?.name ?? null,
+        isMap: val instanceof Map,
+        size: val?.size ?? null,
+        keys: val &amp;&amp; typeof val === 'object' ? Object.getOwnPropertyNames(val).slice(0, 10) : null,
+      };
+    }
+    return {
+      storeKeys: Object.getOwnPropertyNames(mod.Co || {}),
+      chatsCtor: chats?.constructor?.name ?? null,
+      own,
+      symbols,
+      proto,
+      sample,
+      exported: { ja: typeof mod.ja, oc: typeof mod.oc, yc: typeof mod.yc, Co: typeof mod.Co },
+    };
+  });
+  console.log(JSON.stringify(info, null, 2));
+  await context.close();
+})().catch((e) =&gt; {
+  console.error(e);
+  process.exit(1);
+});
+</code></pre>
+        </details>
+
+        <details>
+          <summary><code>list_max_chats.js</code></summary>
+          <pre><code>const { chromium } = require('playwright-core');
+const { ClassicLevel } = require('classic-level');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
+
+async function readStorage() {
+  const db = new ClassicLevel(`${process.env.HOME}/Library/Application Support/Google/Chrome/Default/Local Storage/leveldb`, { keyEncoding: 'utf8', valueEncoding: 'utf8' });
+  const out = {};
+  for await (const [key, rawValue] of db.iterator()) {
+    if (key.startsWith('_https://web.max.ru\u0000\u0001__oneme')) out[key.split('\u0000\u0001')[1]] = rawValue.startsWith('\u0001') ? rawValue.slice(1) : rawValue;
+  }
+  await db.close();
+  return out;
+}
+
+(async () =&gt; {
+  const storage = await readStorage();
+  const context = await chromium.launchPersistentContext(fs.mkdtempSync(path.join(os.tmpdir(), 'max-list-')), {
+    executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    headless: false,
+  });
+  const page = context.pages()[0] || await context.newPage();
+  await page.addInitScript((items) =&gt; {
+    for (const [key, value] of Object.entries(items)) localStorage.setItem(key, value);
+  }, storage);
+  await page.goto('https://web.max.ru/-79157065918537', { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(20000);
+  const out = await page.evaluate(async () =&gt; {
+    const url = performance.getEntriesByType('resource').map((e) =&gt; e.name).find((n) =&gt; /CHBUOM21\.js/.test(n));
+    const mod = await import(url);
+    const values = Array.from(mod.Co.chats.cache.values());
+    return {
+      title: document.title,
+      bodyHasJazz: document.body.innerText.includes('Джаз есть везде'),
+      count: values.length,
+      chats: values.map((chat) =&gt; ({
+        ctor: chat.constructor?.name,
+        id: chat.id?.toString?.() ?? String(chat.id ?? ''),
+        title: chat.title ?? chat.name ?? chat.recipient?.fullName ?? null,
+        viewerCanWrite: chat.viewerCanWrite ?? null,
+        keys: Object.getOwnPropertyNames(chat).slice(0, 12),
+      })).slice(0, 100),
+    };
+  });
+  console.log(JSON.stringify(out, null, 2));
+  await context.close();
+})().catch((e) =&gt; {
+  console.error(e);
+  process.exit(1);
+});
+</code></pre>
+        </details>
+
+        <details>
+          <summary><code>post_voice_to_max.js</code></summary>
+          <pre><code>const { chromium } = require('playwright-core');
+const { spawn, spawnSync } = require('node:child_process');
+const fs = require('node:fs');
+const path = require('node:path');
+const os = require('node:os');
+const readline = require('node:readline/promises');
+
+const DEFAULT_CHANNEL_URL = 'https://web.max.ru/-79157065918537';
+const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const PROFILE_DIR = path.join(os.homedir(), '.max-voice-chrome-profile');
+
+function argValue(name, fallback = undefined) {
+  const idx = process.argv.indexOf(name);
+  return idx &gt;= 0 ? process.argv[idx + 1] : fallback;
+}
+
+function hasFlag(name) {
+  return process.argv.includes(name);
+}
+
+function run(cmd, args, options = {}) {
+  const result = spawnSync(cmd, args, { encoding: 'utf8', ...options });
+  if (result.status !== 0) {
+    throw new Error(`${cmd} failed:\n${result.stderr || result.stdout}`);
+  }
+  return result.stdout;
+}
+
+function durationSeconds(file) {
+  const out = run('ffprobe', [
+    '-v', 'error',
+    '-show_entries', 'format=duration',
+    '-of', 'default=noprint_wrappers=1:nokey=1',
+    file,
+  ]).trim();
+  const seconds = Number(out);
+  if (!Number.isFinite(seconds) || seconds &lt;= 0) {
+    throw new Error(`Cannot determine duration for ${file}`);
+  }
+  return seconds;
+}
+
+function convertToFakeMicWav(inputFile) {
+  const parsed = path.parse(inputFile);
+  const wavFile = path.join(parsed.dir, `${parsed.name}.fake-mic.wav`);
+  run('ffmpeg', [
+    '-hide_banner',
+    '-y',
+    '-i', inputFile,
+    '-vn',
+    '-ac', '1',
+    '-ar', '48000',
+    '-sample_fmt', 's16',
+    wavFile,
+  ], { stdio: 'pipe' });
+  return wavFile;
+}
+
+async function waitForRecordButton(page) {
+  const candidates = [
+    page.getByRole('button', { name: /record voice message/i }),
+    page.locator('button[aria-label*="Record voice" i]'),
+    page.locator('button').filter({ hasText: /record/i }),
+  ];
+
+  for (const locator of candidates) {
+    try {
+      await locator.first().waitFor({ state: 'visible', timeout: 3000 });
+      return locator.first();
+    } catch (_) {
+      // Try the next selector.
+    }
+  }
+
+  const labels = await page.locator('button').evaluateAll((buttons) =&gt;
+    buttons.map((button, index) =&gt; ({
+      index,
+      text: button.innerText,
+      aria: button.getAttribute('aria-label'),
+      title: button.getAttribute('title'),
+    })),
+  );
+  throw new Error(`Record button was not found. Visible buttons:\n${JSON.stringify(labels, null, 2)}`);
+}
+
+async function main() {
+  const inputFile = argValue('--file') || process.argv[2];
+  const channelUrl = argValue('--channel', DEFAULT_CHANNEL_URL);
+  const yes = hasFlag('--yes');
+
+  if (!inputFile) {
+    console.error('Usage: node post_voice_to_max.js --file /path/to/file.mp4 [--channel URL] [--yes]');
+    process.exit(2);
+  }
+
+  const absoluteInput = path.resolve(inputFile);
+  if (!fs.existsSync(absoluteInput)) {
+    throw new Error(`File not found: ${absoluteInput}`);
+  }
+  if (!fs.existsSync(CHROME)) {
+    throw new Error(`Chrome not found: ${CHROME}`);
+  }
+
+  const seconds = durationSeconds(absoluteInput);
+  console.log(`Audio duration: ${seconds.toFixed(1)} seconds`);
+
+  const wavFile = convertToFakeMicWav(absoluteInput);
+  console.log(`Fake microphone WAV: ${wavFile}`);
+
+  const context = await chromium.launchPersistentContext(PROFILE_DIR, {
+    executablePath: CHROME,
+    headless: false,
+    viewport: null,
+    permissions: ['microphone'],
+    args: [
+      '--use-fake-device-for-media-stream',
+      '--use-fake-ui-for-media-stream',
+      `--use-file-for-fake-audio-capture=${wavFile}`,
+    ],
+  });
+
+  await context.grantPermissions(['microphone'], { origin: 'https://web.max.ru' });
+  let page = context.pages()[0] || await context.newPage();
+  await page.goto(channelUrl, { waitUntil: 'domcontentloaded' });
+
+  const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+  console.log('\nIf MAX asks you to log in, do it in the opened Chrome window.');
+  console.log('Open the target channel and make sure the post field and microphone button are visible.');
+  if (!yes) {
+    await rl.question('Press Enter here when the channel is ready. The next step will record and send the voice message. ');
+  } else {
+    await page.waitForTimeout(5000);
+  }
+
+  page = context.pages().find((p) =&gt; p.url().includes('web.max.ru')) || page;
+  const recordButton = await waitForRecordButton(page);
+  const box = await recordButton.boundingBox();
+  if (!box) throw new Error('Record button has no visible bounding box.');
+
+  console.log(`Recording for ${seconds.toFixed(1)} seconds...`);
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  await page.mouse.down();
+  await page.waitForTimeout(Math.ceil(seconds * 1000) + 1000);
+  await page.mouse.up();
+
+  console.log('Recording gesture finished. Check MAX: it should appear as a voice message.');
+  console.log(`Chrome profile is kept at: ${PROFILE_DIR}`);
+  await rl.close();
+
+  if (!yes) {
+    console.log('Leaving Chrome open for verification. Close it manually when done.');
+  } else {
+    await page.waitForTimeout(3000);
+    await context.close();
+  }
+}
+
+main().catch((error) =&gt; {
+  console.error(error.stack || error.message);
+  process.exit(1);
+});
+</code></pre>
+        </details>
+
+        <details>
+          <summary><code>post_audio_attach.js</code></summary>
+          <pre><code>const fs = require('fs');
+const os = require('os');
+const path = require('path');
+const { ClassicLevel } = require('classic-level');
+const { chromium } = require('playwright-core');
+
+const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const TARGET_URL = 'https://web.max.ru/-79157065918537';
+const AUDIO_PATH = '/Users/servas/Downloads/_Подмосковные вечера - BENKO DIXIELAND BAND.ogg';
+const DURATION_MS = 193369;
+
+async function readMaxLocalStorage() {
+  const dbPath = `${process.env.HOME}/Library/Application Support/Google/Chrome/Default/Local Storage/leveldb`;
+  const db = new ClassicLevel(dbPath, { keyEncoding: 'utf8', valueEncoding: 'utf8' });
+  const out = {};
+  for await (const [key, rawValue] of db.iterator()) {
+    if (!key.startsWith('_https://web.max.ru\u0000\u0001__oneme_')) continue;
+    const localKey = key.split('\u0000\u0001')[1];
+    out[localKey] = rawValue.startsWith('\u0001') ? rawValue.slice(1) : rawValue;
+  }
+  await db.close();
+  if (!out.__oneme_auth) throw new Error('MAX auth was not found in Chrome Local Storage');
+  return out;
+}
+
+function makeFlatWave(length = 80) {
+  const wave = new Uint8Array(length);
+  for (let i = 0; i &lt; wave.length; i++) wave[i] = 28 + Math.round(20 * Math.abs(Math.sin(i / 5)));
+  return Array.from(wave);
+}
+
+(async () =&gt; {
+  const storage = await readMaxLocalStorage();
+  const audio = fs.readFileSync(AUDIO_PATH);
+  const audioBase64 = audio.toString('base64');
+  const tmpProfile = fs.mkdtempSync(path.join(os.tmpdir(), 'max-voice-'));
+
+  const context = await chromium.launchPersistentContext(tmpProfile, {
+    executablePath: CHROME,
+    headless: false,
+    args: ['--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream'],
+  });
+
+  const page = context.pages()[0] || await context.newPage();
+  await page.addInitScript((items) =&gt; {
+    for (const [key, value] of Object.entries(items)) {
+      localStorage.setItem(key, value);
+    }
+  }, storage);
+
+  console.log('opening MAX temp session...');
+  await page.goto(TARGET_URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
+  await page.waitForLoadState('load', { timeout: 30000 }).catch(() =&gt; {});
+  await page.waitForFunction(
+    () =&gt; [...document.scripts].some((script) =&gt; /CHBUOM21\.js/.test(script.src)) ||
+      performance.getEntriesByType('resource').some((entry) =&gt; /CHBUOM21\.js/.test(entry.name)),
+    null,
+    { timeout: 45000 },
+  ).catch(() =&gt; {});
+  await page.waitForFunction(
+    () =&gt; document.body.innerText.includes('Джаз есть везде'),
+    null,
+    { timeout: 60000 },
+  ).catch(() =&gt; {});
+  console.log('page:', await page.title(), page.url());
+
+  const result = await page.evaluate(async ({ audioBase64, fileName, duration, wave }) =&gt; {
+    const bundleUrl = [...document.scripts]
+      .map((script) =&gt; script.src)
+      .find((src) =&gt; /CHBUOM21\.js/.test(src)) ||
+      performance.getEntriesByType('resource')
+        .map((entry) =&gt; entry.name)
+        .find((src) =&gt; /CHBUOM21\.js/.test(src));
+    if (!bundleUrl) {
+      throw new Error(`MAX bundle was not found; scripts=${[...document.scripts].map((s) =&gt; s.src).filter(Boolean).slice(0, 10).join(',')}`);
+    }
+
+    const mod = await import(bundleUrl);
+
+    const findChat = () =&gt; {
+      const chats = mod.Co?.chats;
+      const targetId = location.pathname.slice(1);
+      const byId = Array.from(chats?.cache?.values?.() ?? []).find((chat) =&gt; {
+        if (!chat || chat instanceof Error) return false;
+        return (chat.id?.toString?.() ?? String(chat.id ?? '')) === targetId;
+      });
+      if (byId) return byId;
+      const candidates = [];
+      const containers = [
+        chats?.cache,
+        chats?.$,
+        chats?.items,
+        chats?.map,
+        chats,
+      ];
+      for (const container of containers) {
+        if (!container) continue;
+        const values = container instanceof Map
+          ? Array.from(container.values())
+          : typeof container === 'object'
+            ? Object.values(container)
+            : [];
+        for (const chat of values) {
+          if (!chat || typeof chat !== 'object') continue;
+          const title = chat.title ?? chat.name ?? chat.recipient?.fullName ?? '';
+          if (String(title).includes('Джаз есть везде')) candidates.push(chat);
+        }
+      }
+      return candidates[0] ?? null;
+    };
+
+    const waitForChat = async () =&gt; {
+      for (let i = 0; i &lt; 120; i++) {
+        let chat = null;
+        chat = findChat();
+        if (chat) return chat;
+        try {
+          chat ||= mod.Co?.chats?.get?.(location.pathname.slice(1));
+        } catch {}
+        chat ||= findChat();
+        if (chat) return chat;
+        await new Promise((resolve) =&gt; setTimeout(resolve, 1000));
+      }
+      return findChat();
+    };
+
+    const chat = await waitForChat();
+    if (!chat) throw new Error('chat not found');
+    if (typeof mod.ja !== 'function') throw new Error('audio send function was not exported');
+
+    const binary = Uint8Array.from(atob(audioBase64), (char) =&gt; char.charCodeAt(0));
+    const file = new File([binary], fileName, { type: 'audio/ogg' });
+    globalThis.__codexMaxAudioError = null;
+    globalThis.__codexMaxAudioStarted = Date.now();
+    setTimeout(() =&gt; {
+      mod.ja({
+        chat,
+        file,
+        duration,
+        wave: new Uint8Array(wave),
+      }).catch((error) =&gt; {
+        globalThis.__codexMaxAudioError = error?.message ?? String(error);
+      });
+    }, 0);
+
+    return {
+      started: true,
+      chatTitle: chat.title ?? chat.name ?? null,
+      chatId: chat.id?.toString?.() ?? String(chat.id ?? ''),
+    };
+  }, {
+    audioBase64,
+    fileName: path.basename(AUDIO_PATH),
+    duration: DURATION_MS,
+    wave: makeFlatWave(),
+  });
+
+  console.log(JSON.stringify(result, null, 2));
+  await page.waitForTimeout(60000);
+  const observe = await page.evaluate(() =&gt; ({
+    error: globalThis.__codexMaxAudioError ?? null,
+    bodyTail: document.body.innerText.slice(-1600),
+  }));
+  console.log(JSON.stringify(observe, null, 2));
+  await context.close();
+})().catch((error) =&gt; {
+  console.error(error);
+  process.exit(1);
+});
+</code></pre>
+        </details>
+
+        <details>
+          <summary><code>post_audio_attach_debug.js</code></summary>
+          <pre><code>const fs = require('fs');
+const os = require('os');
+const path = require('path');
+const { ClassicLevel } = require('classic-level');
+const { chromium } = require('playwright-core');
+
+const AUDIO_PATH = '/Users/servas/Downloads/_Подмосковные вечера - BENKO DIXIELAND BAND.m4a';
+const TARGET_URL = 'https://web.max.ru/-79157065918537';
+const DURATION_MS = 193369;
+
+async function readStorage() {
+  const db = new ClassicLevel(`${process.env.HOME}/Library/Application Support/Google/Chrome/Default/Local Storage/leveldb`, { keyEncoding: 'utf8', valueEncoding: 'utf8' });
+  const out = {};
+  for await (const [key, rawValue] of db.iterator()) {
+    if (key.startsWith('_https://web.max.ru\u0000\u0001__oneme')) {
+      out[key.split('\u0000\u0001')[1]] = rawValue.startsWith('\u0001') ? rawValue.slice(1) : rawValue;
+    }
+  }
+  await db.close();
+  return out;
+}
+
+function wave() {
+  return Array.from({ length: 80 }, (_, i) =&gt; 28 + Math.round(20 * Math.abs(Math.sin(i / 5))));
+}
+
+(async () =&gt; {
+  const logs = [];
+  const context = await chromium.launchPersistentContext(fs.mkdtempSync(path.join(os.tmpdir(), 'max-audio-debug-')), {
+    executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    headless: false,
+  });
+  const page = context.pages()[0] || await context.newPage();
+  page.on('console', (msg) =&gt; logs.push({ type: msg.type(), text: msg.text().slice(0, 500) }));
+  page.on('pageerror', (err) =&gt; logs.push({ type: 'pageerror', text: err.message.slice(0, 500) }));
+  page.on('requestfailed', (req) =&gt; logs.push({ type: 'requestfailed', url: req.url().slice(0, 200), failure: req.failure()?.errorText }));
+
+  await page.addInitScript((items) =&gt; {
+    for (const [key, value] of Object.entries(items)) localStorage.setItem(key, value);
+  }, await readStorage());
+
+  await page.goto(TARGET_URL, { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() =&gt; document.body.innerText.includes('Джаз есть везде'), null, { timeout: 60000 });
+
+  const audioBase64 = fs.readFileSync(AUDIO_PATH).toString('base64');
+  const started = await page.evaluate(async ({ audioBase64, fileName, duration, wave }) =&gt; {
+    const bundle = performance.getEntriesByType('resource').map((e) =&gt; e.name).find((n) =&gt; /CHBUOM21\.js/.test(n));
+    const mod = await import(bundle);
+    const targetId = location.pathname.slice(1);
+    const chat = Array.from(mod.Co.chats.cache.values()).find((item) =&gt; !(item instanceof Error) &amp;&amp; (item.id?.toString?.() ?? String(item.id ?? '')) === targetId);
+    if (!chat) throw new Error('chat not found');
+
+    globalThis.__codexAudioDebug = {
+      errors: [],
+      snapshots: [],
+      startedAt: Date.now(),
+    };
+
+    const bytes = Uint8Array.from(atob(audioBase64), (char) =&gt; char.charCodeAt(0));
+    const file = new File([bytes], fileName, { type: 'audio/mp4' });
+
+    const snap = (label) =&gt; {
+      const pending = chat.pendingQueue;
+      globalThis.__codexAudioDebug.snapshots.push({
+        label,
+        time: Date.now(),
+        bodyTail: document.body.innerText.slice(-500),
+        queueOwn: Object.getOwnPropertyNames(pending ?? {}),
+        queueText: pending ? String(pending) : null,
+        downloadUploadKeys: Object.getOwnPropertyNames(mod.Co.downloadUpload ?? {}),
+      });
+    };
+
+    snap('before');
+    setTimeout(() =&gt; {
+      snap('before-ja');
+      mod.ja({ chat, file, duration, wave: new Uint8Array(wave) })
+        .then((value) =&gt; {
+          globalThis.__codexAudioDebug.done = true;
+          globalThis.__codexAudioDebug.result = String(value);
+          snap('then');
+        })
+        .catch((error) =&gt; {
+          globalThis.__codexAudioDebug.errors.push(error?.stack || error?.message || String(error));
+          snap('catch');
+        });
+    }, 0);
+
+    return { chatId: targetId, viewerCanWrite: chat.viewerCanWrite ?? null };
+  }, {
+    audioBase64,
+    fileName: path.basename(AUDIO_PATH),
+    duration: DURATION_MS,
+    wave: wave(),
+  });
+
+  console.log('started', JSON.stringify(started));
+  await page.waitForTimeout(120000);
+  const debug = await page.evaluate(() =&gt; globalThis.__codexAudioDebug);
+  console.log(JSON.stringify({ debug, logs: logs.slice(-50) }, null, 2));
+  await context.close();
+})().catch((e) =&gt; {
+  console.error(e);
+  process.exit(1);
+});
+</code></pre>
+        </details>
+
+        <details>
+          <summary><code>check_last_audio.js</code></summary>
+          <pre><code>const { chromium } = require('playwright-core');
+const { ClassicLevel } = require('classic-level');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
+
+async function readStorage() {
+  const db = new ClassicLevel(`${process.env.HOME}/Library/Application Support/Google/Chrome/Default/Local Storage/leveldb`, { keyEncoding: 'utf8', valueEncoding: 'utf8' });
+  const out = {};
+  for await (const [key, rawValue] of db.iterator()) {
+    if (key.startsWith('_https://web.max.ru\u0000\u0001__oneme')) out[key.split('\u0000\u0001')[1]] = rawValue.startsWith('\u0001') ? rawValue.slice(1) : rawValue;
+  }
+  await db.close();
+  return out;
+}
+
+(async () =&gt; {
+  const context = await chromium.launchPersistentContext(fs.mkdtempSync(path.join(os.tmpdir(), 'max-check-')), {
+    executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    headless: false,
+  });
+  const page = context.pages()[0] || await context.newPage();
+  await page.addInitScript((items) =&gt; {
+    for (const [key, value] of Object.entries(items)) localStorage.setItem(key, value);
+  }, await readStorage());
+  await page.goto('https://web.max.ru/-79157065918537', { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() =&gt; document.body.innerText.includes('Джаз есть везде'), null, { timeout: 60000 }).catch(() =&gt; {});
+  await page.waitForTimeout(10000);
+  const out = await page.evaluate(async () =&gt; {
+    const url = performance.getEntriesByType('resource').map((e) =&gt; e.name).find((n) =&gt; /CHBUOM21\.js/.test(n));
+    const mod = await import(url);
+    const chat = mod.Co.chats.cache.get(location.pathname.slice(1));
+    const messages = Array.from(chat?.messages ?? []);
+    return {
+      title: document.title,
+      count: messages.length,
+      last: messages.slice(-5).map((message) =&gt; ({
+        id: message.id?.toString?.() ?? String(message.id ?? ''),
+        text: message.text?.plain ?? null,
+        audio: Boolean(message.attaches?.audio),
+        file: Boolean(message.attaches?.files?.length),
+        status: message.status ?? null,
+      })),
+      bodyTail: document.body.innerText.slice(-1200),
+    };
+  });
+  console.log(JSON.stringify(out, null, 2));
+  await context.close();
+})().catch((e) =&gt; {
+  console.error(e);
+  process.exit(1);
+});
+</code></pre>
+        </details>
+
+        <details>
+          <summary><code>delete_bad_js_post.js</code></summary>
+          <pre><code>const { chromium } = require('playwright-core');
+
+const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const USER_DATA_DIR = `${process.env.HOME}/Library/Application Support/Google/Chrome`;
+const TARGET_URL = 'https://web.max.ru/-79157065918537';
+const NEEDLE = 'javascript:(async()=&gt;';
+
+(async () =&gt; {
+  const context = await chromium.launchPersistentContext(USER_DATA_DIR, {
+    executablePath: CHROME,
+    headless: false,
+    args: [
+      '--use-fake-device-for-media-stream',
+      '--use-fake-ui-for-media-stream',
+      `--use-file-for-fake-audio-capture=${process.env.HOME}/Downloads/_Подмосковные вечера - BENKO DIXIELAND BAND.fake-mic.wav`,
+    ],
+  });
+
+  const page = context.pages()[0] || await context.newPage();
+  await page.goto(TARGET_URL, { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(6000);
+
+  const result = await page.evaluate(async ({ needle }) =&gt; {
+    const bundleUrl = [...document.scripts]
+      .map((script) =&gt; script.src)
+      .find((src) =&gt; /CHBUOM21\.js/.test(src));
+    const mod = await import(bundleUrl);
+    const chat = mod.Co?.chats?.get?.(location.pathname.slice(1));
+    if (!chat) return { ok: false, error: 'chat-not-found' };
+
+    const messages = Array.from(chat.messages ?? []);
+    const target = [...messages].reverse().find((message) =&gt; {
+      const text = message?.text?.plain ?? '';
+      return text.includes(needle);
+    });
+
+    if (!target) {
+      return {
+        ok: false,
+        error: 'message-not-found',
+        chatTitle: chat.title ?? chat.name ?? null,
+        messages: messages.slice(-5).map((message) =&gt; ({
+          id: message.id?.toString?.() ?? String(message.id ?? ''),
+          text: message.text?.plain?.slice(0, 80) ?? '',
+        })),
+      };
+    }
+
+    await mod.io({ chat, message: target });
+    return {
+      ok: true,
+      chatTitle: chat.title ?? chat.name ?? null,
+      messageId: target.id?.toString?.() ?? String(target.id ?? ''),
+      textStart: target.text?.plain?.slice(0, 80) ?? '',
+    };
+  }, { needle: NEEDLE });
+
+  console.log(JSON.stringify(result, null, 2));
+  await page.waitForTimeout(2000);
+  await context.close();
+})().catch((error) =&gt; {
+  console.error(error);
+  process.exit(1);
+});
+</code></pre>
+        </details>
+
         <h3>Итоговая цепочка скриптов</h3>
         <pre><code>inspect_max_storage.js
   проверил Local Storage и ключ __oneme_auth
