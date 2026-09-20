@@ -709,6 +709,378 @@ export {
           </tr>
         </table>
         <p>Такой подход удобен для новичка: каждый маленький скрипт проверяет одну гипотезу. Если что-то ломается, понятно, на каком этапе именно.</p>
+
+        <h3>Общий принцип этих скриптов</h3>
+        <p>Почти все скрипты были устроены одинаково:</p>
+        <ol>
+          <li>Открыть Chrome через Playwright.</li>
+          <li>Если нужен временный профиль, создать папку в <code>/tmp</code>.</li>
+          <li>Прочитать авторизацию MAX из Local Storage обычного Chrome.</li>
+          <li>Положить эти ключи в Local Storage временного профиля через <code>page.addInitScript(...)</code>.</li>
+          <li>Открыть <code>https://web.max.ru/-79157065918537</code>.</li>
+          <li>Выполнить JavaScript внутри страницы через <code>page.evaluate(...)</code>.</li>
+          <li>Вернуть наружу маленький JSON с результатом проверки.</li>
+        </ol>
+        <p>То есть это не были “боевые программы”. Это были измерительные приборы: каждый отвечал на один маленький вопрос.</p>
+
+        <h3><code>inspect_max_storage.js</code>: есть ли авторизация MAX в Chrome?</h3>
+        <p><strong>Вопрос:</strong> где в локальном Chrome лежат данные MAX и есть ли среди них ключ авторизации?</p>
+        <p>Скрипт открывал LevelDB-папку Chrome:</p>
+        <pre><code>~/Library/Application Support/Google/Chrome/Default/Local Storage/leveldb</code></pre>
+        <p>Внутри был такой основной код:</p>
+        <pre><code>const { ClassicLevel } = require("classic-level");
+
+const dbPath = `${process.env.HOME}/Library/Application Support/Google/Chrome/Default/Local Storage/leveldb`;
+const db = new ClassicLevel(dbPath, {
+  keyEncoding: "utf8",
+  valueEncoding: "utf8"
+});
+
+for await (const [key, value] of db.iterator()) {
+  if (!key.includes("web.max.ru") &&
+      !key.includes("max.ru") &&
+      !key.includes("oneme")) {
+    continue;
+  }
+
+  console.log(JSON.stringify({
+    key,
+    valueLength: value?.length ?? 0,
+    valueStart: String(value).slice(0, 80),
+  }));
+}</code></pre>
+        <p><code>ClassicLevel</code> нужен потому, что Chrome хранит Local Storage на диске в формате LevelDB. Обычным <code>cat</code> такой файл читать неудобно: там не один JSON, а база “ключ → значение”.</p>
+        <p>Важно: скрипт не должен печатать токены целиком. Поэтому длинные строки маскировались: показывались начало и длина, а не секретное значение. Это помогло увидеть ключи вроде <code>__oneme_auth</code>, но не засветить сам токен.</p>
+        <p><strong>Что выяснил:</strong> нужные ключи MAX есть в профиле Chrome <code>Default</code>, а главный ключ авторизации называется <code>__oneme_auth</code>.</p>
+
+        <h3><code>debug_temp_max_session.js</code>: можно ли открыть временный Chrome уже авторизованным?</h3>
+        <p><strong>Вопрос:</strong> если взять ключи <code>__oneme...</code> из обычного Chrome и положить их во временный профиль, откроется ли MAX Web как авторизованный?</p>
+        <p>Скрипт сначала читал Local Storage:</p>
+        <pre><code>async function readMaxLocalStorage() {
+  const dbPath = `${process.env.HOME}/Library/Application Support/Google/Chrome/Default/Local Storage/leveldb`;
+  const db = new ClassicLevel(dbPath, { keyEncoding: "utf8", valueEncoding: "utf8" });
+  const out = {};
+
+  for await (const [key, rawValue] of db.iterator()) {
+    if (!key.startsWith("_https://web.max.ru\\0\\1__oneme")) continue;
+    out[key.split("\\0\\1")[1]] = rawValue.startsWith("\\1")
+      ? rawValue.slice(1)
+      : rawValue;
+  }
+
+  await db.close();
+  return out;
+}</code></pre>
+        <p>Потом создавал временный профиль Chrome:</p>
+        <pre><code>const tmpProfile = fs.mkdtempSync(path.join(os.tmpdir(), "max-debug-"));
+const context = await chromium.launchPersistentContext(tmpProfile, {
+  executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+  headless: false
+});</code></pre>
+        <p><code>launchPersistentContext</code> означает “запусти Chrome с конкретной папкой профиля”. Это важно: Local Storage привязан к профилю. Временный профиль чистый, поэтому туда надо заранее положить ключи.</p>
+        <p>Ключи добавлялись до загрузки страницы:</p>
+        <pre><code>await page.addInitScript((items) =&gt; {
+  for (const [key, value] of Object.entries(items)) {
+    localStorage.setItem(key, value);
+  }
+}, storage);</code></pre>
+        <p><code>addInitScript</code> выполняется раньше основного JavaScript сайта. То есть MAX Web открывается и сразу видит в Local Storage нужные <code>__oneme...</code> ключи.</p>
+        <p>Потом скрипт проверял:</p>
+        <pre><code>const info = await page.evaluate(() =&gt; ({
+  title: document.title,
+  url: location.href,
+  authLen: localStorage.getItem("__oneme_auth")?.length ?? 0,
+  keys: Object.keys(localStorage).filter((key) =&gt; key.includes("oneme")),
+  body: document.body.innerText.slice(0, 1000),
+}));</code></pre>
+        <p><strong>Что выяснил:</strong> временная сессия открывается, ключ авторизации виден, MAX показывает содержимое канала. Значит, дальше можно безопасно экспериментировать не в основном профиле.</p>
+
+        <h3><code>probe_max_audio_api.js</code>: есть ли в бандле функция отправки аудио?</h3>
+        <p><strong>Вопрос:</strong> можно ли из страницы добраться до внутренних функций MAX Web и есть ли среди них аудио-отправка?</p>
+        <p>Этот скрипт открывал обычный профиль Chrome <code>Default</code>, потому что на этом этапе мне было важно быстро использовать уже открытую авторизованную сессию:</p>
+        <pre><code>const context = await chromium.launchPersistentContext(USER_DATA_DIR, {
+  executablePath: CHROME,
+  headless: false,
+  args: [
+    "--profile-directory=Default",
+    "--use-fake-device-for-media-stream",
+    "--use-fake-ui-for-media-stream",
+    `--use-file-for-fake-audio-capture=${process.env.HOME}/Downloads/_Подмосковные вечера - BENKO DIXIELAND BAND.fake-mic.wav`,
+  ],
+});</code></pre>
+        <p>Флаги fake microphone остались от предыдущей гипотезы. Для самого поиска <code>mod.ja</code> они уже не были ключевыми.</p>
+        <p>Главная часть была внутри страницы:</p>
+        <pre><code>const result = await page.evaluate(async () =&gt; {
+  const bundleUrl = [...document.scripts]
+    .map((script) =&gt; script.src)
+    .find((src) =&gt; /CHBUOM21\.js/.test(src));
+
+  const mod = await import(bundleUrl);
+  const chat = mod.Co?.chats?.get?.(location.pathname.slice(1));
+
+  return {
+    bundleUrl,
+    hasAudioSend: typeof mod.ja,
+    hasStore: Boolean(mod.Co),
+    chatType: chat?.constructor?.name ?? null,
+    chatId: chat?.id?.toString?.() ?? String(chat?.id ?? ""),
+    viewerCanWrite: chat?.viewerCanWrite ?? null,
+    audioSendName: mod.ja?.name ?? null,
+  };
+});</code></pre>
+        <p>Что здесь происходит:</p>
+        <ul>
+          <li><code>document.scripts</code> ищет JS-файлы, подключенные к странице.</li>
+          <li><code>/CHBUOM21\.js/</code> выбирает нужный бандл MAX.</li>
+          <li><code>await import(bundleUrl)</code> импортирует бандл как модуль.</li>
+          <li><code>mod.Co</code> проверяет, доступен ли store MAX.</li>
+          <li><code>mod.ja</code> проверяет, есть ли экспортированная функция, похожая на отправку аудио.</li>
+        </ul>
+        <p><strong>Что выяснил:</strong> <code>mod.ja</code> существует и является функцией, <code>mod.Co</code> существует, но прямой <code>mod.Co.chats.get(...)</code> не всегда сразу возвращал чат. Поэтому понадобился следующий скрипт.</p>
+
+        <h3><code>debug_max_store.js</code>: как устроен store и где лежат чаты?</h3>
+        <p><strong>Вопрос:</strong> если прямой <code>chats.get(...)</code> не дает объект канала, где в <code>mod.Co</code> реально лежит кэш чатов?</p>
+        <p>Скрипт снова открывал временный авторизованный профиль, импортировал <code>CHBUOM21.js</code> и изучал структуру объекта <code>mod.Co.chats</code>:</p>
+        <pre><code>const chats = mod.Co?.chats;
+const proto = [];
+for (let o = chats; o; o = Object.getPrototypeOf(o)) {
+  proto.push(Object.getOwnPropertyNames(o));
+}
+
+const own = Object.getOwnPropertyNames(chats || {});
+const symbols = Object.getOwnPropertySymbols(chats || {}).map(String);</code></pre>
+        <p><code>Object.getOwnPropertyNames</code> показывает собственные поля объекта. <code>Object.getPrototypeOf</code> идет вверх по прототипам и помогает увидеть методы, которые не лежат прямо на объекте. Это полезно, когда код обфусцирован и ты не знаешь, как называется нужное поле.</p>
+        <p>Потом скрипт делал маленький “паспорт” каждого поля:</p>
+        <pre><code>sample[key] = {
+  type: typeof val,
+  ctor: val?.constructor?.name ?? null,
+  isMap: val instanceof Map,
+  size: val?.size ?? null,
+  keys: val && typeof val === "object"
+    ? Object.getOwnPropertyNames(val).slice(0, 10)
+    : null,
+};</code></pre>
+        <p><strong>Что выяснил:</strong> у <code>mod.Co.chats</code> есть <code>cache</code>, похожий на <code>Map</code>. Поэтому чат надежнее искать не через <code>get</code>, а через <code>Array.from(mod.Co.chats.cache.values())</code>.</p>
+
+        <h3><code>list_max_chats.js</code>: какой id у нужного канала и можно ли туда писать?</h3>
+        <p><strong>Вопрос:</strong> есть ли канал “Джаз есть везде” в кэше MAX, какой у него <code>id</code>, и разрешена ли запись?</p>
+        <p>Главный код:</p>
+        <pre><code>const values = Array.from(mod.Co.chats.cache.values());
+
+return {
+  title: document.title,
+  bodyHasJazz: document.body.innerText.includes("Джаз есть везде"),
+  count: values.length,
+  chats: values.map((chat) =&gt; ({
+    ctor: chat.constructor?.name,
+    id: chat.id?.toString?.() ?? String(chat.id ?? ""),
+    title: chat.title ?? chat.name ?? chat.recipient?.fullName ?? null,
+    viewerCanWrite: chat.viewerCanWrite ?? null,
+    keys: Object.getOwnPropertyNames(chat).slice(0, 12),
+  })).slice(0, 100),
+};</code></pre>
+        <p>Здесь <code>bodyHasJazz</code> — грубая проверка, что страница действительно открыла нужный канал, а не экран логина или пустую оболочку. <code>viewerCanWrite</code> показывал, может ли текущий аккаунт писать в канал.</p>
+        <p><strong>Что выяснил:</strong> нужный id канала — <code>-79157065918537</code>, объект чата находится в <code>mod.Co.chats.cache</code>, запись разрешена через <code>viewerCanWrite</code>.</p>
+
+        <h3><code>post_voice_to_max.js</code>: первая попытка через fake microphone</h3>
+        <p><strong>Вопрос:</strong> можно ли обмануть MAX Web так, будто пользователь записывает голос, но вместо микрофона Chrome получает WAV-файл?</p>
+        <p>Скрипт делал три вещи:</p>
+        <ol>
+          <li>Определял длительность исходного файла через <code>ffprobe</code>.</li>
+          <li>Конвертировал MP4 в WAV для fake microphone.</li>
+          <li>Открывал Chrome с флагом <code>--use-file-for-fake-audio-capture</code> и удерживал кнопку записи мышью.</li>
+        </ol>
+        <p>Конвертация в WAV была такой:</p>
+        <pre><code>function convertToFakeMicWav(inputFile) {
+  const parsed = path.parse(inputFile);
+  const wavFile = path.join(parsed.dir, `${parsed.name}.fake-mic.wav`);
+
+  run("ffmpeg", [
+    "-hide_banner",
+    "-y",
+    "-i", inputFile,
+    "-vn",
+    "-ac", "1",
+    "-ar", "48000",
+    "-sample_fmt", "s16",
+    wavFile,
+  ]);
+
+  return wavFile;
+}</code></pre>
+        <p>Здесь <code>-ac 1</code> делает один канал mono, <code>-ar 48000</code> ставит частоту 48 кГц, <code>-sample_fmt s16</code> делает 16-битный PCM. Такой WAV подходит для fake microphone в Chrome.</p>
+        <p>Сам “ручной” кусок был таким:</p>
+        <pre><code>const recordButton = await waitForRecordButton(page);
+const box = await recordButton.boundingBox();
+
+await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+await page.mouse.down();
+await page.waitForTimeout(Math.ceil(seconds * 1000) + 1000);
+await page.mouse.up();</code></pre>
+        <p><strong>Что выяснил:</strong> технически можно подать файл как микрофон, но это плохой путь: нужно удерживать кнопку записи, зависеть от координат интерфейса и ждать всю длительность аудио. Поэтому я отбросил этот способ.</p>
+
+        <h3><code>post_audio_attach.js</code>: первая прямая отправка audio attach, но через OGG</h3>
+        <p><strong>Вопрос:</strong> можно ли вызвать внутреннюю функцию MAX <code>mod.ja</code> и отправить аудио без удержания кнопки?</p>
+        <p>Скрипт уже шел не через микрофон, а через внутренний audio attach. Он читал авторизацию, открывал временный профиль, загружал OGG-файл и передавал его в страницу как base64:</p>
+        <pre><code>const AUDIO_PATH = "/Users/servas/Downloads/_Подмосковные вечера - BENKO DIXIELAND BAND.ogg";
+const DURATION_MS = 193369;
+
+const storage = await readMaxLocalStorage();
+const audio = fs.readFileSync(AUDIO_PATH);
+const audioBase64 = audio.toString("base64");</code></pre>
+        <p>Почему base64: <code>page.evaluate(...)</code> передает данные из Node.js в браузерную страницу. Бинарный файл удобнее передать как строку base64, а внутри страницы превратить обратно в байты.</p>
+        <p>Внутри страницы скрипт находил бандл, импортировал модуль и искал чат:</p>
+        <pre><code>const bundleUrl = [...document.scripts]
+  .map((script) =&gt; script.src)
+  .find((src) =&gt; /CHBUOM21\.js/.test(src)) ||
+  performance.getEntriesByType("resource")
+    .map((entry) =&gt; entry.name)
+    .find((src) =&gt; /CHBUOM21\.js/.test(src));
+
+const mod = await import(bundleUrl);
+const chat = await waitForChat();</code></pre>
+        <p>Потом создавал браузерный <code>File</code>:</p>
+        <pre><code>const binary = Uint8Array.from(
+  atob(audioBase64),
+  (char) =&gt; char.charCodeAt(0)
+);
+
+const file = new File([binary], fileName, {
+  type: "audio/ogg"
+});</code></pre>
+        <p>И вызывал аудио-отправку:</p>
+        <pre><code>mod.ja({
+  chat,
+  file,
+  duration,
+  wave: new Uint8Array(wave),
+});</code></pre>
+        <p><strong>Что выяснил:</strong> UI мог показать аудио-плашку, но сервер потом отклонял сообщение ошибкой <code>errors.process.attachment.video.not.ready</code>. Это был ложный успех. Потребовался debug-скрипт, который собирал логи и снимки состояния.</p>
+
+        <h3><code>post_audio_attach_debug.js</code>: почему OGG выглядел успешным, но не публиковался?</h3>
+        <p><strong>Вопрос:</strong> что именно происходит после вызова <code>mod.ja</code>, какие ошибки пишет страница и меняется ли pending queue?</p>
+        <p>Этот скрипт перешел на M4A:</p>
+        <pre><code>const AUDIO_PATH = "/Users/servas/Downloads/_Подмосковные вечера - BENKO DIXIELAND BAND.m4a";</code></pre>
+        <p>Он собирал консольные сообщения и ошибки страницы:</p>
+        <pre><code>const logs = [];
+
+page.on("console", (msg) =&gt; {
+  logs.push({ type: msg.type(), text: msg.text().slice(0, 500) });
+});
+
+page.on("pageerror", (err) =&gt; {
+  logs.push({ type: "pageerror", text: err.message.slice(0, 500) });
+});
+
+page.on("requestfailed", (req) =&gt; {
+  logs.push({
+    type: "requestfailed",
+    url: req.url().slice(0, 200),
+    failure: req.failure()?.errorText
+  });
+});</code></pre>
+        <p>Внутри страницы он создавал объект для отладки:</p>
+        <pre><code>globalThis.__codexAudioDebug = {
+  errors: [],
+  snapshots: [],
+  startedAt: Date.now(),
+};</code></pre>
+        <p><code>globalThis</code> — это глобальный объект страницы. Я положил туда <code>__codexAudioDebug</code>, чтобы после отправки забрать из страницы накопленные снимки.</p>
+        <p>Снимок состояния сохранял хвост текста страницы, поля pending queue и ключи download/upload store:</p>
+        <pre><code>const snap = (label) =&gt; {
+  const pending = chat.pendingQueue;
+  globalThis.__codexAudioDebug.snapshots.push({
+    label,
+    time: Date.now(),
+    bodyTail: document.body.innerText.slice(-500),
+    queueOwn: Object.getOwnPropertyNames(pending ?? {}),
+    queueText: pending ? String(pending) : null,
+    downloadUploadKeys: Object.getOwnPropertyNames(mod.Co.downloadUpload ?? {}),
+  });
+};</code></pre>
+        <p>Потом вызов <code>mod.ja</code> был обернут так, чтобы поймать успех или ошибку:</p>
+        <pre><code>mod.ja({ chat, file, duration, wave: new Uint8Array(wave) })
+  .then((value) =&gt; {
+    globalThis.__codexAudioDebug.done = true;
+    globalThis.__codexAudioDebug.result = String(value);
+    snap("then");
+  })
+  .catch((error) =&gt; {
+    globalThis.__codexAudioDebug.errors.push(
+      error?.stack || error?.message || String(error)
+    );
+    snap("catch");
+  });</code></pre>
+        <p><strong>Что выяснил:</strong> M4A шел по более подходящей ветке обработки. После ожидания и проверки в новой сессии сообщение реально появилось в канале как аудио, а не как файл.</p>
+
+        <h3><code>check_last_audio.js</code>: проверка не текущего DOM, а реальной публикации</h3>
+        <p><strong>Вопрос:</strong> если открыть канал заново в чистой временной сессии, сервер вернет последнее аудиосообщение или нет?</p>
+        <p>Скрипт открывал новый временный профиль, снова подкладывал авторизацию и читал последние сообщения из кэша чата:</p>
+        <pre><code>const chat = mod.Co.chats.cache.get(location.pathname.slice(1));
+const messages = Array.from(chat?.messages ?? []);
+
+return {
+  title: document.title,
+  count: messages.length,
+  last: messages.slice(-5).map((message) =&gt; ({
+    id: message.id?.toString?.() ?? String(message.id ?? ""),
+    text: message.text?.plain ?? null,
+    audio: Boolean(message.attaches?.audio),
+    file: Boolean(message.attaches?.files?.length),
+    status: message.status ?? null,
+  })),
+  bodyTail: document.body.innerText.slice(-1200),
+};</code></pre>
+        <p>Почему это важно: текущая страница может показывать pending-плашку, которую сервер еще не принял. Новая сессия видит только то, что сервер реально отдает назад.</p>
+        <p><strong>Что выяснил:</strong> после успешной M4A-попытки аудио сохранялось после чистой загрузки. Это и было настоящим подтверждением публикации.</p>
+
+        <h3><code>delete_bad_js_post.js</code>: попытка найти случайно отправленный <code>javascript:</code>-пост</h3>
+        <p><strong>Вопрос:</strong> можно ли программно найти сообщение, которое случайно ушло текстом и начинается с <code>javascript:(async()=&gt;</code>?</p>
+        <p>Скрипт открывал обычный Chrome-профиль и искал в последних сообщениях текстовый фрагмент:</p>
+        <pre><code>const NEEDLE = "javascript:(async()=&gt;";
+
+const messages = Array.from(chat.messages ?? []);
+const target = [...messages].reverse().find((message) =&gt; {
+  const text = message?.text?.plain ?? "";
+  return text.includes(NEEDLE);
+});</code></pre>
+        <p>Если сообщение находилось, скрипт пробовал вызвать внутреннюю функцию удаления:</p>
+        <pre><code>await mod.io({
+  chat,
+  message: target
+});</code></pre>
+        <p><strong>Что выяснил:</strong> сам факт такого скрипта показывает, как я диагностировал ошибку с фокусом. Но в финальной инструкции я отдельно отметил: пользователь сказал, что удалит запись сам, поэтому удаление не было частью рабочего способа отправки аудио.</p>
+
+        <h3>Итоговая цепочка скриптов</h3>
+        <pre><code>inspect_max_storage.js
+  проверил Local Storage и ключ __oneme_auth
+
+debug_temp_max_session.js
+  доказал, что временный Chrome можно авторизовать через Local Storage
+
+probe_max_audio_api.js
+  нашел CHBUOM21.js, mod.Co и mod.ja
+
+debug_max_store.js
+  показал устройство mod.Co.chats и наличие cache
+
+list_max_chats.js
+  нашел id канала и viewerCanWrite
+
+post_voice_to_max.js
+  проверил fake microphone, но путь отброшен как ручной
+
+post_audio_attach.js
+  попробовал прямой audio attach через OGG, поймал ложный успех
+
+post_audio_attach_debug.js
+  перешел на M4A, собрал логи и подтвердил рабочую отправку
+
+check_last_audio.js
+  подтвердил публикацию после чистой загрузки
+
+delete_bad_js_post.js
+  искал случайно отправленный javascript-текст</code></pre>
       </section>
 
       <section>
