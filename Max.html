@@ -671,6 +671,14 @@ case e instanceof lG:
         <h3>Как я понял, что <code>mod.ja</code> — нужная функция</h3>
         <p>После поиска по бандлу стало видно, что некоторые функции экспортируются наружу из модуля. У MAX Web в импортированном бандле были экспортированные имена, в том числе <code>ja</code>. Внутри эта функция вела к коду, который создает аудио-вложение и запускает отправку.</p>
         <p>Почему это важно: если функция экспортирована, ее можно вызвать из консоли страницы или из Playwright через <code>await import(bundleUrl)</code>. То есть не нужно имитировать удержание кнопки мышью. Можно вызвать тот же внутренний путь, которым пользуется MAX Web.</p>
+        <p>Технически это выглядело так: в конце бандла был большой список экспортов. В нем я увидел связь <code>L0r as ja</code>. Это значит: внутри файла функция называется <code>L0r</code>, а наружу модуль отдает ее под именем <code>ja</code>. Поэтому после <code>const mod = await import(bundleUrl)</code> я мог вызвать ее как <code>mod.ja(...)</code>.</p>
+        <pre><code>// в конце CHBUOM21.js, в списке export:
+export {
+  ...
+  L0r as ja,
+  ...
+}</code></pre>
+        <p>Дальше я искал уже не <code>ja</code>, а внутреннее имя <code>L0r</code>. Так нашел тело функции и увидел, что она действительно создает аудио-вложение <code>new WW(...)</code>, коллекцию вложений <code>new VW</code>, сообщение <code>new CG(...)</code>, вызывает <code>sendChatMessage</code> и отдельно запускает upload через <code>I0r</code>.</p>
 
         <h3>Какие рабочие файлы получились по дороге</h3>
         <p>Во время исследования я не писал один идеальный скрипт сразу. Сначала были маленькие проверочные скрипты, каждый отвечал на один вопрос:</p>
@@ -803,6 +811,34 @@ PY</code></pre>
 
       <section>
         <h2 id="flow">8. Как устроена отправка аудио внутри MAX</h2>
+        <h3>Что такое <code>cmd(64)</code></h3>
+        <p><code>cmd(64)</code> — это не стандарт JavaScript и не команда браузера. Это внутренний протокол MAX Web поверх WebSocket. У MAX есть объект сокета, и клиент отправляет на сервер команды с числовыми номерами.</p>
+        <p>Проще говоря, <code>socket.cmd(64, payload)</code> означает: “отправь на сервер команду номер 64 с такими данными”. По тому, какие данные туда передаются, стало понятно, что команда <code>64</code> — это отправка сообщения в чат.</p>
+        <p>Почему это видно:</p>
+        <ul>
+          <li>в payload есть <code>chatId</code> — id чата или канала;</li>
+          <li>есть <code>postId</code> — id поста/ветки, куда отправляется сообщение;</li>
+          <li>есть объект <code>message</code>;</li>
+          <li>внутри <code>message</code> есть <code>text</code>, <code>cid</code>, <code>elements</code>, <code>link</code>, <code>attaches</code>;</li>
+          <li>есть <code>notify: true</code>, то есть нужно уведомлять о новом сообщении.</li>
+        </ul>
+
+        <pre><code>this.socket.cmd(64, {
+  chatId: e.id,
+  postId: U.resolvePostId(e.id),
+  message: {
+    type: t.type === "USER" ? void 0 : t.type,
+    text: t.text?.plain,
+    cid: t.id,
+    elements: t.text?.toApiElements(),
+    link: n,
+    attaches: vG(t.attaches)
+  },
+  notify: true
+})</code></pre>
+
+        <p>Я не знал заранее, что <code>64</code> значит “send message”. Это стало понятно по контексту: вокруг этого вызова были очередь сообщений, проверка <code>canSend</code>, лог <code>ready_msg_send</code>, ожидание ответа сервера и удаление сообщения из pending queue после успешной отправки.</p>
+
         <p>В коде MAX нашлась цепочка:</p>
         <ol>
           <li>Создается аудио-attach класса <code>WW</code>.</li>
@@ -833,6 +869,106 @@ socket.cmd(64, {
   },
   notify: true
 })</code></pre>
+
+        <h3>Как именно <code>ja</code> вела к отправке</h3>
+        <p>Снаружи я вызывал <code>mod.ja(...)</code>, но в самом бандле эта функция называлась <code>L0r</code>. После деобфускации руками, то есть после чтения по смыслу, ее можно переписать примерно так:</p>
+        <pre><code>// Оригинал был минифицирован и назывался L0r.
+// Наружу он экспортировался как ja: L0r as ja.
+async function sendAudioLikeMax({ chat, file, duration, wave }, { store }) {
+  if (!chat.viewerCanWrite) {
+    throw new Error("chat.write.denied");
+  }
+
+  // cid — клиентский id операции/вложения.
+  const cid = SG.next();
+
+  // WW — внутренний класс audio attach.
+  const audioAttach = new WW(cid, file, {
+    duration,
+    wave
+  });
+
+  // VW — коллекция вложений.
+  const attaches = new VW();
+  attaches.add([audioAttach]);
+
+  // CG — объект сообщения/черновика сообщения.
+  const replyTo = chat.draft.replyTo || undefined;
+  const message = new CG({
+    chatId: chat.id,
+    attaches,
+    replyTo
+  });
+
+  // 1. Поставить сообщение в очередь отправки.
+  store.sendChatMessage(chat, message, undefined);
+
+  // 2. Очистить reply-состояние черновика.
+  store.clearChatDraftReply(chat);
+
+  // 3. Запустить загрузку файла аудио.
+  const upload = () =&gt; {
+    const controller = new AbortController();
+
+    audioAttach.startUpload(audioAttach.cid, {
+      abort: () =&gt; {
+        controller.abort();
+        audioAttach.finishUpload();
+      },
+      retry: upload
+    });
+
+    I0r({
+      attach: audioAttach,
+      signal: controller.signal
+    });
+  };
+
+  upload();
+  return true;
+}</code></pre>
+
+        <p>Здесь важная деталь: <code>ja</code>/<code>L0r</code> не сама напрямую вызывает <code>cmd(64)</code>. Она создает правильный объект сообщения и отдает его в <code>store.sendChatMessage(...)</code>. А уже <code>sendChatMessage</code> внутри store берет сообщение из очереди и вызывает <code>this.socket.cmd(64, ...)</code>.</p>
+
+        <h3>Как цепочка выглядит коротко</h3>
+        <pre><code>mod.ja(...)
+  ↓
+L0r(...)
+  ↓
+new WW(...)             // audio attach
+  ↓
+new VW().add([WW])      // список вложений
+  ↓
+new CG({ attaches })    // сообщение
+  ↓
+store.sendChatMessage(chat, message)
+  ↓
+vG(message.attaches)    // сериализация вложений
+  ↓
+{ _type: "AUDIO", audioId, duration, wave, token }
+  ↓
+socket.cmd(64, { chatId, postId, message, notify: true })</code></pre>
+
+        <h3>Где тут загрузка файла</h3>
+        <p>Отправка сообщения и загрузка файла — две связанные, но разные части. Файл надо сначала или параллельно загрузить на сервер. Для аудио это делала функция <code>I0r</code>. Внутри нее был запрос:</p>
+        <pre><code>send(82, {
+  count: 1,
+  type: 2,
+  uploaderType: ...
+})</code></pre>
+        <p>По смыслу <code>cmd(82)</code> / <code>send(82)</code> — это “дай мне URL, куда загрузить audio/video файл”. Сервер возвращает <code>url</code>, <code>videoId</code> и <code>token</code>. После этого клиент грузит сам файл на выданный URL и обновляет audio attach токеном.</p>
+
+        <p>Поэтому полная картина такая:</p>
+        <ol>
+          <li><code>ja</code> создает audio attach и сообщение.</li>
+          <li><code>sendChatMessage</code> ставит сообщение в очередь.</li>
+          <li><code>I0r</code> запрашивает upload URL через команду <code>82</code>.</li>
+          <li>Файл загружается на полученный URL.</li>
+          <li><code>sendChatMessage</code> сериализует attach через <code>vG</code>.</li>
+          <li><code>vG</code> превращает <code>WW</code> в объект <code>{ _type: "AUDIO", audioId, duration, wave, token }</code>.</li>
+          <li>Готовое сообщение уходит на сервер через <code>socket.cmd(64, ...)</code>.</li>
+        </ol>
+
         <p>Формат аудио-вложения после сериализации:</p>
         <pre><code>{
   _type: "AUDIO",
