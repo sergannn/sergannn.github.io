@@ -1917,7 +1917,10 @@ check_last_audio.js
   подтвердил публикацию после чистой загрузки
 
 delete_bad_js_post.js
-  искал случайно отправленный javascript-текст</code></pre>
+  искал случайно отправленный javascript-текст
+
+send_audio_to_max.js
+  собрал рабочий путь в один учебный скрипт</code></pre>
       </section>
 
       <section>
@@ -2226,11 +2229,288 @@ startAudioUpload(attach)         // upload начинается после эт�
           <li>Открыть временный Chrome-профиль.</li>
           <li>Записать туда ключи <code>__oneme_...</code> в Local Storage.</li>
           <li>Открыть <code>https://web.max.ru/-79157065918537</code>.</li>
-          <li>Импортировать основной JS-бандл MAX <code>CHBUOM21.js</code>.</li>
+          <li>Найти JS-модуль MAX, в котором есть <code>mod.ja</code> и <code>mod.Co</code>.</li>
           <li>Найти объект чата в <code>mod.Co.chats.cache</code> по <code>chat.id === "-79157065918537"</code>.</li>
           <li>Вызвать экспортированную функцию аудио-отправки <code>mod.ja(...)</code>.</li>
           <li>Проверить результат в новой чистой сессии.</li>
         </ol>
+        <div class="note ok">
+          <p><strong>Важное уточнение про <code>CHBUOM21.js</code>.</strong> Это было имя бандла в момент расследования. В финальном учебном скрипте его не нужно использовать как вечную константу: бандл ищется динамически среди загруженных JavaScript-файлов по признакам <code>typeof mod.ja === "function"</code> и наличию <code>mod.Co.chats.cache</code>.</p>
+        </div>
+
+        <h3>Итоговый собранный скрипт <code>send_audio_to_max.js</code></h3>
+        <p>Ниже не диагностический кусок, а цельная версия, собранная из всех шагов. Она показывает весь путь: конвертация MP4 в M4A, чтение Local Storage, временный Chrome-профиль, поиск модуля MAX, поиск чата, вызов <code>mod.ja(...)</code> и проверка публикации через новую сессию.</p>
+        <p>Этот код включен в учебный материал, чтобы видеть полную механику. Если его запускать, он делает настоящую отправку в канал.</p>
+        <details open>
+          <summary><code>send_audio_to_max.js</code></summary>
+          <pre><code>const fs = require('fs');
+const os = require('os');
+const path = require('path');
+const { spawnSync } = require('child_process');
+const { ClassicLevel } = require('classic-level');
+const { chromium } = require('playwright-core');
+
+const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const DEFAULT_CHANNEL_URL = 'https://web.max.ru/-79157065918537';
+const DEFAULT_INPUT = '/Users/servas/Downloads/_Подмосковные вечера - BENKO DIXIELAND BAND.mp4';
+
+function argValue(name, fallback) {
+  const index = process.argv.indexOf(name);
+  return index &gt;= 0 ? process.argv[index + 1] : fallback;
+}
+
+function run(cmd, args) {
+  const result = spawnSync(cmd, args, { encoding: 'utf8' });
+  if (result.status !== 0) {
+    throw new Error(`${cmd} failed:\n${result.stderr || result.stdout}`);
+  }
+  return result.stdout;
+}
+
+function ensureM4a(inputFile) {
+  const parsed = path.parse(inputFile);
+  const outputFile = path.join(parsed.dir, `${parsed.name}.m4a`);
+
+  run('ffmpeg', [
+    '-hide_banner',
+    '-y',
+    '-i', inputFile,
+    '-vn',
+    '-c:a', 'aac',
+    '-b:a', '128k',
+    '-movflags', '+faststart',
+    outputFile,
+  ]);
+
+  return outputFile;
+}
+
+function durationMs(audioFile) {
+  const out = run('ffprobe', [
+    '-v', 'error',
+    '-show_entries', 'format=duration',
+    '-of', 'default=noprint_wrappers=1:nokey=1',
+    audioFile,
+  ]).trim();
+
+  const seconds = Number(out);
+  if (!Number.isFinite(seconds) || seconds &lt;= 0) {
+    throw new Error(`Cannot determine duration for ${audioFile}`);
+  }
+
+  return Math.round(seconds * 1000);
+}
+
+function makeWave(length = 80) {
+  return Array.from({ length }, (_, i) =&gt; {
+    return 28 + Math.round(20 * Math.abs(Math.sin(i / 5)));
+  });
+}
+
+async function readMaxLocalStorage() {
+  const dbPath = `${process.env.HOME}/Library/Application Support/Google/Chrome/Default/Local Storage/leveldb`;
+  const db = new ClassicLevel(dbPath, {
+    keyEncoding: 'utf8',
+    valueEncoding: 'utf8',
+  });
+
+  const storage = {};
+
+  for await (const [key, rawValue] of db.iterator()) {
+    if (!key.startsWith('_https://web.max.ru\u0000\u0001__oneme')) continue;
+
+    const localKey = key.split('\u0000\u0001')[1];
+    storage[localKey] = rawValue.startsWith('\u0001')
+      ? rawValue.slice(1)
+      : rawValue;
+  }
+
+  await db.close();
+
+  if (!storage.__oneme_auth) {
+    throw new Error('MAX auth was not found in Chrome Local Storage');
+  }
+
+  return storage;
+}
+
+async function openAuthorizedPage(storage, url, prefix) {
+  const tmpProfile = fs.mkdtempSync(path.join(os.tmpdir(), prefix));
+  const context = await chromium.launchPersistentContext(tmpProfile, {
+    executablePath: CHROME,
+    headless: false,
+  });
+
+  const page = context.pages()[0] || await context.newPage();
+
+  await page.addInitScript((items) =&gt; {
+    for (const [key, value] of Object.entries(items)) {
+      localStorage.setItem(key, value);
+    }
+  }, storage);
+
+  await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+  await page.waitForLoadState('load', { timeout: 30000 }).catch(() =&gt; {});
+  await page.waitForFunction(
+    () =&gt; document.body.innerText.includes('Джаз есть везде') || document.body.innerText.length &gt; 500,
+    null,
+    { timeout: 60000 },
+  ).catch(() =&gt; {});
+
+  return { context, page, tmpProfile };
+}
+
+async function sendAudio(page, audioFile, duration, wave) {
+  const audioBase64 = fs.readFileSync(audioFile).toString('base64');
+  const fileName = path.basename(audioFile);
+
+  return page.evaluate(async ({ audioBase64, fileName, duration, wave }) =&gt; {
+    async function importMaxModule() {
+      const urls = [
+        ...Array.from(document.scripts, (script) =&gt; script.src),
+        ...performance.getEntriesByType('resource').map((entry) =&gt; entry.name),
+      ].filter((url) =&gt; /\.js(?:\?|$)/.test(url));
+
+      const uniqueUrls = Array.from(new Set(urls));
+      const errors = [];
+
+      for (const url of uniqueUrls) {
+        try {
+          const mod = await import(url);
+          if (typeof mod.ja === 'function' &amp;&amp; mod.Co?.chats?.cache) {
+            return { mod, url };
+          }
+        } catch (error) {
+          errors.push(`${url}: ${error?.message || error}`);
+        }
+      }
+
+      throw new Error(`MAX module with ja and Co was not found. Tried ${uniqueUrls.length} scripts. First errors: ${errors.slice(0, 3).join(' | ')}`);
+    }
+
+    function findChat(mod) {
+      const targetId = location.pathname.slice(1);
+      const chats = Array.from(mod.Co?.chats?.cache?.values?.() ?? []);
+
+      return chats.find((chat) =&gt; {
+        if (!chat || chat instanceof Error) return false;
+        const id = chat.id?.toString?.() ?? String(chat.id ?? '');
+        return id === targetId;
+      }) ?? null;
+    }
+
+    const { mod, url } = await importMaxModule();
+    const chat = findChat(mod);
+
+    if (!chat) {
+      throw new Error('Target chat was not found in MAX store');
+    }
+
+    if (!chat.viewerCanWrite) {
+      throw new Error('Current MAX user cannot write to this channel');
+    }
+
+    const bytes = Uint8Array.from(atob(audioBase64), (char) =&gt; char.charCodeAt(0));
+    const file = new File([bytes], fileName, { type: 'audio/mp4' });
+
+    const result = await mod.ja({
+      chat,
+      file,
+      duration,
+      wave: new Uint8Array(wave),
+    });
+
+    return {
+      ok: true,
+      moduleUrl: url,
+      chatId: chat.id?.toString?.() ?? String(chat.id ?? ''),
+      chatTitle: chat.title ?? chat.name ?? null,
+      result: String(result),
+    };
+  }, {
+    audioBase64,
+    fileName,
+    duration,
+    wave,
+  });
+}
+
+async function checkPublished(storage, url) {
+  const { context, page } = await openAuthorizedPage(storage, url, 'max-audio-check-');
+
+  try {
+    await page.waitForTimeout(12000);
+    return await page.evaluate(async () =&gt; {
+      async function importMaxModule() {
+        const urls = [
+          ...Array.from(document.scripts, (script) =&gt; script.src),
+          ...performance.getEntriesByType('resource').map((entry) =&gt; entry.name),
+        ].filter((url) =&gt; /\.js(?:\?|$)/.test(url));
+
+        for (const url of Array.from(new Set(urls))) {
+          try {
+            const mod = await import(url);
+            if (mod.Co?.chats?.cache) return mod;
+          } catch {}
+        }
+
+        return null;
+      }
+
+      const mod = await importMaxModule();
+      const chat = mod?.Co?.chats?.cache?.get?.(location.pathname.slice(1));
+      const messages = Array.from(chat?.messages ?? []);
+      const last = messages.slice(-10).map((message) =&gt; ({
+        id: message.id?.toString?.() ?? String(message.id ?? ''),
+        text: message.text?.plain ?? null,
+        audio: Boolean(message.attaches?.audio),
+        file: Boolean(message.attaches?.files?.length),
+        status: message.status ?? null,
+      }));
+
+      return {
+        title: document.title,
+        messageCount: messages.length,
+        last,
+        bodyTail: document.body.innerText.slice(-1200),
+      };
+    });
+  } finally {
+    await context.close();
+  }
+}
+
+(async () =&gt; {
+  const inputFile = path.resolve(argValue('--file', DEFAULT_INPUT));
+  const channelUrl = argValue('--channel', DEFAULT_CHANNEL_URL);
+
+  if (!fs.existsSync(inputFile)) {
+    throw new Error(`Input file was not found: ${inputFile}`);
+  }
+
+  const audioFile = inputFile.endsWith('.m4a') ? inputFile : ensureM4a(inputFile);
+  const duration = durationMs(audioFile);
+  const storage = await readMaxLocalStorage();
+
+  const { context, page } = await openAuthorizedPage(storage, channelUrl, 'max-audio-send-');
+
+  try {
+    const result = await sendAudio(page, audioFile, duration, makeWave());
+    console.log(JSON.stringify({ sent: result }, null, 2));
+
+    await page.waitForTimeout(60000);
+  } finally {
+    await context.close();
+  }
+
+  const check = await checkPublished(storage, channelUrl);
+  console.log(JSON.stringify({ check }, null, 2));
+})().catch((error) =&gt; {
+  console.error(error.stack || error.message);
+  process.exit(1);
+});
+</code></pre>
+        </details>
       </section>
 
       <section>
