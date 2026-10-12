@@ -1,0 +1,18 @@
+* { box-sizing: border-box; }
+body { margin: 0; font: 18px/1.6 Arial, sans-serif; color: #243247; background: #f3f5f8; }
+header, main, footer { max-width: 900px; margin: auto; padding: 24px; }
+header { border-bottom: 3px solid var(--accent, #245a91); }
+h1 { margin: 12px 0; } h2, h3 { line-height: 1.3; }
+a { color: #174f86; } a:focus-visible, input:focus-visible, select:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid #b04c00; outline-offset: 3px; }
+main { background: white; } footer { font-size: 14px; }
+article, details, .plan, .season, .review { padding: 16px; margin: 0 0 16px; border: 1px solid #d4dce5; border-radius: 6px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.columns { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+.price, dt { font-weight: bold; } .note, .sidebar { padding: 16px; background: #edf3fa; }
+table { width: 100%; border-collapse: collapse; } th, td { border: 1px solid #b8c4d3; padding: 10px; text-align: left; }
+caption { margin-bottom: 12px; } dt { margin-top: 16px; } dd { margin-left: 20px; }
+figure { margin: 0; } .illustration { font-size: 56px; text-align: center; } summary { cursor: pointer; }
+.field { margin-bottom: 16px; } .field label { display: block; } input[type="text"], select { width: 100%; max-width: 400px; padding: 10px; font: inherit; }
+fieldset { margin: 16px 0; } fieldset label { display: block; } button { padding: 10px 20px; font: inherit; cursor: pointer; }
+.task-list { list-style: none; padding: 0; } .task { padding: 10px 0; } .milestone { padding-bottom: 16px; }
+@media (max-width: 600px) { .columns { grid-template-columns: 1fr; } header, main, footer { padding: 16px; } body { font-size: 16px; } th, td { padding: 6px; } }
