@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Студенты</title>
+  <style>
+    body { font-family: sans-serif; max-width: 700px; margin: 20px auto; }
+    form { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+    label { font-size: 14px; }
+    input, button { padding: 8px; font-size: 14px; }
+    button { cursor: pointer; }
+    .student { padding: 8px 0; }
+    hr { border: none; border-top: 1px solid #ddd; }
+  </style>
+</head>
+<body>
+
+  <!-- ФОРМА -->
+  <form id="student-form">
+    <label>Имя
+      <input type="text" id="name" required>
+    </label>
+    <label>Специальность
+      <input type="text" id="major" required>
+    </label>
+    <label>Год выпуска
+      <input type="number" id="gradYear" required>
+    </label>
+    <button type="submit">Добавить студента</button>
+  </form>
+
+  <!-- ОБЛАСТЬ ОТОБРАЖЕНИЯ -->
+  <div id="student-display">Загрузка...</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
+  import { getDatabase, ref, push, set, onValue } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-database.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-analytics.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBxPdG50W4MM50znuNXeN2GZmKchn6cRn4",
+    authDomain: "college-6310c.firebaseapp.com",
+    databaseURL: "https://college-6310c-default-rtdb.firebaseio.com",
+    projectId: "college-6310c",
+    storageBucket: "college-6310c.firebasestorage.app",
+    messagingSenderId: "25474168630",
+    appId: "1:25474168630:web:968c7e83aeee3bb389a597",
+    measurementId: "G-Z50WP322MK"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  getAnalytics(app);
+  const database = getDatabase(app);
+
+  const studentsRef = ref(database, 'students');
+
+  // --- ОБРАБОТКА ФОРМЫ ---
+  const form = document.getElementById('student-form');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault(); // не перезагружать страницу
+
+    const name = document.getElementById('name').value.trim();
+    const major = document.getElementById('major').value.trim();
+    const gradYear = Number(document.getElementById('gradYear').value);
+
+    if (!name || !major || !gradYear) return;
+
+    // push — новый уникальный ключ, не перезаписывает других
+    const newStudentRef = push(studentsRef);
+    set(newStudentRef, { name, major, gradYear })
+      .then(() => {
+        form.reset(); // очистить поля
+        console.log("Insert success!");
+      })
+      .catch((error) => {
+        console.error("Database write error:", error);
+        alert("Не удалось сохранить: " + error.message);
+      });
+  });
+
+  // --- ОТОБРАЖЕНИЕ ВСЕХ В РЕАЛЬНОМ ВРЕМЕНИ ---
+  const displayElement = document.getElementById('student-display');
+
+  onValue(studentsRef, (snapshot) => {
+    const data = snapshot.val();
+    if (!data) {
+      displayElement.textContent = "Студентов нет.";
+      return;
+    }
+
+    const html = Object.entries(data).map(([key, s]) => `
+      <div class="student">
+        <p><strong>Имя:</strong> ${s.name ?? '-'}</p>
+        <p><strong>Специальность:</strong> ${s.major ?? '-'}</p>
+        <p><strong>Год выпуска:</strong> ${s.gradYear ?? '-'}</p>
+      </div>
+      <hr>
+    `).join('');
+
+    displayElement.innerHTML = html;
+  }, (error) => {
+    console.error("Ошибка чтения:", error);
+    displayElement.textContent = "Ошибка загрузки данных.";
+  });
+</script>
+
+</body>
+</html>
