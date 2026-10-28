@@ -14,7 +14,33 @@
   </style>
 </head>
 <body>
+<button id="google-btn">Войти через Google</button>
+<div id="result"></div>
 
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
+  import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBxPdG50W4MM50znuNXeN2GZmKchn6cRn4",
+    authDomain: "college-6310c.firebaseapp.com",
+    projectId: "college-6310c",
+    appId: "1:25474168630:web:968c7e83aeee3bb389a597"
+  };
+
+  const auth = getAuth(initializeApp(firebaseConfig));
+  const provider = new GoogleAuthProvider();
+
+  document.getElementById("google-btn").addEventListener("click", () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        document.getElementById("result").textContent = "Вошёл: " + result.user.email;
+      })
+      .catch((error) => {
+        document.getElementById("result").textContent = "Ошибка: " + error.message;
+      });
+  });
+</script>
   <!-- ФОРМА -->
   <form id="student-form">
     <label>Имя
