@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy - Piano Chords Quiz</title>
+  <meta name="description" content="Privacy information for Piano Chords Quiz.">
+  <style>
+    :root {
+      color-scheme: dark;
+      --panel: rgba(8, 18, 38, 0.82);
+      --ink: #f8fbff;
+      --muted: #bec8da;
+      --accent: #a729b8;
+      --accent-2: #ff5a2f;
+      --line: rgba(255,255,255,0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: ui-rounded, "Avenir Next", "Trebuchet MS", sans-serif;
+      background:
+        radial-gradient(circle at 12% 20%, rgba(255, 90, 47, 0.2), transparent 26rem),
+        radial-gradient(circle at 82% 10%, rgba(167, 41, 184, 0.24), transparent 24rem),
+        linear-gradient(135deg, #071027 0%, #0d275b 52%, #071026 100%);
+      color: var(--ink);
+    }
+
+    .shell {
+      width: min(860px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+
+    a {
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    .back {
+      display: inline-flex;
+      margin-bottom: 30px;
+      padding: 11px 15px;
+      border-radius: 999px;
+      color: var(--ink);
+      text-decoration: none;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid var(--line);
+    }
+
+    .card {
+      padding: clamp(26px, 5vw, 48px);
+      border-radius: 34px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.28);
+      backdrop-filter: blur(22px);
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(40px, 7vw, 70px);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+    }
+
+    h2 {
+      margin: 34px 0 10px;
+      font-size: 24px;
+    }
+
+    p,
+    li {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.58;
+    }
+
+    ul {
+      padding-left: 22px;
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <a class="back" href="index.html">Back to app page</a>
+    <section class="card">
+      <h1>Privacy</h1>
+      <p>Last updated: November 20, 2026.</p>
+
+      <h2>Data</h2>
+      <p>
+        Piano Chords Quiz requires a Sergannn account. You can sign in using
+        Google, Apple, or an email address and password. Authentication is
+        provided by Google Firebase Authentication. We use your account ID,
+        email address and, when provided by your sign-in service, name and
+        profile information to create and manage your account. Passwords are
+        handled by the authentication service and are not displayed to us.
+      </p>
+      <p>
+        This account is shared across participating Sergannn apps. Signing in
+        does not by itself grant access to private data or administrator roles
+        in another service. Firebase processes authentication and security
+        information, such as IP addresses and sign-in activity, to operate and
+        protect the service. See
+        <a href="https://firebase.google.com/support/privacy">Firebase Privacy</a>.
+      </p>
+      <p>
+        The app may send technical diagnostics and usage events to help improve
+        stability. We do not use account information for cross-app advertising
+        tracking or sell it to advertisers.
+      </p>
+
+      <h2>Account deletion</h2>
+      <p>
+        Open Account and choose Delete account to delete your shared Firebase
+        account. This removes sign-in access across participating Sergannn
+        apps. Data kept separately by an individual service is not automatically
+        deleted by this action; contact support to request its deletion.
+        You can also request account deletion by emailing the address below.
+      </p>
+
+      <h2>No sensitive content</h2>
+      <p>
+        The app is a music education tool. It does not ask for health,
+        financial, contact, or location data.
+      </p>
+
+      <h2>Support</h2>
+      <p>
+        If you contact support by email, your message and email address are used
+        only to reply to your request.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        For privacy or support questions, contact
+        <a href="mailto:su.vasiliev@gmail.com">su.vasiliev@gmail.com</a>.
+      </p>
+    </section>
+  </main>
+</body>
+</html>
