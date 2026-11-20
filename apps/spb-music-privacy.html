@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Spb Music: Support and Privacy</title>
+<style>body{font:17px/1.6 system-ui,sans-serif;max-width:800px;margin:36px auto;padding:0 20px;color:#202326}h1{font-size:28px}h2{font-size:21px}a{color:#176b53}section{margin-top:36px}</style>
+</head>
+<body>
+<h1>Spb Music: Support and Privacy</h1>
+<p>Spb Music / Афиша концертов СПб is a concert calendar for Saint Petersburg. Updated November 20, 2026.</p>
+<h2 id="support">Support</h2>
+<p>For application support or privacy requests, contact <a href="mailto:su.vasiliev@gmail.com">su.vasiliev@gmail.com</a>. If an event listing is inaccurate, include the venue, event date and event link. Do not send passwords.</p>
+<h2>Scope</h2>
+<p>This policy concerns this concert-calendar app, its local preferences and cache, requests for public event information, external links, diagnostics and sign-in. It does not describe the unrelated features or data processing of other Sergannn apps.</p>
+<h2>Account and sign-in</h2>
+<p>An account is required to enter the app. Sign-in uses the shared Sergannn Firebase Authentication service, with email/password, Google or native Sign in with Apple on iOS. The service processes an account identifier, email address, sign-in provider and profile information supplied by the selected provider. Authentication security processing may involve IP addresses, device information and sign-in activity. See the <a href="https://sergannn.github.io/apps/auth-privacy.html">shared-account privacy addendum</a> for details, including verification and password-reset emails.</p>
+<h2>Concert data and local settings</h2>
+<p>The app requests public concert-calendar data from <code>music.postagents.ru</code>. A detail request contains the venue identifier and public event URL. Network requests necessarily expose technical connection information, such as the IP address, to the service handling them. The reviewed app code does not attach your Firebase account ID or authentication token to these public calendar requests.</p>
+<p>Concert listings, event details and venue preferences are cached on the device using local application storage. Filtering the loaded concert catalogue by venue, composer or work happens on the device. These caches and preferences are separate from the shared sign-in identity.</p>
+<h2>External event and ticket websites</h2>
+<p>Opening a venue or ticket link may launch the system browser or another application. Those services handle their own visits and any ticket purchases under their policies. The reviewed Music app does not implement its own ticket-payment form or collect payment-card information.</p>
+<h2>Diagnostics</h2>
+<p>The app uses Sentry-compatible diagnostics sent to <code>app.glitchtip.com</code> for errors and performance monitoring. Reports may contain application and operating-system versions, technical device information, error stack traces and public event/request URLs associated with a failure. The current app configuration samples performance traces at 5 percent. The reviewed app code does not attach the shared-account email, password or Firebase user ID to these diagnostic reports. The app's sign-in and diagnostics processing are distinct from public concert listings.</p>
+<h2>Deletion and retention</h2>
+<p>In Account, choose Delete account and confirm to remove the shared Firebase identity. This affects sign-in with that identity across participating apps. It does not automatically erase local concert caches, venue preferences, diagnostics already processed by a separate service or records held by external ticket websites. Local cached concert data is replaced as the app refreshes it. For access, correction, retention or deletion questions about other records, contact support. Do not assume that deleting a sign-in identity erases data held by an independent external service.</p>
+<h2>Related services</h2>
+<p>See <a href="https://firebase.google.com/support/privacy">Firebase Privacy</a>, <a href="https://policies.google.com/privacy">Google Privacy</a>, <a href="https://www.apple.com/legal/privacy/">Apple Privacy</a> and the <a href="https://sergannn.github.io/apps/auth-privacy.html">shared-account addendum</a>.</p>
+<section lang="ru">
+<h1>Афиша концертов СПб: поддержка и конфиденциальность</h1>
+<p>Spb Music / «Афиша концертов СПб» показывает концертный календарь Санкт-Петербурга. Обновлено 20 ноября 2026 года.</p>
+<h2>Поддержка</h2>
+<p>Вопросы о приложении и данных: <a href="mailto:su.vasiliev@gmail.com">su.vasiliev@gmail.com</a>. Если в афише есть ошибка, укажите площадку, дату и ссылку события. Не отправляйте пароли.</p>
+<h2>Область действия и аккаунт</h2>
+<p>Эта политика относится только к концертному приложению: его локальным настройкам и кешу, публичной афише, внешним ссылкам, диагностике и входу. Для входа требуется общий аккаунт Sergannn: почта и пароль, Google либо Apple на iOS. Firebase Authentication обрабатывает идентификатор аккаунта, почту, способ входа и данные профиля, переданные выбранным провайдером. Для безопасности могут обрабатываться IP-адрес, сведения об устройстве и события входа. Подробности, включая письма подтверждения и восстановления пароля, приведены в <a href="https://sergannn.github.io/apps/auth-privacy.html">дополнении о конфиденциальности общего аккаунта</a>.</p>
+<h2>Афиша, настройки и внешние сайты</h2>
+<p>Приложение получает публичную афишу с <code>music.postagents.ru</code>. Запрос деталей содержит идентификатор площадки и публичную ссылку события. При сетевом соединении принимающему сервису становятся доступны технические сведения, например IP-адрес. Проверенный код приложения не прикладывает Firebase UID или токен аккаунта к этим запросам.</p>
+<p>Календарь, подробности событий и настройки площадок сохраняются локально на устройстве. Фильтрация загруженного каталога по площадке, композитору или произведению выполняется на устройстве. Ссылки площадок и билетов открываются во внешнем браузере или приложении. В Music нет собственной формы оплаты билетов или сбора данных банковских карт; у внешних сервисов действуют отдельные политики.</p>
+<h2>Диагностика</h2>
+<p>Ошибки и техническая диагностика передаются в Sentry-совместимый сервис <code>app.glitchtip.com</code>. Отчёт может включать версии приложения и системы, сведения об устройстве, стек ошибки и публичные ссылки событий или запросов, связанных со сбоем. Текущая настройка выбирает 5 процентов трасс производительности. Проверенный код Music не прикладывает к диагностике почту, пароль или Firebase UID общего аккаунта.</p>
+<h2>Удаление данных</h2>
+<p>В разделе «Аккаунт» выберите «Удалить аккаунт» и подтвердите действие. Это удаляет общую учётную запись Firebase и влияет на вход с ней во всех участвующих приложениях. Локальные кеши концертов, настройки площадок, ранее обработанная отдельным сервисом диагностика и данные внешних билетных сайтов автоматически этим действием не удаляются. Кеш афиши заменяется при обновлении данных. По вопросам доступа, исправления, сроков хранения и удаления других записей обратитесь в поддержку. Удаление общей учётной записи не означает автоматического удаления информации у независимых внешних сервисов.</p>
+</section>
+</body>
+</html>
