@@ -1,8 +1,14 @@
 <html>
+   <button id="github-btn">Войти через GitHub</button>
+  <p id="status"></p>
+
+  
 <script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-analytics.js";
+
+    import { getAuth, signInWithPopup, GithubAuthProvider } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -21,5 +27,22 @@
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
+  const auth = getAuth(app);
+  const provider = new GithubAuthProvider(); // Создаем провайдер GitHub [1]
+
+    // Обработчик клика на кнопку
+    document.getElementById("github-btn").addEventListener("click", function() {
+      // Открываем всплывающее окно для входа [1]
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          const user = result.user; // Получаем данные пользователя [1]
+          document.getElementById("status").innerText = `Привет, ${user.displayName || user.email}!`;
+        })
+/*        .catch((error) => {
+          console.error("Ошибка входа:", error);
+          document.getElementById("status").innerText = `Ошибка: ${error.message}`; // Обработка ошибок [1]
+        });*/
+    });
+  
 </script>
 </html>
