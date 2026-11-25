@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Школьные Предметы</title>
+</head>
+<body>
+   <!-- Секция авторизации -->
+  <div id="authSection">
+    <button id="loginBtn">Войти через Google</button>
+    <span id="userInfo" style="margin-left: 10px; font-weight: bold;"></span>
+  </div>
+  <h2>Добавить школьный предмет</h2>
+  <input type="text" id="subject" placeholder="Название предмета">
+  <input type="date" id="date">
+  <button id="saveBtn">Сохранить</button>
+
+  <h2>Список предметов</h2>
+  <ul id="subjectsList"></ul>
+
+  <script type="module">
+    // Импорт необходимых функций из Firebase SDK
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import { getDatabase, ref, push, set, onValue } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js"; 
+    // Конфигурация для вашего проекта novgorod-test
+     const firebaseConfig = {
+    apiKey: "AIzaSyClk_UdZuhTSGkHiPyBSJD2Gg5xRrG-sck",
+    authDomain: "novgorod-test.firebaseapp.com",
+    projectId: "novgorod-test",
+    storageBucket: "novgorod-test.firebasestorage.app",
+    messagingSenderId: "365658012242",
+    appId: "1:365658012242:web:f4479db845948e8921bd8b"
+  };
+    // Инициализация приложения и базы данных
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+const auth = getAuth(app);
+    const provider = new GoogleAuthProvider(); // Создаем провайдер Google
+    const loginBtn = document.getElementById('loginBtn');
+    const userInfo = document.getElementById('userInfo');
+    const appSection = document.getElementById('appSection');
+    
+    const subjectInput = document.getElementById('subject');
+    const dateInput = document.getElementById('date');
+    const saveBtn = document.getElementById('saveBtn');
+    const subjectsList = document.getElementById('subjectsList');
+
+
+  // Клик по кнопке: открываем всплывающее окно Google
+    loginBtn.addEventListener('click', () => {
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          console.log("Успешный вход!", result.user);
+        })
+        .catch((error) => {
+          console.error("Ошибка авторизации:", error); 
+        });
+    });
+
+     // Слушатель состояния авторизации (срабатывает при входе/выходе)
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // Пользователь вошел: показываем контент
+        userInfo.textContent = `Вы вошли как: ${user.displayName}`;
+        loginBtn.style.display = 'none';
+        appSection.style.display = 'block';
+        loadSubjects(); // Запускаем загрузку предметов
+      } else {
+        // Пользователь вышел/не вошел: скрываем контент
+        userInfo.textContent = '';
+        loginBtn.style.display = 'block';
+        appSection.style.display = 'none';
+      }
+    });
+
+
+    // 1. Запись данных в базу
+    saveBtn.addEventListener('click', function() {
+      const subject = subjectInput.value;
+      const date = dateInput.value;
+
+      if (subject && date) {
+        const subjectsRef = ref(db, 'school_subjects');
+        // Создаем уникальный ключ для новой записи
+        const newSubjectRef = push(subjectsRef); 
+        
+        set(newSubjectRef, {
+          name: subject,
+          date: date
+        }).then(() => {
+          // Очищаем поля ввода после успешной записи
+          subjectInput.value = '';
+          dateInput.value = '';
+        }).catch((error) => {
+          console.error("Ошибка при сохранении: ", error);
+        });
+      } else {
+        alert("Пожалуйста, заполните оба поля!");
+      }
+    });
+
+    // 2. Чтение данных в реальном времени
+    const subjectsRef = ref(db, 'school_subjects');
+    onValue(subjectsRef, (snapshot) => {
+      subjectsList.innerHTML = ''; // Очищаем список перед обновлением
+      const data = snapshot.val(); // ловим то, что изменилось
+      
+      if (data) {
+        Object.keys(data).forEach(key => {
+          const item = data[key];
+          const li = document.createElement('li');
+          li.textContent = `${item.name} — ${item.date}`;
+          subjectsList.appendChild(li);
+        });
+      } else {
+        subjectsList.innerHTML = '<li>Список пуст</li>';
+      }
+    });
+  </script>
+</body>
+</html>
